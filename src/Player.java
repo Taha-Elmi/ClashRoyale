@@ -7,5 +7,5 @@ public class Player {
     private List<Tower> towers = new ArrayList<Tower>();
     private List<Card> cards = new ArrayList<Card>();
     private int score = 0;
-    private int exirs = 4;
+    private int elixirs = 4;
 }

@@ -1,5 +1,10 @@
 package Cards;
 
 public class Card {
-    // write your code here
+    private int cost;
+
+    public Card(int cost) {
+        this.cost = cost;
+    }
+
 }
