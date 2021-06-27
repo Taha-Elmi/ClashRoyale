@@ -1,5 +1,7 @@
 package Towers;
 
+import Cards.Card;
+
 public class PrincessTower extends Tower {
 
     public PrincessTower() {
@@ -26,5 +28,10 @@ public class PrincessTower extends Tower {
         } else if (level == 5) {
 
         } else;
+    }
+
+    @Override
+    public void hit(Card card) {
+
     }
 }

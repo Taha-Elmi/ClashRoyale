@@ -1,6 +1,8 @@
 package Towers;
 
-public class Tower {
+import Interfaces.Hitter;
+
+abstract public class Tower implements Hitter {
     private int level;
     private int hp;
     private int damage;
@@ -26,4 +28,5 @@ public class Tower {
     public void setHitSpeed(double hitSpeed) {
         this.hitSpeed = hitSpeed;
     }
+
 }
