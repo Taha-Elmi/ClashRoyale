@@ -16,9 +16,4 @@ public class Wizard extends Troop {
     public void die() {
 
     }
-
-    @Override
-    public void hit(Card card) {
-
-    }
 }

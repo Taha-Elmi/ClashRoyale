@@ -17,8 +17,4 @@ public class Valkyrie extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 }

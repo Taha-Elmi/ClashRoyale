@@ -17,8 +17,4 @@ public class Giant extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 }

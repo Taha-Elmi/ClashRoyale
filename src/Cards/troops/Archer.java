@@ -18,8 +18,4 @@ public class Archer extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 }

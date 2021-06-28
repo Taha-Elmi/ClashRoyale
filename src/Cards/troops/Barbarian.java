@@ -17,8 +17,5 @@ public class Barbarian extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
 
-    }
 }

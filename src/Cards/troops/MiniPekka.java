@@ -17,8 +17,4 @@ public class MiniPekka extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 }

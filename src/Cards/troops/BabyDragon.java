@@ -17,8 +17,4 @@ public class BabyDragon extends Troop {
 
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 }

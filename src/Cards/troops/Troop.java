@@ -1,9 +1,10 @@
 package Cards.troops;
 import Cards.Card;
 import Cards.Target;
+import Interfaces.Damageable;
 import Interfaces.Hitter;
 
-abstract public class Troop extends Card implements Hitter {
+abstract public class Troop extends Card implements Hitter, Damageable {
     private int level;
     private int hp;
     private int damage;
@@ -21,4 +22,23 @@ abstract public class Troop extends Card implements Hitter {
         this.target = target;
     }
 
+    @Override
+    public void getDamage(int damage) {
+        hp -= damage;
+        if (isDead())
+            die();
+    }
+
+    @Override
+    public void hit(Card card) {
+        if (card instanceof Damageable) {
+            Damageable damageable = (Damageable) card;
+            damageable.getDamage(damage);
+        }
+    }
+
+    @Override
+    protected boolean isDead() {
+        return hp <= 0;
+    }
 }

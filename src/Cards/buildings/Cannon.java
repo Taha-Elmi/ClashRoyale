@@ -17,8 +17,5 @@ public class Cannon extends Building {
 
     }
 
-    @Override
-    public void hit(Card card) {
 
-    }
 }

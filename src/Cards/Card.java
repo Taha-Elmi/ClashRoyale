@@ -13,4 +13,6 @@ abstract public class Card {
 
     public abstract void born();
     public abstract void die();
+    protected abstract boolean isDead();
+
 }
