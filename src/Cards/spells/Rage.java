@@ -16,4 +16,9 @@ public class Rage extends Spell {
 
     }
 
+    @Override
+    protected boolean isDead() {
+        return false;
+    }
+
 }

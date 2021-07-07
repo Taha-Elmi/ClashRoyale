@@ -16,4 +16,9 @@ public class Arrows extends Spell {
 
     }
 
+    @Override
+    protected boolean isDead() {
+        return false;
+    }
+
 }

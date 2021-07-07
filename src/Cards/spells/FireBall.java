@@ -16,4 +16,9 @@ public class FireBall extends Spell {
 
     }
 
+    @Override
+    protected boolean isDead() {
+        return false;
+    }
+
 }
