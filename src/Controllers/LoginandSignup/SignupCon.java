@@ -1,5 +1,6 @@
 package Controllers.LoginandSignup;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,11 @@ public class SignupCon extends Controller {
     @Override
     public void initialize() {
         super.initialize();
-        confirmPasswordTextField.setFocusTraversable(false);
+        confirmPasswordTextField.styleProperty().bind(
+                Bindings
+                        .when(confirmPasswordTextField.focusedProperty())
+                        .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
+                        .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
     }
     @Override
     protected void loginButtonPressed() {

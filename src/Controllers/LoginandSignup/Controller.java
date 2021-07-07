@@ -1,5 +1,6 @@
 package Controllers.LoginandSignup;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,15 +24,19 @@ public abstract class Controller {
         }
     }
     public void initialize() {
-        setAllFocusTraversable(false);
+        usernameTextField.styleProperty().bind(
+                Bindings
+                        .when(usernameTextField.focusedProperty())
+                        .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
+                        .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+        passwordTextField.styleProperty().bind(
+                Bindings
+                        .when(passwordTextField.focusedProperty())
+                        .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
+                        .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
+
     }
 
-    private void setAllFocusTraversable(boolean b) {
-        usernameTextField.setFocusTraversable(b);
-        passwordTextField.setFocusTraversable(b);
-        loginButton.setFocusTraversable(b);
-        signupButton.setFocusTraversable(b);
-    }
     protected abstract void loginButtonPressed();
     protected abstract void signupButtonPressed();
 }
