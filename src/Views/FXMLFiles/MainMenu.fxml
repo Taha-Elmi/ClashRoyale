@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.MainMenuCon">
+   <top>
+      <BorderPane prefHeight="110.0" prefWidth="514.0" BorderPane.alignment="CENTER">
+         <center>
+            <Label prefHeight="69.0" prefWidth="244.0" text="MainMenu" textAlignment="RIGHT" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Sitka Small Bold" size="42.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="playGameButton" mnemonicParsing="false" onAction="#actionHandler" prefHeight="46.0" prefWidth="230.0" text="Play Game">
+               <font>
+                  <Font name="Haettenschweiler" size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="profileButton" mnemonicParsing="false" onAction="#actionHandler" prefHeight="46.0" prefWidth="230.0" text="Profile">
+               <font>
+                  <Font name="Haettenschweiler" size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="battleDeckButton" mnemonicParsing="false" onAction="#actionHandler" prefHeight="46.0" prefWidth="230.0" text="Battle Deck">
+               <font>
+                  <Font name="Haettenschweiler" size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="battleHistoryButton" mnemonicParsing="false" onAction="#actionHandler" prefHeight="46.0" prefWidth="230.0" text="Battle History">
+               <font>
+                  <Font name="Haettenschweiler" size="32.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#actionHandler" prefHeight="46.0" prefWidth="230.0" text="Exit">
+               <font>
+                  <Font name="Haettenschweiler" size="32.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

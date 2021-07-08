@@ -3,9 +3,16 @@ package Controllers.LoginandSignup;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public abstract class Controller {
     @FXML
     protected Button loginButton;
@@ -37,7 +44,6 @@ public abstract class Controller {
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
 
     }
-
     protected abstract void loginButtonPressed();
     protected abstract void signupButtonPressed();
 }

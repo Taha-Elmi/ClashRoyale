@@ -11,7 +11,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Views/FXMLFiles/login.fxml"));
         primaryStage.setTitle("Clash Royale");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root,514,400));
+        primaryStage.setScene(new Scene(root,514,410));
         primaryStage.show();
     }
 
