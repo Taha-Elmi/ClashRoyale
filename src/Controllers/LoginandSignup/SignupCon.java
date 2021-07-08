@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,14 +13,14 @@ import java.io.IOException;
 public class SignupCon extends Controller {
 
     @FXML
-    private TextField confirmPasswordTextField;
+    private PasswordField confirmPasswordField;
 
     @Override
     public void initialize() {
         super.initialize();
-        confirmPasswordTextField.styleProperty().bind(
+        confirmPasswordField.styleProperty().bind(
                 Bindings
-                        .when(confirmPasswordTextField.focusedProperty())
+                        .when(confirmPasswordField.focusedProperty())
                         .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
     }

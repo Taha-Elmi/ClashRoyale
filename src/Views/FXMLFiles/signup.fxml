@@ -66,10 +66,10 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="217.0" promptText="password" />
+            <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="217.0" promptText="password" />
             <BorderPane prefHeight="95.0" prefWidth="176.0">
                <top>
-                  <TextField fx:id="confirmPasswordTextField" prefHeight="30.0" promptText="confirm password" BorderPane.alignment="CENTER" />
+                  <PasswordField fx:id="confirmPasswordField" prefHeight="30.0" promptText="confirm password" BorderPane.alignment="CENTER" />
                </top>
                <left>
                   <Button fx:id="signupButton" mnemonicParsing="false" onAction="#buttonPressed" text="Signup" BorderPane.alignment="CENTER">

@@ -67,7 +67,7 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="217.0" promptText="password" />
+            <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="217.0" promptText="password" />
             <BorderPane prefHeight="95.0" prefWidth="176.0">
                <left>
                   <Button fx:id="signupButton" mnemonicParsing="false" onAction="#buttonPressed" text="Signup" BorderPane.alignment="CENTER">

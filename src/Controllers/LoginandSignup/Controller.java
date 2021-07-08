@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 public abstract class Controller {
     @FXML
@@ -13,7 +14,7 @@ public abstract class Controller {
     @FXML
     protected TextField usernameTextField;
     @FXML
-    protected TextField passwordTextField;
+    protected PasswordField passwordField;
 
     @FXML
     protected void buttonPressed(ActionEvent actionEvent) {
@@ -29,9 +30,9 @@ public abstract class Controller {
                         .when(usernameTextField.focusedProperty())
                         .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-        passwordTextField.styleProperty().bind(
+        passwordField.styleProperty().bind(
                 Bindings
-                        .when(passwordTextField.focusedProperty())
+                        .when(passwordField.focusedProperty())
                         .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
 
