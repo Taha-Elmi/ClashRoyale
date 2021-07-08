@@ -44,7 +44,7 @@
          <children>
             <ImageView fitHeight="101.0" fitWidth="113.0">
                <image>
-                  <Image url="@../Pictures/kisspng-computer-icons-icon-design-user-urban-poverty-5b4ea6e1c807d2.3237098915318811858193.png" />
+                  <Image url="@../Assets/Pictures/kisspng-computer-icons-icon-design-user-urban-poverty-5b4ea6e1c807d2.3237098915318811858193.png" />
                </image>
             </ImageView>
          </children>
@@ -68,6 +68,9 @@
             </TextField>
             <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="217.0" promptText="password" />
             <BorderPane prefHeight="95.0" prefWidth="176.0">
+               <top>
+                  <TextField fx:id="confirmPasswordTextField" prefHeight="30.0" promptText="confirm password" BorderPane.alignment="CENTER" />
+               </top>
                <left>
                   <Button fx:id="signupButton" mnemonicParsing="false" onAction="#buttonPressed" text="Signup" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
@@ -82,9 +85,6 @@
                      </BorderPane.margin>
                   </Button>
                </right>
-               <top>
-                  <TextField fx:id="confirmPasswordTextField" prefHeight="30.0" promptText="confirm password" BorderPane.alignment="CENTER" />
-               </top>
             </BorderPane>
          </children>
       </VBox>
