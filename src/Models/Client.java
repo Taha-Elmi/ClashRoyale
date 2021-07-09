@@ -11,6 +11,13 @@ public class Client {
     private int level;
     private List<Card> cards = new ArrayList<>();
     private ArrayList<Card> deckCards = new ArrayList<>();
+
+    public Client(String name, int xp, int level) {
+        this.name = name;
+        this.xp = xp;
+        this.level = level;
+    }
+
     public void signup(String username, String password) {
     }
     public void login(String username) {
@@ -20,5 +27,17 @@ public class Client {
     }
     public void setDeckCards(ArrayList<Card> deckCards) {
         this.deckCards = deckCards;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getXp() {
+        return xp;
     }
 }

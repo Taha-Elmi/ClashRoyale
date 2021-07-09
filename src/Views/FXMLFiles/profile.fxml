@@ -1,13 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.ProfileCon">
+    <top>
+        <BorderPane prefHeight="110.0" prefWidth="514.0" BorderPane.alignment="CENTER">
+            <center>
+                <Label alignment="CENTER" prefHeight="69.0" prefWidth="180.0" text="Profile" textAlignment="RIGHT" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Sitka Small Bold" size="42.0" />
+                    </font>
+               <BorderPane.margin>
+                  <Insets right="121.0" />
+               </BorderPane.margin>
+                </Label>
+            </center>
+         <left>
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="71.0" text="Back" BorderPane.alignment="CENTER" fx:id="back" onAction="#actionHandler">
+               <BorderPane.margin>
+                  <Insets left="50.0" />
+               </BorderPane.margin>
+            </Button>
+         </left>
+        </BorderPane>
+    </top>
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="408.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="514.0">
+               <children>
+                  <Label fx:id="username" text="Username:">
+                     <font>
+                        <Font name="Haettenschweiler" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="200.0">
+               <children>
+                  <Label text="XP:" fx:id="xp">
+                     <font>
+                        <Font name="Haettenschweiler" size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="level" text="Level:">
+                     <font>
+                        <Font name="Haettenschweiler" size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+        </VBox>
+    </center>
+</BorderPane>

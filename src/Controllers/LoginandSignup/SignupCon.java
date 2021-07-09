@@ -1,5 +1,7 @@
 package Controllers.LoginandSignup;
 
+import Main.Config;
+import Models.Client;
 import Models.Graphic.FXManager;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -31,5 +33,7 @@ public class SignupCon extends Controller {
     }
     private void signupProcess() {
         System.out.println("signup");
+        //sample client.
+        Config.client = new Client("Farid",0,1);
     }
 }
