@@ -21,4 +21,8 @@ public class FireBall extends Spell {
         return false;
     }
 
+    @Override
+    public void run() {
+
+    }
 }

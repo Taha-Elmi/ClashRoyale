@@ -4,7 +4,7 @@ import Models.Cards.Card;
 import Interfaces.Damageable;
 import Interfaces.Hitter;
 
-abstract public class Tower implements Hitter, Damageable {
+abstract public class Tower implements Hitter, Damageable,Runnable {
     private int level;
     private int hp;
     private int damage;

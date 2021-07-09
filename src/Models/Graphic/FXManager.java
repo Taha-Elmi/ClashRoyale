@@ -3,6 +3,8 @@ package Models.Graphic;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,5 +34,17 @@ public class FXManager {
             e.printStackTrace();
         }
 
+    }
+    public static void setBackground(Image image,Pane pane) {
+        BackgroundImage backgroundimage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1,1,
+                        true, true,
+                        false, false));
+        pane.setBackground(new Background(backgroundimage));
+    }
+    public static Image getImage(String imageName) {
+        return new Image(FXManager.class.getResourceAsStream("/Views/Assets/Pictures/BackGrounds/" + imageName));
     }
 }

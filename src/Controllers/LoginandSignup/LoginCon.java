@@ -1,5 +1,7 @@
 package Controllers.LoginandSignup;
 
+import Main.Config;
+import Models.Client;
 import Models.Graphic.FXManager;
 import javafx.stage.Stage;
 
@@ -14,6 +16,8 @@ public class LoginCon extends Controller {
 
     private void loginProcess() {
         System.out.println("login");
+        //sample client.
+        Config.client = new Client("Farid",0,1);
     }
     @Override
     protected void signupButtonPressed() {

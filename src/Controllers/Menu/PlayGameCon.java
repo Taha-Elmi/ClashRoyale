@@ -4,10 +4,14 @@ import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class PlayGameCon implements Controller {
     private Stage stage;
+    @FXML
+    private BorderPane mainBorder;
     @FXML
     private Button singlePlayer;
     @FXML
@@ -32,6 +36,10 @@ public class PlayGameCon implements Controller {
         }
     }
 
+    public void initialize() {
+        Image image = FXManager.getImage("PlayGame.jpg");
+        FXManager.setBackground(image,mainBorder);
+    }
     private Stage getStage() {
         if (stage == null)
             stage = (Stage) back.getScene().getWindow();

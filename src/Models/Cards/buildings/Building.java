@@ -5,7 +5,7 @@ import Models.Cards.Target;
 import Interfaces.Damageable;
 import Interfaces.Hitter;
 
-abstract public class Building extends Card implements Hitter, Damageable {
+abstract public class Building extends Card implements Hitter, Damageable,Runnable {
     private int level;
     private int hp;
     private int damage;
@@ -38,6 +38,12 @@ abstract public class Building extends Card implements Hitter, Damageable {
             Damageable damageable = (Damageable) card;
             damageable.getDamage(damage);
         }
+    }
+
+    public abstract void setLevel(int level);
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     @Override

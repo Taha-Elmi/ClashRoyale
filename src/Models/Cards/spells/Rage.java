@@ -21,4 +21,8 @@ public class Rage extends Spell {
         return false;
     }
 
+    @Override
+    public void run() {
+
+    }
 }

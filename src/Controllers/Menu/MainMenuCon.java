@@ -4,10 +4,15 @@ import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 
 public class MainMenuCon implements Controller {
     private Stage stage;
+    @FXML
+    private BorderPane mainBorder;
     @FXML
     private Button playGameButton;
     @FXML
@@ -36,6 +41,10 @@ public class MainMenuCon implements Controller {
         }
     }
 
+    public void initialize() {
+        Image image = new Image(getClass().getResourceAsStream("/Views/Assets/Pictures/BackGrounds/MainMenu.jpg"));
+        FXManager.setBackground(image,mainBorder);
+    }
     private Stage getStage() {
         if (stage == null)
             stage = (Stage) exitButton.getScene().getWindow();
