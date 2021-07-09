@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class MainMenuCon {
+public class MainMenuCon implements Controller {
     private Stage stage;
     @FXML
     private Button playGameButton;
@@ -19,6 +19,7 @@ public class MainMenuCon {
     @FXML
     private Button exitButton;
 
+    @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == playGameButton) {
             FXManager.goTo("playGame.fxml",getStage());

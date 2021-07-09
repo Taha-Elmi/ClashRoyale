@@ -20,4 +20,17 @@ public class FXManager {
         stage.setScene(scene);
         stage.show();
     }
+    public static void openWindow(String fxmlName) {
+        try {
+            Parent root = FXMLLoader.load(FXManager.class.getResource(
+                    "/Views/FXMLFiles/" + fxmlName));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.sizeToScene();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
