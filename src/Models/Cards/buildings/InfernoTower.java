@@ -6,12 +6,23 @@ public class InfernoTower extends Building {
     }
 
     @Override
+    public void setLevel(int level) {
+
+    }
+
+    @Override
     public void born() {
 
     }
 
     @Override
     public void die() {
+
+    }
+
+
+    @Override
+    public void run() {
 
     }
 

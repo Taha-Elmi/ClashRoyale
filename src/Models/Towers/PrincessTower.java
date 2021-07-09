@@ -33,4 +33,9 @@ public class PrincessTower extends Tower {
     public void hit(Card card) {
 
     }
+
+    @Override
+    public void run() {
+
+    }
 }

@@ -21,4 +21,8 @@ public class Arrows extends Spell {
         return false;
     }
 
+    @Override
+    public void run() {
+
+    }
 }
