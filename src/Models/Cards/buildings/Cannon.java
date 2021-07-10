@@ -1,9 +1,14 @@
 package Models.Cards.buildings;
 
+import Models.Cards.Card;
+import Models.Cards.Target;
+
 public class Cannon extends Building {
     private int damage;
-    public Cannon(int cost) {
-        super(cost);
+
+    public Cannon(int cost, int level, int hp, double hitSpeed,
+                  Target target, double range, int lifetime) {
+        super(cost, level, hp, hitSpeed, target, range, lifetime);
     }
 
     @Override
@@ -47,5 +52,18 @@ public class Cannon extends Building {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    @Override
+    public void hit(Card card) {
+
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

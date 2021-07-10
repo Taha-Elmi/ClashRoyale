@@ -1,8 +1,8 @@
 package Models.Cards.troops;
 
 public class BabyDragon extends Troop {
-    public BabyDragon(int cost) {
-        super(cost);
+    public BabyDragon(int cost, int level) {
+        super(cost, level);
     }
 
     @Override
@@ -12,6 +12,11 @@ public class BabyDragon extends Troop {
 
     @Override
     public void die() {
+
+    }
+
+    @Override
+    protected void setLevel(int level) {
 
     }
 

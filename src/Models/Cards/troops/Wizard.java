@@ -1,8 +1,9 @@
 package Models.Cards.troops;
 
 public class Wizard extends Troop {
-    public Wizard(int cost) {
-        super(cost);
+
+    public Wizard(int cost, int level) {
+        super(cost, level);
     }
 
     @Override
@@ -12,6 +13,11 @@ public class Wizard extends Troop {
 
     @Override
     public void die() {
+
+    }
+
+    @Override
+    protected void setLevel(int level) {
 
     }
 }
