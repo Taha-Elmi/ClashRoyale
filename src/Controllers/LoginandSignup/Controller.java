@@ -43,4 +43,8 @@ public abstract class Controller {
     }
     protected abstract void loginButtonPressed();
     protected abstract void signupButtonPressed();
+
+    protected void assignClient(String username) {
+
+    }
 }

@@ -1,13 +1,15 @@
 package Controllers.LoginandSignup;
 
 import Main.Config;
-import Models.Client;
 import Models.Graphic.FXManager;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.sql.SQLException;
+
 public class SignupCon extends Controller {
 
     @FXML
@@ -18,6 +20,9 @@ public class SignupCon extends Controller {
 
     @FXML
     private PasswordField confirmPasswordField;
+
+    @FXML
+    private Label warningLabel;
 
     @Override
     public void initialize() {
@@ -35,16 +40,32 @@ public class SignupCon extends Controller {
 
     @Override
     protected void signupButtonPressed() {
-        signupProcess();
+        try {
+            signupProcess();
+        } catch (IllegalArgumentException e) {
+            return;
+        }
         FXManager.goTo("MainMenu.fxml",(Stage) signupButton.getScene().getWindow());
     }
-    private void signupProcess() {
+    private void signupProcess() throws IllegalArgumentException{
         String username = usernameTextField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
+        if (!password.equals(confirmPassword)) {
+            warningLabel.setText("Your 'confirm password' is not equal to your password.");
+            throw new IllegalArgumentException();
+        }
+
+        try {
+            String query = "insert into clients(name, password) values('" + username + "', '" + password + "');";
+            Config.statement.execute(query);
+        } catch (SQLException throwable) {
+            warningLabel.setText("There is already an account with this username.");
+            throw new IllegalArgumentException();
+        }
+
         System.out.println("signup");
-        //sample client.
-        Config.client = new Client("Farid",0,1);
+        assignClient(username);
     }
 }

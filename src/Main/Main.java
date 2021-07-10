@@ -32,6 +32,7 @@ public class Main extends Application {
         try {
             Connection connection = DriverManager.getConnection(url, user, pass);
             Config.statement = connection.createStatement();
+            Config.statement.execute("use clash_royale");
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
