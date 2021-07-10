@@ -3,15 +3,10 @@ package Controllers.LoginandSignup;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public abstract class Controller {
     @FXML
@@ -22,6 +17,8 @@ public abstract class Controller {
     protected TextField usernameTextField;
     @FXML
     protected PasswordField passwordField;
+    @FXML
+    protected Label warningLabel;
 
     @FXML
     protected void buttonPressed(ActionEvent actionEvent) {
