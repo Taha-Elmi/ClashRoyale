@@ -2,9 +2,9 @@ package Models.Cards.troops;
 import Models.Cards.Target;
 
 public class Archer extends Troop {
-    public Archer(int cost) {
-        super(cost);
-        setTarget(Target.AIRandGROUND);
+
+    public Archer(int cost, int level) {
+        super(cost, level);
     }
 
     @Override
@@ -14,6 +14,11 @@ public class Archer extends Troop {
 
     @Override
     public void die() {
+
+    }
+
+    @Override
+    protected void setLevel(int level) {
 
     }
 

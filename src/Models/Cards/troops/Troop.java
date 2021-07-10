@@ -5,7 +5,6 @@ import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
 
 abstract public class Troop extends Card implements Hitter, Damageable {
-    private int level;
     private int hp;
     private int damage;
     private double hitSpeed;
@@ -14,8 +13,8 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     private int range;
     private boolean areaSplash;
     private int count;
-    public Troop(int cost) {
-        super(cost);
+    public Troop(int cost,int level) {
+        super(cost,level);
     }
 
     public void setTarget(Target target) {
