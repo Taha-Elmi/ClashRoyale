@@ -9,7 +9,6 @@ public class Client {
     private String name;
     private int xp;
     private int level;
-    private List<Card> cards = new ArrayList<>();
     private ArrayList<Card> deckCards = new ArrayList<>();
 
     public Client(String name, int xp, int level) {
@@ -25,6 +24,7 @@ public class Client {
     public ArrayList<Card> getDeckCards() {
         return deckCards;
     }
+
     public void setDeckCards(ArrayList<Card> deckCards) {
         this.deckCards = deckCards;
     }

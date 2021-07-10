@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.sql.*;
 
 /**
  * The Main.
@@ -21,11 +22,28 @@ public class Main extends Application {
     }
 
     /**
+     * Connects to the game's database.
+     */
+    private static void connectToDatabase() {
+        String url = "jdbc:mysql://localhost:3306";
+        String user = "root";
+        String pass = "99clash31royale";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, user, pass);
+            Config.statement = connection.createStatement();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    /**
      * The entry point of application.
      *
      * @param args the input arguments
      */
     public static void main(String[] args) {
+        connectToDatabase();
         launch(args);
     }
 }
