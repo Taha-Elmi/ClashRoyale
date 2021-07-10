@@ -6,8 +6,15 @@ import Models.Graphic.FXManager;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 public class SignupCon extends Controller {
+
+    @FXML
+    private TextField usernameTextField;
+
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     private PasswordField confirmPasswordField;
@@ -32,6 +39,10 @@ public class SignupCon extends Controller {
         FXManager.goTo("MainMenu.fxml",(Stage) signupButton.getScene().getWindow());
     }
     private void signupProcess() {
+        String username = usernameTextField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
         System.out.println("signup");
         //sample client.
         Config.client = new Client("Farid",0,1);
