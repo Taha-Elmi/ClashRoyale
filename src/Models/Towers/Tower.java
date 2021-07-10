@@ -1,8 +1,8 @@
 package Models.Towers;
 
 import Models.Cards.Card;
-import Interfaces.Damageable;
-import Interfaces.Hitter;
+import Models.Interfaces.Damageable;
+import Models.Interfaces.Hitter;
 
 abstract public class Tower implements Hitter, Damageable,Runnable {
     private int level;

@@ -2,8 +2,8 @@ package Models.Cards.buildings;
 
 import Models.Cards.Card;
 import Models.Cards.Target;
-import Interfaces.Damageable;
-import Interfaces.Hitter;
+import Models.Interfaces.Damageable;
+import Models.Interfaces.Hitter;
 
 abstract public class Building extends Card implements Hitter, Damageable,Runnable {
     private int level;

@@ -1,8 +1,8 @@
 package Models.Cards.troops;
 import Models.Cards.Card;
 import Models.Cards.Target;
-import Interfaces.Damageable;
-import Interfaces.Hitter;
+import Models.Interfaces.Damageable;
+import Models.Interfaces.Hitter;
 
 abstract public class Troop extends Card implements Hitter, Damageable {
     private int level;
