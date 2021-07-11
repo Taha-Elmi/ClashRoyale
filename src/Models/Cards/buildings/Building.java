@@ -28,10 +28,9 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
         return lifetime;
     }
 
-    public Building(int cost, int level, int hp, double hitSpeed,
+    public Building(int cost, int level, double hitSpeed,
                     Target target, double range, int lifetime) {
         super(cost,level);
-        this.hp = hp;
         this.hitSpeed = hitSpeed;
         this.target = target;
         this.range = range;

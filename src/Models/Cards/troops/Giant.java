@@ -2,8 +2,8 @@ package Models.Cards.troops;
 
 public class Giant extends Troop {
 
-    public Giant(int cost, int level) {
-        super(cost, level);
+    public Giant(int level) {
+        super(5, level);
     }
 
     @Override

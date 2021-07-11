@@ -3,8 +3,8 @@ import Models.Cards.Target;
 
 public class Archer extends Troop {
 
-    public Archer(int cost, int level) {
-        super(cost, level);
+    public Archer(int level) {
+        super(3, level);
     }
 
     @Override

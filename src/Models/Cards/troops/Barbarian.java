@@ -2,8 +2,8 @@ package Models.Cards.troops;
 
 public class Barbarian extends Troop {
 
-    public Barbarian(int cost, int level) {
-        super(cost, level);
+    public Barbarian(int level) {
+        super(5, level);
     }
 
     @Override

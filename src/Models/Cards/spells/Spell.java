@@ -4,7 +4,7 @@ import Models.Cards.Card;
 
 abstract public class Spell extends Card implements Runnable {
     private final double radius;
-    public Spell(int cost,int level,int radius) {
+    public Spell(int cost,int level,double radius) {
         super(cost,level);
         this.radius = radius;
     }

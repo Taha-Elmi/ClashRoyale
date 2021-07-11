@@ -2,8 +2,8 @@ package Models.Cards.troops;
 
 public class Wizard extends Troop {
 
-    public Wizard(int cost, int level) {
-        super(cost, level);
+    public Wizard(int level) {
+        super(5, level);
     }
 
     @Override

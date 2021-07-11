@@ -4,8 +4,8 @@ import Main.Config;
 
 public class FireBall extends Spell {
     private int areaDamage;
-    public FireBall(int cost,int level,int radius) {
-        super(cost,level,radius);
+    public FireBall(int level) {
+        super(4, level,2.5);
     }
 
     public void setAreaDamage(int areaDamage) {
