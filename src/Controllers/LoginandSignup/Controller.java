@@ -67,10 +67,10 @@ public abstract class Controller {
             for (int i = 1; i <= 8; i++)
                 indexes[i-1] = resultSet.getInt("card" + i);
 
-            ArrayList<Card> cards = new ArrayList<>(8);
+            ArrayList<Card> cards = new ArrayList<>();
             for (int i = 0; i < 8; i++) {
                 cards.add(Config.indexToCard(indexes[i]));
-                cards.get(i).setLevel(level);
+                System.out.println(cards.get(i).getClass().getSimpleName());
             }
 
             client.setDeckCards(cards);

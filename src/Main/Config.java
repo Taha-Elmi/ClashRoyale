@@ -57,15 +57,11 @@ public class Config {
             throwable.printStackTrace();
         }
 
-        Card toReturn = null;
         for (Card card : cards) {
-            if (card.getClass().getName().equals(cardName)) {
-                toReturn = card;
-                break;
-            }
+            if (card.getClass().getSimpleName().equals(cardName))
+                return card;
         }
-        assert toReturn != null;
-        return toReturn;
+        return null;
     }
 
     public static int cardToIndex(Card card) {
