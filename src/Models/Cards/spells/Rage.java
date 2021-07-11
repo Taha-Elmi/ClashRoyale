@@ -17,7 +17,7 @@ public class Rage extends Spell {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
         if (level == 1) {
             setDuration(6);
         } else if (level == 2) {

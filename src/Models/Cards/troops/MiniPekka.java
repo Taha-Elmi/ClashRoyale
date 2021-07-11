@@ -17,7 +17,7 @@ public class MiniPekka extends Troop {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
 
     }
 

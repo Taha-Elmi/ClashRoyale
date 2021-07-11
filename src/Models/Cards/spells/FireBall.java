@@ -17,7 +17,7 @@ public class FireBall extends Spell {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
         if (level == 1) {
             setAreaDamage(325);
         } else if (level == 2) {
