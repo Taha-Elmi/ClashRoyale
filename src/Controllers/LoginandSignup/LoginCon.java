@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class LoginCon extends Controller {
 
     @FXML
@@ -21,17 +24,38 @@ public class LoginCon extends Controller {
 
     @Override
     protected void loginButtonPressed() {
-        loginProcess();
+        try {
+            loginProcess();
+        } catch (IllegalArgumentException e) {
+            return;
+        }
         FXManager.goTo("MainMenu.fxml",(Stage) loginButton.getScene().getWindow());
     }
 
     private void loginProcess() {
+        String username = usernameTextField.getText();
+        String password = passwordField.getText();
 
-        
+        String query = "select password from clients where name='" + username + "';";
+        try {
+            Config.statement.execute(query);
+            ResultSet resultSet = Config.statement.getResultSet();
+            boolean result = resultSet.next();
+            if (!result) {
+                warningLabel.setText("There is no account with this username.");
+                throw new IllegalArgumentException();
+            }
+
+            if (!resultSet.getString("password").equals(password)) {
+                warningLabel.setText("Password is incorrect.");
+                throw new IllegalArgumentException();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         System.out.println("login");
-        //sample client.
-        Config.client = new Client("Farid",0,1);
+        assignClient(username);
     }
     @Override
     protected void signupButtonPressed() {
