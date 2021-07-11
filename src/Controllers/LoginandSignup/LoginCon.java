@@ -16,10 +16,8 @@ public class LoginCon extends Controller {
 
     @FXML
     private TextField usernameTextField;
-
     @FXML
     private TextField passwordField;
-
     @FXML
     private Label warningLabel;
 
