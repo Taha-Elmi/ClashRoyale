@@ -7,9 +7,8 @@ public class InfernoTower extends Building {
     private int minimumDamage;
     private int maximumDamage;
 
-    public InfernoTower(int cost, int level, int hp, double hitSpeed,
-                        Target target, double range, int lifetime) {
-        super(cost, level, hp, hitSpeed, target, range, lifetime);
+    public InfernoTower(int level) {
+        super(5, level, 0.4, Target.AIRandGROUND, 6, 40);
     }
 
     @Override

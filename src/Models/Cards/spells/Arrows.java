@@ -4,8 +4,8 @@ import Main.Config;
 
 public class Arrows extends Spell {
     private int areaDamage;
-    public Arrows(int cost,int level,int radius) {
-        super(cost,level,radius);
+    public Arrows(int level) {
+        super(3, level, 4);
     }
 
     public void setAreaDamage(int areaDamage) {
@@ -17,7 +17,7 @@ public class Arrows extends Spell {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
         if (level == 1) {
             setAreaDamage(144);
         } else if (level == 2) {

@@ -2,8 +2,8 @@ package Models.Cards.troops;
 
 public class MiniPekka extends Troop {
 
-    public MiniPekka(int cost, int level) {
-        super(cost, level);
+    public MiniPekka(int level) {
+        super(4, level);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class MiniPekka extends Troop {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
 
     }
 

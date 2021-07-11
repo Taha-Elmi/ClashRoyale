@@ -6,9 +6,8 @@ import Models.Cards.Target;
 public class Cannon extends Building {
     private int damage;
 
-    public Cannon(int cost, int level, int hp, double hitSpeed,
-                  Target target, double range, int lifetime) {
-        super(cost, level, hp, hitSpeed, target, range, lifetime);
+    public Cannon(int level) {
+        super(6, level, 0.8, Target.GROUND, 5.5, 30);
     }
 
     @Override

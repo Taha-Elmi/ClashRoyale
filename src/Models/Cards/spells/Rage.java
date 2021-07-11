@@ -4,8 +4,8 @@ import Main.Config;
 
 public class Rage extends Spell {
     private double duration;
-    public Rage(int cost,int level,int radius) {
-        super(cost,level,radius);
+    public Rage(int level) {
+        super(3,level,5);
     }
 
     public void setDuration(double duration) {
@@ -17,7 +17,7 @@ public class Rage extends Spell {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
         if (level == 1) {
             setDuration(6);
         } else if (level == 2) {

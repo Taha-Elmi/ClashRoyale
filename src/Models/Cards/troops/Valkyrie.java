@@ -2,8 +2,8 @@ package Models.Cards.troops;
 
 public class Valkyrie extends Troop {
 
-    public Valkyrie(int cost, int level) {
-        super(cost, level);
+    public Valkyrie(int level) {
+        super(4, level);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Valkyrie extends Troop {
     }
 
     @Override
-    protected void setLevel(int level) {
+    public void setLevel(int level) {
 
     }
 

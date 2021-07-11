@@ -61,9 +61,17 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="416.0" promptText="username">
+            <Label fx:id="warningLabel" prefHeight="17.0" prefWidth="222.0" textFill="#de1111">
                <VBox.margin>
                   <Insets top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameTextField" prefHeight="30.0" prefWidth="416.0" promptText="username">
+               <VBox.margin>
+                  <Insets />
                </VBox.margin>
             </TextField>
             <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="217.0" promptText="password" />

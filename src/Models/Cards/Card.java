@@ -19,5 +19,5 @@ abstract public class Card {
     public abstract void born();
     public abstract void die();
     protected abstract boolean isDead();
-    protected abstract void setLevel(int level);
+    public abstract void setLevel(int level);
 }
