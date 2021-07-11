@@ -68,8 +68,10 @@ public abstract class Controller {
                 indexes[i-1] = resultSet.getInt("card" + i);
 
             ArrayList<Card> cards = new ArrayList<>(8);
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++) {
                 cards.add(Config.indexToCard(indexes[i]));
+                cards.get(i).setLevel(level);
+            }
 
             client.setDeckCards(cards);
         } catch (SQLException throwable) {
