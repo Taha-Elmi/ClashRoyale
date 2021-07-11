@@ -10,12 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Controller {
+    protected final String labelFontName = "System";
+    protected final int labelFontSize = 11;
     @FXML
     protected Button loginButton;
     @FXML
@@ -46,7 +51,7 @@ public abstract class Controller {
                         .when(passwordField.focusedProperty())
                         .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
-
+        warningLabel.setFont(new Font("System",labelFontSize));
     }
     protected abstract void loginButtonPressed();
     protected abstract void signupButtonPressed();

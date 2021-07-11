@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.sql.SQLException;
 
@@ -47,13 +48,14 @@ public class SignupCon extends Controller {
         }
         FXManager.goTo("MainMenu.fxml",(Stage) signupButton.getScene().getWindow());
     }
-    private void signupProcess() throws IllegalArgumentException{
+    private void signupProcess() throws IllegalArgumentException {
+        warningLabel.setFont(new Font(labelFontName,labelFontSize));
         String username = usernameTextField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
         if (!password.equals(confirmPassword)) {
-            warningLabel.setText("Your 'confirm password' is not equal to your password.");
+            warningLabel.setText("Password fields aren't equal.");
             throw new IllegalArgumentException();
         }
 
@@ -61,7 +63,7 @@ public class SignupCon extends Controller {
             String query = "insert into clients(name, password) values('" + username + "', '" + password + "');";
             Config.statement.execute(query);
         } catch (SQLException throwable) {
-            warningLabel.setText("There is already an account with this username.");
+            warningLabel.setText("This username is already taken.");
             throw new IllegalArgumentException();
         }
 

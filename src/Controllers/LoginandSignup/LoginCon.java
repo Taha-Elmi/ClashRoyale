@@ -6,6 +6,7 @@ import Models.Graphic.FXManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class LoginCon extends Controller {
     }
 
     private void loginProcess() {
+        warningLabel.setFont(new Font(labelFontName,labelFontSize));
         String username = usernameTextField.getText();
         String password = passwordField.getText();
 
