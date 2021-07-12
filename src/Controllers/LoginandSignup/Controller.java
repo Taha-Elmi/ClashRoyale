@@ -1,5 +1,6 @@
 package Controllers.LoginandSignup;
 
+import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Client;
@@ -10,8 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.sql.ResultSet;
@@ -72,10 +71,8 @@ public abstract class Controller {
                 indexes[i-1] = resultSet.getInt("card" + i);
 
             ArrayList<Card> cards = new ArrayList<>();
-            for (int i = 0; i < 8; i++) {
-                cards.add(Config.indexToCard(indexes[i]));
-                System.out.println(cards.get(i).getClass().getSimpleName());
-            }
+            for (int i = 0; i < 8; i++)
+                cards.add(SQLManager.indexToCard(indexes[i]));
 
             Config.client.setDeckCards(cards);
         } catch (SQLException throwable) {

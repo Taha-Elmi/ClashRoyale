@@ -29,7 +29,7 @@ public class Config {
         }
     }
 
-    public static void fillCards() {
+    static {
         cards.add(new Archer(1));
         cards.add(new BabyDragon(1));
         cards.add(new Barbarian(1));
@@ -42,25 +42,6 @@ public class Config {
         cards.add(new Rage(1));
         cards.add(new Cannon(1));
         cards.add(new InfernoTower(1));
-    }
-
-    public static Card indexToCard(int id) {
-        String cardName = "";
-        String query = "select name from cards where id=" + id + ";";
-        try {
-            statement.execute(query);
-            ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-            cardName = resultSet.getString("name");
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-
-        for (Card card : cards) {
-            if (card.getClass().getSimpleName().equals(cardName))
-                return card;
-        }
-        return null;
     }
 
 
