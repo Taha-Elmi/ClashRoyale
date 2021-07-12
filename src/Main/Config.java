@@ -64,19 +64,5 @@ public class Config {
         return null;
     }
 
-    public static int cardToIndex(Card card) {
-        String cardName = card.getClass().getName();
-        int index = 0;
-        try {
-            String query = "select id from cards where name='" + cardName + "';";
-            statement.execute(query);
-            ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-            index = resultSet.getInt("id");
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-        assert index != 0;
-        return index;
-    }
+
 }
