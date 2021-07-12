@@ -6,22 +6,29 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
 
 public class ProfileCon implements Controller {
+    @FXML
+    private Pane mainBorder;
     @FXML
     private Label username;
     @FXML
     private Label xp;
     @FXML
-    private Label level;
+    private ImageView levelImage;
     @FXML
     private Button back;
 
     @FXML
     public void initialize() {
-        username.setText("Username: " + Config.client.getName());
-        xp.setText("XP: " + Config.client.getXp());
-        level.setText("Level: " + Config.client.getLevel());
+        levelImage.setImage(FXManager.getImage("/Levels/" + Config.client.getLevel() + ".png"));
+        username.setText(Config.client.getName());
+        xp.setText("" + Config.client.getXp());
+        FXManager.setBackground(FXManager.getImage("/BackGrounds/Profile.png"),mainBorder);
     }
 
     @Override

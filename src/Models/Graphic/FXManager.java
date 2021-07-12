@@ -78,6 +78,6 @@ public class FXManager {
      * @return the image
      */
     public static Image getImage(String imageName) {
-        return new Image(FXManager.class.getResourceAsStream("/Views/Assets/Pictures/BackGrounds/" + imageName));
+        return new Image(FXManager.class.getResourceAsStream("/Views/Assets/Pictures" + imageName));
     }
 }
