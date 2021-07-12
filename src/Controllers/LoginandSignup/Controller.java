@@ -57,7 +57,6 @@ public abstract class Controller {
     protected abstract void signupButtonPressed();
 
     protected void assignClient(String username) {
-        Client client;
         String query = "select * from clients where name='" + username + "';";
         try {
             Config.statement.execute(query);
@@ -66,7 +65,7 @@ public abstract class Controller {
             String name = resultSet.getString("name");
             int level = resultSet.getInt("level");
             int xp = resultSet.getInt("xp");
-            client = new Client(name, xp, level);
+            Config.client = new Client(name, xp, level);
 
             int[] indexes = new int[8];
             for (int i = 1; i <= 8; i++)
@@ -78,7 +77,7 @@ public abstract class Controller {
                 System.out.println(cards.get(i).getClass().getSimpleName());
             }
 
-            client.setDeckCards(cards);
+            Config.client.setDeckCards(cards);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }

@@ -37,7 +37,7 @@ public class PlayGameCon implements Controller {
     }
 
     public void initialize() {
-        Image image = FXManager.getImage("PlayGame.jpg");
+        Image image = FXManager.getImage("/BackGrounds/PlayGame.jpg");
         FXManager.setBackground(image,mainBorder);
     }
     private Stage getStage() {

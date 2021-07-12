@@ -8,7 +8,6 @@ import Models.Cards.spells.Rage;
 import Models.Cards.troops.*;
 import Models.Client;
 import javafx.stage.Stage;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
