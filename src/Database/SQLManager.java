@@ -2,11 +2,14 @@ package Database;
 
 import Main.Config;
 import Models.Cards.Card;
+import Models.Client;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class SQLManager {
 
@@ -70,5 +73,35 @@ public class SQLManager {
                 return card;
         }
         return null;
+    }
+
+    public ArrayList getHistory(Client client) {
+        ArrayList<BattleHistory> battleHistories = new ArrayList<>();
+        try {
+            String query = "select * from history where name='" + client.getName() + "';";
+            Config.statement.execute(query);
+            ResultSet resultSet = Config.statement.getResultSet();
+
+            while (resultSet.next()) {
+                String opponentName = resultSet.getString("opponent");
+                Date date = resultSet.getDate("time");
+                int wonCrowns = resultSet.getInt("crowns");
+                int lostCrowns = resultSet.getInt("opponent_crowns");
+                BattleHistory.Result result = (resultSet.getBoolean("result") ? BattleHistory.Result.WIN : BattleHistory.Result.LOOSE);
+                battleHistories.add(new BattleHistory(opponentName, date, wonCrowns, lostCrowns, result));
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return battleHistories;
+    }
+
+    public void addHistory(String name, int wonCrowns, int lostCrowns, BattleHistory.Result result) {
+        try {
+            String query = "insert into history values (" + name + ")";
+            Config.statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
