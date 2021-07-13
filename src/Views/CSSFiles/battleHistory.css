@@ -1,0 +1,10 @@
+.label.text {
+    -fx-text-fill: white;
+    -fx-font-family: Georgia;
+    -fx-font-size: 25px;
+}
+.outline.label .text {
+    -fx-fill: white;
+    -fx-stroke: black;
+    -fx-stroke-width: 0.5px;
+}

@@ -3,31 +3,51 @@ package Database;
 import java.util.Date;
 
 public class BattleHistory {
-    private int wonCrowns;
-    private int lostCrowns;
+    private int wonCrown;
+    private int lostCrown;
     private Date date;
     private Result result;
     private String opponentName;
 
-    public BattleHistory(String opponentName, Date date, int wonCrowns, int lostCrowns, Result result) {
-        this.opponentName = opponentName;
+    public BattleHistory(String opponentName, Date date,int wonCrown,int lostCrown, Result result) {
+        this.wonCrown = wonCrown;
+        this.lostCrown = lostCrown;
         this.date = date;
-        this.wonCrowns = wonCrowns;
-        this.lostCrowns = lostCrowns;
         this.result = result;
+        this.opponentName = opponentName;
     }
 
     @Override
     public String toString() {
         return "BattleHistory{" +
-                "wonCrowns=" + wonCrowns +
-                ", lostCrowns=" + lostCrowns +
+                "ownCrown=" + wonCrown +
+                ", notOwnCrown=" + lostCrown +
                 ", date=" + date +
                 ", result=" + result +
                 '}';
     }
 
-    enum Result {
+    public Date getDate() {
+        return date;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public int getWonCrown() {
+        return wonCrown;
+    }
+
+    public int getLostCrown() {
+        return lostCrown;
+    }
+
+    public String getOpponentName() {
+        return opponentName;
+    }
+
+    public enum Result {
         WIN,LOOSE
     }
 }
