@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane fx:id="mainBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.BattleDeckCon">
    <right>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
@@ -31,7 +30,7 @@
                   <Image url="@../Assets/Pictures/icons/cardsq.png" />
                </image>
             </ImageView>
-            <Button fx:id="changeButton" mnemonicParsing="false" text="Change" />
+            <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeButtonOnAction" text="Change" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -62,14 +61,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="card1" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="card2" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fx:id="card3" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                  <ImageView fx:id="card4" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
-                  <ImageView fx:id="card5" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                  <ImageView fx:id="card6" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ImageView fx:id="card7" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fx:id="card8" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ImageView fx:id="card1" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="card2" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="card3" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="card4" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fx:id="card5" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                  <ImageView fx:id="card6" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ImageView fx:id="card7" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ImageView fx:id="card8" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane alignment="CENTER" prefHeight="89.0" prefWidth="292.0">
@@ -83,12 +82,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="outCard1" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="outCard2" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                  <ImageView fx:id="outCard3" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                  <ImageView fx:id="outCard4" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                  <ImageView fx:id="outCard1" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#outCardOnClick" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="outCard2" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#outCardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                  <ImageView fx:id="outCard3" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#outCardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                  <ImageView fx:id="outCard4" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#outCardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
                </children>
             </GridPane>
+            <Label fx:id="message" prefHeight="44.0" prefWidth="262.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" top="10.0" />

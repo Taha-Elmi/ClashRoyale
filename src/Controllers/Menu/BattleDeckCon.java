@@ -6,8 +6,10 @@ import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
@@ -65,6 +67,9 @@ public class BattleDeckCon {
     @FXML
     private ImageView outCard4;
 
+    @FXML
+    private Label message;
+
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
@@ -106,6 +111,26 @@ public class BattleDeckCon {
             String resource = "/Cards/" + outCards.get(i).getClass().getSimpleName() + ".png";
             Image image = FXManager.getImage(resource);
             outDeck.get(i).setImage(image);
+        }
+    }
+
+    @FXML
+    void cardOnClick(MouseEvent event) {
+        upperCard.setImage(((ImageView)event.getSource()).getImage());
+    }
+
+    @FXML
+    void outCardOnClick(MouseEvent event) {
+        lowerCard.setImage(((ImageView)event.getSource()).getImage());
+    }
+
+    @FXML
+    void changeButtonOnAction(ActionEvent event) {
+        Image changeImage = FXManager.getImage("/icons/change.png");
+        if (upperCard.getImage().getUrl().endsWith("change.png") || lowerCard.getImage().equals(changeImage)) {
+            message.setText("You have not chosen the cards you want to change.");
+        } else {
+            message.setText(upperCard.getImage().getUrl());
         }
     }
 }
