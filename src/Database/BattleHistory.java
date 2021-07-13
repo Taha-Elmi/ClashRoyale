@@ -1,19 +1,19 @@
 package Database;
 
-import java.util.Date;
-
+import java.util.Calendar;
 public class BattleHistory {
     private int ownCrown;
     private int notOwnCrown;
-    private Date date;
+    private Calendar calendar;
     private Result result;
+    private String opponentName;
 
     @Override
     public String toString() {
         return "BattleHistory{" +
                 "ownCrown=" + ownCrown +
                 ", notOwnCrown=" + notOwnCrown +
-                ", date=" + date +
+                ", date=" + calendar +
                 ", result=" + result +
                 '}';
     }
