@@ -1,5 +1,6 @@
-package Main;
+package Database;
 
+import Main.Config;
 import Models.Cards.Card;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ public class SQLManager {
     /**
      * Connects to the game's database.
      */
-    protected static void connectToDatabase() {
+    public static void connectToDatabase() {
         String url = "jdbc:mysql://localhost:3306";
         String user = "root";
         String pass = "99clash31royale";
@@ -47,4 +48,27 @@ public class SQLManager {
         return index;
     }
 
+    /**
+     * gets a card id from database and return the appropriate card.
+     * @param id the card id gotten from the database
+     * @return the appropriate card
+     */
+    public static Card indexToCard(int id) {
+        String cardName = "";
+        String query = "select name from cards where id=" + id + ";";
+        try {
+            Config.statement.execute(query);
+            ResultSet resultSet = Config.statement.getResultSet();
+            resultSet.next();
+            cardName = resultSet.getString("name");
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        for (Card card : Config.cards) {
+            if (card.getClass().getSimpleName().equals(cardName))
+                return card;
+        }
+        return null;
+    }
 }
