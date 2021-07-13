@@ -1,30 +1,26 @@
 package Controllers.Menu;
 
 import Database.BattleHistory;
+import Database.SQLManager;
 import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.text.SimpleDateFormat;
 
 public class BattleHistoriesCon implements Controller {
-    private Scene scene;
     @FXML
     private Pane mainBorder;
     @FXML
     private VBox mainBox;
 
     public void initialize() {
-        scene = mainBox.getScene();
         Image image = FXManager.getImage("/BackGrounds/BattleHistory.jpg");
         FXManager.setBackground(image,mainBorder);
         addAllBattleHistories();
@@ -54,7 +50,7 @@ public class BattleHistoriesCon implements Controller {
         mainBox.getChildren().add(vBox);
     }
     private void addAllBattleHistories() {
-        for (BattleHistory battleHistory: Config.client.getBattleHistories()) {
+        for (BattleHistory battleHistory: SQLManager.getHistory(Config.client)) {
             addNewBattleHistory(battleHistory);
         }
     }

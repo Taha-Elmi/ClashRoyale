@@ -81,7 +81,7 @@ public class SQLManager {
      * @param client the client we want their histories
      * @return an ArrayList of clients BattleHistories
      */
-    public static ArrayList getHistory(Client client) {
+    public static ArrayList<BattleHistory> getHistory(Client client) {
         ArrayList<BattleHistory> battleHistories = new ArrayList<>();
         try {
             String query = "select * from history where name='" + client.getName() + "';";
