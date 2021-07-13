@@ -76,9 +76,10 @@ public class SQLManager {
     }
 
     /**
+     * get an ArrayList of the BattleHistories of a clients
      *
-     * @param client
-     * @return
+     * @param client the client we want their histories
+     * @return an ArrayList of clients BattleHistories
      */
     public static ArrayList getHistory(Client client) {
         ArrayList<BattleHistory> battleHistories = new ArrayList<>();
@@ -101,6 +102,14 @@ public class SQLManager {
         return battleHistories;
     }
 
+    /**
+     * adds a record of BattleHistory to the database
+     * @param username name of the player
+     * @param opponentName name of the opponent
+     * @param wonCrowns number of won crowns
+     * @param lostCrowns number of lost crowns
+     * @param result result of the match
+     */
     public static void addHistory(String username, String opponentName, int wonCrowns, int lostCrowns, BattleHistory.Result result) {
         try {
             String query = "insert into history (name, opponent, crowns, opponent_crowns, result) values ('" + username + "', '" + opponentName + "', " + wonCrowns + ", " + lostCrowns + (result == BattleHistory.Result.WIN ? ",1);" : ",0);");
