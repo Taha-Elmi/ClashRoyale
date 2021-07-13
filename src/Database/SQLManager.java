@@ -75,7 +75,12 @@ public class SQLManager {
         return null;
     }
 
-    public ArrayList getHistory(Client client) {
+    /**
+     *
+     * @param client
+     * @return
+     */
+    public static ArrayList getHistory(Client client) {
         ArrayList<BattleHistory> battleHistories = new ArrayList<>();
         try {
             String query = "select * from history where name='" + client.getName() + "';";
@@ -96,9 +101,9 @@ public class SQLManager {
         return battleHistories;
     }
 
-    public void addHistory(String name, int wonCrowns, int lostCrowns, BattleHistory.Result result) {
+    public static void addHistory(String username, String opponentName, int wonCrowns, int lostCrowns, BattleHistory.Result result) {
         try {
-            String query = "insert into history values (" + name + ")";
+            String query = "insert into history (name, opponent, crowns, opponent_crowns, result) values ('" + username + "', '" + opponentName + "', " + wonCrowns + ", " + lostCrowns + (result == BattleHistory.Result.WIN ? ",1);" : ",0);");
             Config.statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();

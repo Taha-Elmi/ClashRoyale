@@ -17,6 +17,22 @@ public class BattleHistory {
         this.result = result;
     }
 
+    public String getOpponentName() {
+        return opponentName;
+    }
+
+    public int getWonCrowns() {
+        return wonCrowns;
+    }
+
+    public int getLostCrowns() {
+        return lostCrowns;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
     @Override
     public String toString() {
         return "BattleHistory{" +
@@ -27,7 +43,7 @@ public class BattleHistory {
                 '}';
     }
 
-    enum Result {
+    public enum Result {
         WIN,LOOSE
     }
 }
