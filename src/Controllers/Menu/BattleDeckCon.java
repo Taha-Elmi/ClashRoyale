@@ -1,5 +1,6 @@
 package Controllers.Menu;
 
+import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
@@ -140,7 +141,17 @@ public class BattleDeckCon {
         || !Config.cardImages.contains(new CardImage(null, lowerCard.getImage()))) {
             message.setText("You have not chosen the card you want to change.");
         } else {
+            Card before = CardImage.find(upperCard.getImage()).getCard();
+            Card after = CardImage.find(lowerCard.getImage()).getCard();
+            changeCards(before, after);
+            updateOnScreenCards();
             message.setText("Done.");
         }
+    }
+
+    private void changeCards(Card before, Card after) {
+        Config.client.getDeckCards().remove(before);
+        Config.client.getDeckCards().add(after);
+        SQLManager.updateClientDeck();
     }
 }

@@ -71,4 +71,8 @@ public class SQLManager {
         }
         return null;
     }
+
+    public static void updateClientDeck() {
+
+    }
 }
