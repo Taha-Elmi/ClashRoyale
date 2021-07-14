@@ -2,6 +2,7 @@ package Controllers.Menu;
 
 import Main.Config;
 import Models.Cards.Card;
+import Models.Cards.CardImage;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -103,22 +104,23 @@ public class BattleDeckCon {
         outDeck.add(outCard3);
         outDeck.add(outCard4);
 
-        ArrayList<Card> outCards = new ArrayList<>(4);
-        for (Card card : Config.cards) {
-            if (!Config.client.getDeckCards().contains(card))
-                outCards.add(card);
+        ArrayList<CardImage> outCards = new ArrayList<>(4);
+        for (CardImage cardImage : Config.cardImages) {
+            if (!Config.client.getDeckCards().contains(cardImage.getCard()))
+                outCards.add(cardImage);
         }
 
         for (int i = 0; i < 8; i++) {
-            String resource = "/Cards/" + Config.client.getDeckCards().get(i).getClass().getSimpleName() + ".png";
-            Image image = FXManager.getImage(resource);
-            deck.get(i).setImage(image);
+            for (CardImage cardImage : Config.cardImages) {
+                if (Config.client.getDeckCards().get(i).equals(cardImage.getCard())) {
+                    deck.get(i).setImage(cardImage.getImage());
+                    break;
+                }
+            }
         }
 
         for (int i = 0; i < 4; i++) {
-            String resource = "/Cards/" + outCards.get(i).getClass().getSimpleName() + ".png";
-            Image image = FXManager.getImage(resource);
-            outDeck.get(i).setImage(image);
+            outDeck.get(i).setImage(outCards.get(i).getImage());
         }
     }
 
@@ -134,11 +136,11 @@ public class BattleDeckCon {
 
     @FXML
     void changeButtonOnAction(ActionEvent event) {
-        Image changeImage = FXManager.getImage("/icons/change.png");
-        if (upperCard.getImage().getUrl().endsWith("change.png") || lowerCard.getImage().equals(changeImage)) {
-            message.setText("You have not chosen the cards you want to change.");
+        if (!Config.cardImages.contains(new CardImage(null, upperCard.getImage()))
+        || !Config.cardImages.contains(new CardImage(null, lowerCard.getImage()))) {
+            message.setText("You have not chosen the card you want to change.");
         } else {
-            message.setText(upperCard.getImage().getUrl());
+            message.setText("Done.");
         }
     }
 }

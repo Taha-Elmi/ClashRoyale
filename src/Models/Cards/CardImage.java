@@ -10,4 +10,19 @@ public class CardImage {
         this.card = card;
         this.image = image;
     }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CardImage))
+            return false;
+        return image.equals(((CardImage)obj).getImage());
+    }
 }
