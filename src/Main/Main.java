@@ -32,7 +32,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         SQLManager.connectToDatabase();
-//        SQLManager.addHistory("Farid","taha",0,0, BattleHistory.Result.LOOSE);
+//        SQLManager.addHistory("Farid","taha",1,0, BattleHistory.Result.WIN);
         launch(args);
     }
 }
