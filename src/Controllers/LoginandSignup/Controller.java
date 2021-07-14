@@ -1,5 +1,6 @@
 package Controllers.LoginandSignup;
 
+import Database.BattleHistory;
 import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
@@ -16,6 +17,7 @@ import javafx.scene.text.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class Controller {
     protected final String labelFontName = "System";
@@ -73,7 +75,6 @@ public abstract class Controller {
             ArrayList<Card> cards = new ArrayList<>();
             for (int i = 0; i < 8; i++)
                 cards.add(SQLManager.indexToCard(indexes[i]));
-
             Config.client.setDeckCards(cards);
         } catch (SQLException throwable) {
             throwable.printStackTrace();

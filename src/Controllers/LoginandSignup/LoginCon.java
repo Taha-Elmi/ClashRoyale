@@ -1,32 +1,56 @@
 package Controllers.LoginandSignup;
 
+import Database.FileUtils;
 import Main.Config;
-import Models.Client;
 import Models.Graphic.FXManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginCon extends Controller {
-
+    @FXML
+    private CheckBox rememberMeBox;
     @FXML
     private TextField usernameTextField;
     @FXML
     private TextField passwordField;
     @FXML
     private Label warningLabel;
-
+    public void initialize() {
+        super.initialize();
+        try {
+            String username = FileUtils.rememberUsername();
+            String password = FileUtils.rememberPassword();
+            if (!(username == null || password == null)) {
+                usernameTextField.setText(username);
+                passwordField.setText(password);
+                rememberMeBox.setSelected(true);
+                Platform.runLater(() -> loginButton.requestFocus());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     protected void loginButtonPressed() {
         try {
             loginProcess();
+            if (rememberMeBox.isSelected()) {
+                FileUtils.saveHim(usernameTextField.getText(),passwordField.getText());
+            } else {
+                FileUtils.doNotSaveHim();
+            }
         } catch (IllegalArgumentException e) {
             return;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         FXManager.goTo("MainMenu.fxml",(Stage) loginButton.getScene().getWindow());
     }

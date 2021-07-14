@@ -1,5 +1,7 @@
 package Main;
+import Database.BattleHistory;
 import Database.SQLManager;
+import Models.Graphic.FXManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +18,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLFiles/login.fxml"));
         primaryStage.setTitle("Clash Royale");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root,400,520));
+        Scene scene = new Scene(root,400,520);
+        primaryStage.setScene(scene);
+        primaryStage.getIcons().add(FXManager.getImage("/Icons/mainicon.jpg"));
         Config.primaryStage = primaryStage;
         primaryStage.show();
     }
@@ -28,6 +32,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         SQLManager.connectToDatabase();
+//        SQLManager.addHistory("Farid","taha",1,0, BattleHistory.Result.WIN);
         launch(args);
     }
 }
