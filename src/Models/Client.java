@@ -35,4 +35,12 @@ public class Client {
     public int getXp() {
         return xp;
     }
+
+    public ArrayList<BattleHistory> getBattleHistories() {
+        return battleHistories;
+    }
+
+    public void setBattleHistories(ArrayList<BattleHistory> battleHistories) {
+        this.battleHistories = battleHistories;
+    }
 }
