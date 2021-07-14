@@ -33,7 +33,7 @@ public class SQLManager {
      * @return the id of the card
      */
     public static int cardToIndex(Card card) {
-        String cardName = card.getClass().getName();
+        String cardName = card.getClass().getSimpleName();
         int index = 0;
         try {
             String query = "select id from cards where name='" + cardName + "';";
@@ -73,6 +73,16 @@ public class SQLManager {
     }
 
     public static void updateClientDeck() {
-
+        for (int i = 1; i <= 8; i++) {
+            int index = cardToIndex(Config.client.getDeckCards().get(i - 1));
+            System.out.println(index);
+            try {
+                String query = "update clients set card" + i + " = " + index + " where name='" + Config.client.getName() + "';";
+                System.out.println(query);
+                Config.statement.execute(query);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

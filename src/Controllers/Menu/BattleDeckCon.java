@@ -72,8 +72,10 @@ public class BattleDeckCon {
     @FXML
     private Label message;
 
-    public void actionHandler(ActionEvent ae) throws Exception {
+    @FXML
+    void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
+            SQLManager.updateClientDeck();
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
         } else {
             throw new Exception("unknown event");
@@ -152,6 +154,5 @@ public class BattleDeckCon {
     private void changeCards(Card before, Card after) {
         Config.client.getDeckCards().remove(before);
         Config.client.getDeckCards().add(after);
-        SQLManager.updateClientDeck();
     }
 }
