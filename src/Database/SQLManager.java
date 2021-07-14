@@ -119,6 +119,9 @@ public class SQLManager {
         }
     }
 
+    /**
+     * It will update deck cards of the client in the database.
+     */
     public static void updateClientDeck() {
         for (int i = 1; i <= 8; i++) {
             int index = cardToIndex(Config.client.getDeckCards().get(i - 1));
