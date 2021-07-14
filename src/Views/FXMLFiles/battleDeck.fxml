@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="mainBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.BattleDeckCon">
    <right>
@@ -30,10 +31,13 @@
       </VBox>
    </right>
    <top>
-      <Label text="Battle Deck" BorderPane.alignment="CENTER" />
+      <Label styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Battle Deck" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font></Label>
    </top>
    <bottom>
-      <Button fx:id="backButton" mnemonicParsing="false" onAction="#actionHandler" text="Back" BorderPane.alignment="CENTER" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#actionHandler" text="Submit" BorderPane.alignment="CENTER" />
    </bottom>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -62,6 +66,9 @@
                   <ImageView fx:id="card7" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <ImageView fx:id="card8" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#cardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
             </GridPane>
             <GridPane alignment="CENTER" prefHeight="89.0" prefWidth="292.0">
               <columnConstraints>
@@ -80,15 +87,21 @@
                   <ImageView fx:id="outCard4" fitHeight="89.0" fitWidth="73.0" onMouseClicked="#outCardOnClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Label fx:id="message" prefHeight="44.0" prefWidth="262.0">
+            <Label fx:id="message" prefHeight="62.0" prefWidth="307.0" textFill="WHITE">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </BorderPane.margin>
+         <padding>
+            <Insets top="30.0" />
+         </padding>
       </VBox>
    </center>
 </BorderPane>

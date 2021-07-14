@@ -83,6 +83,7 @@ public class BattleDeckCon {
     }
 
     public void initialize() {
+        FXManager.setBackground(FXManager.getImage("/BackGrounds/BattleDeck.png"), mainBorder);
         updateOnScreenCards();
     }
 
@@ -141,7 +142,7 @@ public class BattleDeckCon {
     void changeButtonOnAction(ActionEvent event) {
         if (!Config.cardImages.contains(new CardImage(null, upperCard.getImage()))
         || !Config.cardImages.contains(new CardImage(null, lowerCard.getImage()))) {
-            message.setText("You have not chosen the card you want to change.");
+            message.setText("You have not chosen the card\nyou want to change.");
         } else {
             Card before = CardImage.find(upperCard.getImage()).getCard();
             Card after = CardImage.find(lowerCard.getImage()).getCard();
