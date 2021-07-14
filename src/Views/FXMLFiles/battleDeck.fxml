@@ -15,21 +15,13 @@
    <right>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="upperCard" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Assets/Pictures/icons/cardsq.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="upperCard" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" rotate="65.4">
                <image>
                   <Image url="@../Assets/Pictures/icons/change.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="lowerCard" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Assets/Pictures/icons/cardsq.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="lowerCard" fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeButtonOnAction" text="Change" />
          </children>
          <BorderPane.margin>

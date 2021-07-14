@@ -79,6 +79,14 @@ public class BattleDeckCon {
     }
 
     public void initialize() {
+        updateOnScreenCards();
+    }
+
+    private void updateOnScreenCards() {
+        Image cardsq = FXManager.getImage("/icons/cardsq.png");
+        upperCard.setImage(cardsq);
+        lowerCard.setImage(cardsq);
+
         ArrayList<ImageView> deck = new ArrayList<>(4);
         deck.add(card1);
         deck.add(card2);
