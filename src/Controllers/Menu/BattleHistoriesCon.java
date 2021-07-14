@@ -7,6 +7,7 @@ import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -52,10 +53,12 @@ public class BattleHistoriesCon implements Controller {
         vBox.prefWidth(320);
         vBox.prefHeight(84);
         vBox.setPadding(new Insets(0,10,0,10));
-        Label label = new Label("No Battle history to show");
-        String cssLayout = "-fx-font-size: 27;";
+        Label label = new Label("No Battle history to show!");
+        label.setAlignment(Pos.CENTER);
+        String cssLayout = "-fx-font-size: 25;";
         label.setStyle(cssLayout);
         vBox.getChildren().add(label);
+        vBox.setAlignment(Pos.TOP_CENTER);
         mainBox.getChildren().add(vBox);
     }
 

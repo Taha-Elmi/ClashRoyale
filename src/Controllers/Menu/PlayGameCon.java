@@ -26,9 +26,9 @@ public class PlayGameCon implements Controller {
         if (ae.getSource() == singlePlayer) {
             FXManager.openWindow("singlePlayer.fxml");
         } else if (ae.getSource() == oneVsOne) {
-            FXManager.goTo("battleDeck.fxml",getStage());
+
         } else if (ae.getSource() == twoVsTwo) {
-            FXManager.goTo("battleHistory.fxml",getStage());
+
         } else if (ae.getSource() == back) {
             FXManager.goTo("MainMenu.fxml",getStage());
         } else {
