@@ -1,9 +1,16 @@
 package Database;
 
+import javafx.scene.media.Media;
+
 import java.io.*;
 
 public class FileUtils {
     private final static String rememberMeFilePath = "database/txtFiles/rememberMe.txt";
+
+    public static Media loadMedia(String path) {
+        File file = new File(path);
+        return new Media(file.toURI().toString());
+    }
     public static void saveHim(String username,String password) throws IOException {
         File file = new File(rememberMeFilePath);
         if (!file.exists()) {
