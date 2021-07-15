@@ -17,7 +17,8 @@ public class FileUtils {
             file.createNewFile();
         }
         DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
-        out.writeUTF(username + " " + password);
+        String string = username + " " + password;
+        out.writeBytes(string);
     }
     public static void doNotSaveHim() {
         File file = new File(rememberMeFilePath);
