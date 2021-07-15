@@ -1,13 +1,17 @@
 package Controllers.Menu;
 
+import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
+import Models.Cards.CardImage;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
@@ -65,8 +69,13 @@ public class BattleDeckCon {
     @FXML
     private ImageView outCard4;
 
-    public void actionHandler(ActionEvent ae) throws Exception {
+    @FXML
+    private Label message;
+
+    @FXML
+    void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
+            SQLManager.updateClientDeck();
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
         } else {
             throw new Exception("unknown event");
@@ -74,6 +83,15 @@ public class BattleDeckCon {
     }
 
     public void initialize() {
+        FXManager.setBackground(FXManager.getImage("/BackGrounds/BattleDeck.png"), mainBorder);
+        updateOnScreenCards();
+    }
+
+    private void updateOnScreenCards() {
+        Image cardsq = FXManager.getImage("/icons/cardsq.png");
+        upperCard.setImage(cardsq);
+        lowerCard.setImage(cardsq);
+
         ArrayList<ImageView> deck = new ArrayList<>(4);
         deck.add(card1);
         deck.add(card2);
@@ -90,22 +108,52 @@ public class BattleDeckCon {
         outDeck.add(outCard3);
         outDeck.add(outCard4);
 
-        ArrayList<Card> outCards = new ArrayList<>(4);
-        for (Card card : Config.cards) {
-            if (!Config.client.getDeckCards().contains(card))
-                outCards.add(card);
+        ArrayList<CardImage> outCards = new ArrayList<>(4);
+        for (CardImage cardImage : Config.cardImages) {
+            if (!Config.client.getDeckCards().contains(cardImage.getCard()))
+                outCards.add(cardImage);
         }
 
         for (int i = 0; i < 8; i++) {
-            String resource = "/Cards/" + Config.client.getDeckCards().get(i).getClass().getSimpleName() + ".png";
-            Image image = FXManager.getImage(resource);
-            deck.get(i).setImage(image);
+            for (CardImage cardImage : Config.cardImages) {
+                if (Config.client.getDeckCards().get(i).equals(cardImage.getCard())) {
+                    deck.get(i).setImage(cardImage.getImage());
+                    break;
+                }
+            }
         }
 
         for (int i = 0; i < 4; i++) {
-            String resource = "/Cards/" + outCards.get(i).getClass().getSimpleName() + ".png";
-            Image image = FXManager.getImage(resource);
-            outDeck.get(i).setImage(image);
+            outDeck.get(i).setImage(outCards.get(i).getImage());
         }
+    }
+
+    @FXML
+    void cardOnClick(MouseEvent event) {
+        upperCard.setImage(((ImageView)event.getSource()).getImage());
+    }
+
+    @FXML
+    void outCardOnClick(MouseEvent event) {
+        lowerCard.setImage(((ImageView)event.getSource()).getImage());
+    }
+
+    @FXML
+    void changeButtonOnAction(ActionEvent event) {
+        if (!Config.cardImages.contains(new CardImage(null, upperCard.getImage()))
+        || !Config.cardImages.contains(new CardImage(null, lowerCard.getImage()))) {
+            message.setText("You have not chosen the card\nyou want to change.");
+        } else {
+            Card before = CardImage.find(upperCard.getImage()).getCard();
+            Card after = CardImage.find(lowerCard.getImage()).getCard();
+            changeCards(before, after);
+            updateOnScreenCards();
+            message.setText("Done.");
+        }
+    }
+
+    private void changeCards(Card before, Card after) {
+        Config.client.getDeckCards().remove(before);
+        Config.client.getDeckCards().add(after);
     }
 }
