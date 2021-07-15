@@ -43,7 +43,7 @@ public class LoginCon extends Controller {
         try {
             loginProcess();
             if (rememberMeBox.isSelected()) {
-                FileUtils.saveHim(usernameTextField.getText(),passwordField.getText());
+                FileUtils.saveHim(usernameTextField.getText(), passwordField.getText());
             } else {
                 FileUtils.doNotSaveHim();
             }
@@ -52,7 +52,8 @@ public class LoginCon extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        FXManager.goTo("MainMenu.fxml",(Stage) loginButton.getScene().getWindow());
+        playMainThemeMusic();
+        FXManager.goTo("MainMenu.fxml", (Stage) loginButton.getScene().getWindow());
     }
 
     private void loginProcess() {

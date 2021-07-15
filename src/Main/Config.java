@@ -9,6 +9,7 @@ import Models.Cards.spells.Rage;
 import Models.Cards.troops.*;
 import Models.Client;
 import Models.Graphic.FXManager;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class Config {
     public static Statement statement;
     public static ArrayList<Card> cards = new ArrayList<>();
     public static ArrayList<CardImage> cardImages = new ArrayList<>();
+    public static MediaPlayer mediaPlayer;
 
     //methods
     public static void unknownInputException() {

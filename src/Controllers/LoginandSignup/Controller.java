@@ -1,6 +1,6 @@
 package Controllers.LoginandSignup;
 
-import Database.BattleHistory;
+import Database.FileUtils;
 import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
@@ -12,12 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public abstract class Controller {
     protected final String labelFontName = "System";
@@ -79,5 +81,12 @@ public abstract class Controller {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
+    }
+    protected void playMainThemeMusic() {
+        Media media = FileUtils.loadMedia("assets/musics/MainTheme.mp3");
+        Config.mediaPlayer = new MediaPlayer(media);
+        Config.mediaPlayer.play();
+        Config.mediaPlayer.setOnEndOfMedia(() ->
+                Config.mediaPlayer.seek(Duration.ZERO));
     }
 }
