@@ -35,6 +35,6 @@ public class SinglePlayerCon implements Controller{
     }
     private void startSinglePlayerGame(String mode) {
         System.out.println("singlePlayerStarted");
-        Config.primaryStage.close();
+        FXManager.openWindow("game.fxml");
     }
 }
