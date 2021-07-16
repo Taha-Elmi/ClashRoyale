@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -40,6 +41,9 @@ public class GameCon {
 
     @FXML
     private ImageView next;
+
+    @FXML
+    private Pane boardPane;
 
     @FXML
     public void initialize() {
