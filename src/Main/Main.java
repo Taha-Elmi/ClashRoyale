@@ -1,5 +1,4 @@
 package Main;
-import Database.BattleHistory;
 import Database.SQLManager;
 import Models.Graphic.FXManager;
 import javafx.application.Application;
@@ -32,7 +31,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         SQLManager.connectToDatabase();
-//        SQLManager.addHistory("Farid","taha",1,0, BattleHistory.Result.WIN);
         launch(args);
     }
 }
