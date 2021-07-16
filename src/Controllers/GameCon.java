@@ -35,15 +35,21 @@ public class GameCon {
     @FXML
     private Label hp;
 
-
     @FXML
     private HBox mainBorder;
 
     @FXML
+    private ImageView next;
+
+    @FXML
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             ((ImageView) deck.getChildren().get(i)).setImage(CardImage.find(Config.client.getDeckCards().get(i)).getImage());
         }
+        next.setImage(CardImage.find(Config.client.getDeckCards().get(4)).getImage());
+        name.setText(Config.client.getName());
+        level.setText("" + Config.client.getLevel());
+        hp.setText("MAX");
     }
 }

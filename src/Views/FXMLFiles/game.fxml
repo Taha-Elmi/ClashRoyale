@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -31,10 +30,9 @@
             <Label fx:id="hp" text="Label" />
          </children>
       </VBox>
-      <Pane prefHeight="200.0" prefWidth="200.0" />
-      <GridPane fx:id="deck" maxHeight="-Infinity" prefHeight="360.0" prefWidth="150.0">
+      <Pane maxHeight="-Infinity" opacity="0.5" prefHeight="666.0" prefWidth="482.0" style="-fx-background-color: #B7F29E;" />
+      <GridPane fx:id="deck" maxHeight="-Infinity" prefHeight="360.0" prefWidth="75.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -48,14 +46,20 @@
          </HBox.margin>
          <children>
             <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
             <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-            <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-            <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-            <ImageView fitHeight="89.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Next Card:">
+               <VBox.margin>
+                  <Insets top="260.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="next" fitHeight="89.0" fitWidth="73.0" opacity="0.36" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </HBox>
