@@ -39,18 +39,18 @@ public class FXManager {
      * then open it on a new stage.
      * @param fxmlName the fxml name.
      */
-    public static void openWindow(String fxmlName) {
+    public static Stage openWindow(String fxmlName) {
+        Stage stage = new Stage();
         try {
             Parent root = FXMLLoader.load(FXManager.class.getResource(
                     "/Views/FXMLFiles/" + fxmlName));
-            Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.sizeToScene();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return stage;
     }
 
     /**

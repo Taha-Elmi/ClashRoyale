@@ -2,11 +2,15 @@ package Controllers.Menu;
 
 import Main.Config;
 import Models.Graphic.FXManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class SinglePlayerCon implements Controller{
     @FXML
@@ -20,6 +24,7 @@ public class SinglePlayerCon implements Controller{
         choiceBox.getItems().add("medium");
         choiceBox.getItems().add("hard");
         choiceBox.setValue("easy");
+        Platform.runLater(() -> ok.requestFocus());
     }
 
     @Override
@@ -35,6 +40,19 @@ public class SinglePlayerCon implements Controller{
     }
     private void startSinglePlayerGame(String mode) {
         System.out.println("singlePlayerStarted");
-        FXManager.openWindow("game.fxml");
+        Stage stage = FXManager.openWindow("game.fxml");
+
+        stage.setTitle("Clash Royale");
+        stage.getIcons().add(FXManager.getImage("/Icons/mainicon.jpg"));
+
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+
+        stage.setResizable(false);
+        stage.setFullScreen(true);
+        stage.show();
     }
 }

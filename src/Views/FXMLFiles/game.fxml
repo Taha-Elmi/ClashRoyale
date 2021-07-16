@@ -11,24 +11,24 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
+<HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label text="Label" />
-            <Label text="Label" />
-            <Label text="Label">
+            <Label fx:id="opponentName" text="Label" />
+            <Label fx:id="opponentLevel" text="Label" />
+            <Label fx:id="opponentHp" text="Label">
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin>
             </Label>
-            <Label text="Label">
+            <Label fx:id="name" text="Label">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </Label>
-            <Label text="Label" />
-            <Label text="Label" />
+            <Label fx:id="level" text="Label" />
+            <Label fx:id="hp" text="Label" />
          </children>
       </VBox>
       <Pane prefHeight="200.0" prefWidth="200.0" />
