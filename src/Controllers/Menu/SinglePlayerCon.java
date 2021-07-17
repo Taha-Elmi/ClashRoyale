@@ -31,28 +31,15 @@ public class SinglePlayerCon implements Controller{
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == ok) {
             String mode = choiceBox.getValue();
-            Stage stage = (Stage) ok.getScene().getWindow();
-            stage.close();
+            ((Stage) ok.getScene().getWindow()).close();
             startSinglePlayerGame(mode);
         } else {
             throw new Exception("unknown event");
         }
     }
     private void startSinglePlayerGame(String mode) {
+        Config.mediaPlayer.stop();
+        FXManager.goTo("game.fxml",Config.primaryStage);
         System.out.println("singlePlayerStarted");
-        Stage stage = FXManager.openWindow("game.fxml");
-
-        stage.setTitle("Clash Royale");
-        stage.getIcons().add(FXManager.getImage("/Icons/mainicon.jpg"));
-
-        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-
-        stage.setResizable(false);
-        stage.setFullScreen(true);
-        stage.show();
     }
 }

@@ -3,6 +3,7 @@ package Controllers;
 import Main.Config;
 import Models.Cards.CardImage;
 import Models.Graphic.FXManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
@@ -55,5 +56,8 @@ public class GameCon {
         name.setText(Config.client.getName());
         level.setText("" + Config.client.getLevel());
         hp.setText("MAX");
+        Platform.runLater(() -> {
+            FXManager.setStageReadyForGame(Config.primaryStage);
+        });
     }
 }
