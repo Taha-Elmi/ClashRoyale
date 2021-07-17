@@ -67,9 +67,9 @@ public class GameCon implements Controller{
 
     private void setCardsImages() {
         card1.setImage(CardImage.find(Config.client.getDeckCards().get(0)).getImage());
-        card2.setImage(CardImage.find(Config.client.getDeckCards().get(0)).getImage());
-        card3.setImage(CardImage.find(Config.client.getDeckCards().get(0)).getImage());
-        card4.setImage(CardImage.find(Config.client.getDeckCards().get(0)).getImage());
+        card2.setImage(CardImage.find(Config.client.getDeckCards().get(1)).getImage());
+        card3.setImage(CardImage.find(Config.client.getDeckCards().get(2)).getImage());
+        card4.setImage(CardImage.find(Config.client.getDeckCards().get(3)).getImage());
         next.setImage(CardImage.find(Config.client.getDeckCards().get(4)).getImage());
     }
     @Override
