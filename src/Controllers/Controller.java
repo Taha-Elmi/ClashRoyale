@@ -1,4 +1,4 @@
-package Controllers.Menu;
+package Controllers;
 
 import javafx.event.ActionEvent;
 

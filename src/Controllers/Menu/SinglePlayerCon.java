@@ -1,18 +1,16 @@
 package Controllers.Menu;
 
+import Controllers.Controller;
 import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class SinglePlayerCon implements Controller{
+public class SinglePlayerCon implements Controller {
     @FXML
     private ChoiceBox<String> choiceBox;
 
