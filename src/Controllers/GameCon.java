@@ -116,8 +116,8 @@ public class GameCon implements Controller{
 
     private void playCard(Card card) {
         List<Card> deckCards = Config.client.getDeckCards();
-        deckCards.remove(chosenCard);
+        deckCards.remove(card);
         setCardsImages();
-        deckCards.add(chosenCard);
+        deckCards.add(card);
     }
 }
