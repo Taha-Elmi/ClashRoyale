@@ -1,18 +1,21 @@
 package Controllers;
 
 import Main.Config;
+import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
+import java.util.List;
 
 public class GameCon implements Controller{
     @FXML
@@ -80,8 +83,38 @@ public class GameCon implements Controller{
     private void dragHandler(DragEvent de) {
 
     }
-//    @FXML
-//    private void dragDetectionHandler(MouseEvent me) {
-//        if ()
-//    }
+    @FXML
+    private void dragDetectionHandler(MouseEvent me) {
+        if (!(me.getSource() instanceof ImageView)) {
+            return;
+        }
+        Dragboard db = ((ImageView) me.getSource()).startDragAndDrop(TransferMode.ANY);
+        ClipboardContent cb = new ClipboardContent();
+        cb.putImage(((ImageView) me.getSource()).getImage());
+        db.setContent(cb);
+        me.consume();
+    }
+    @FXML
+    private void dragOverHandler(DragEvent de) {
+        if (de.getDragboard().hasImage()) {
+            de.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+    @FXML
+    private void dragDroppedHandler(DragEvent de) {
+        List<Card> deckCards = Config.client.getDeckCards();
+        ImageView imageView = new ImageView(de.getDragboard().getImage());
+        imageView.maxHeight(10);
+        imageView.maxWidth(5);
+        imageView.setX(de.getX());
+        imageView.setY(de.getY());
+        System.out.println("1");
+        Card cardToRemove = CardImage.find(imageView.getImage()).getCard();
+        Card cardToAdd = CardImage.find(next.getImage()).getCard();
+        deckCards.remove(cardToRemove);
+        deckCards.add(cardToAdd);
+        //update
+        setCardsImages();
+        boardPane.getChildren().add(imageView);
+    }
 }
