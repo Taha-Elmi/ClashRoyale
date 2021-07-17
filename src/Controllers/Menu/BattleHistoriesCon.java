@@ -1,5 +1,6 @@
 package Controllers.Menu;
 
+import Controllers.Controller;
 import Database.BattleHistory;
 import Database.SQLManager;
 import Main.Config;

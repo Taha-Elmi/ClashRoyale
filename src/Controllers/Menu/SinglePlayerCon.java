@@ -1,18 +1,16 @@
 package Controllers.Menu;
 
+import Controllers.Controller;
 import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class SinglePlayerCon implements Controller{
+public class SinglePlayerCon implements Controller {
     @FXML
     private ChoiceBox<String> choiceBox;
 
@@ -31,28 +29,15 @@ public class SinglePlayerCon implements Controller{
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == ok) {
             String mode = choiceBox.getValue();
-            Stage stage = (Stage) ok.getScene().getWindow();
-            stage.close();
+            ((Stage) ok.getScene().getWindow()).close();
             startSinglePlayerGame(mode);
         } else {
             throw new Exception("unknown event");
         }
     }
     private void startSinglePlayerGame(String mode) {
+        Config.mediaPlayer.stop();
+        FXManager.goTo("game.fxml",Config.primaryStage);
         System.out.println("singlePlayerStarted");
-        Stage stage = FXManager.openWindow("game.fxml");
-
-        stage.setTitle("Clash Royale");
-        stage.getIcons().add(FXManager.getImage("/Icons/mainicon.jpg"));
-
-        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-
-        stage.setResizable(false);
-        stage.setFullScreen(true);
-        stage.show();
     }
 }
