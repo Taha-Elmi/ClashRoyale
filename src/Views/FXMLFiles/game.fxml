@@ -31,7 +31,7 @@
             <Label fx:id="hp" text="Label" />
          </children>
       </VBox>
-      <Pane fx:id="boardPane" maxHeight="-Infinity" onDragDropped="#dragDroppedHandler" onDragOver="#dragOverHandler" opacity="0.5" prefHeight="775.0" prefWidth="450.0" style="-fx-background-color: #B7F29E;">
+      <Pane fx:id="boardPane" maxHeight="-Infinity" onDragDropped="#dragDroppedHandler" onDragOver="#dragOverHandler" opacity="0.7" prefHeight="775.0" prefWidth="450.0" style="-fx-background-color: #34C692;">
          <children>
             <GridPane prefHeight="775.0" prefWidth="450.0">
                 <columnConstraints>
