@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
@@ -18,6 +17,7 @@ import javafx.scene.layout.Pane;
 import java.util.List;
 
 public class GameCon implements Controller{
+    private Card chosenCard;
     @FXML
     private GridPane deck;
     @FXML
@@ -90,6 +90,7 @@ public class GameCon implements Controller{
         }
         Dragboard db = ((ImageView) me.getSource()).startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
+        chosenCard = CardImage.find(((ImageView) me.getSource()).getImage()).getCard();
         cb.putImage(((ImageView) me.getSource()).getImage());
         db.setContent(cb);
         me.consume();
@@ -102,19 +103,21 @@ public class GameCon implements Controller{
     }
     @FXML
     private void dragDroppedHandler(DragEvent de) {
-        List<Card> deckCards = Config.client.getDeckCards();
         ImageView imageView = new ImageView(de.getDragboard().getImage());
         imageView.maxHeight(10);
         imageView.maxWidth(5);
         imageView.setX(de.getX());
         imageView.setY(de.getY());
-        System.out.println("1");
-        Card cardToRemove = CardImage.find(imageView.getImage()).getCard();
-        Card cardToAdd = CardImage.find(next.getImage()).getCard();
-        deckCards.remove(cardToRemove);
-        deckCards.add(cardToAdd);
-        //update
-        setCardsImages();
+        playCard(chosenCard);
+        chosenCard = null;
+        // just a sample event to make sure it works.
         boardPane.getChildren().add(imageView);
+    }
+
+    private void playCard(Card card) {
+        List<Card> deckCards = Config.client.getDeckCards();
+        deckCards.remove(chosenCard);
+        setCardsImages();
+        deckCards.add(chosenCard);
     }
 }
