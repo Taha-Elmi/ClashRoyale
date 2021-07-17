@@ -1,5 +1,6 @@
 package Controllers.Menu;
 
+import Controllers.Controller;
 import Database.SQLManager;
 import Main.Config;
 import Models.Cards.Card;
@@ -16,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
-public class BattleDeckCon {
+public class BattleDeckCon implements Controller {
 
     @FXML
     private BorderPane mainBorder;
@@ -73,7 +74,7 @@ public class BattleDeckCon {
     private Label message;
 
     @FXML
-    void actionHandler(ActionEvent ae) throws Exception {
+    public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
             SQLManager.updateClientDeck();
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
