@@ -15,6 +15,7 @@
 
 <HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
    <children>
+      <ImageView fx:id="leftKingImageView" fitHeight="673.0" fitWidth="421.0" opacity="0.65" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Label fx:id="opponentName" text="Label" />
@@ -35,7 +36,7 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="450.0">
          <children>
-            <Pane fx:id="boardPane" maxHeight="-Infinity" onDragDropped="#dragDroppedHandler" onDragOver="#dragOverHandler" opacity="0.7" prefHeight="775.0" prefWidth="450.0" style="-fx-background-color: #34C692;">
+            <Pane fx:id="boardPane" maxHeight="-Infinity" onDragDropped="#dragDroppedHandler" onDragOver="#dragOverHandler" prefHeight="775.0" prefWidth="450.0" style="-fx-background-color: #34C692;">
                <children>
                   <GridPane prefHeight="775.0" prefWidth="450.0">
                       <columnConstraints>
@@ -2884,6 +2885,36 @@
                         </ImageView>
                       </children>
                   </GridPane>
+                  <ImageView fx:id="redKingTower" fitHeight="103.0" fitWidth="112.0" layoutX="179.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redKingTower.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="redLeftPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="56.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincessTower.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="redRightPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="330.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincessTower.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="blueKingTower" fitHeight="110.0" fitWidth="100.0" layoutX="178.0" layoutY="664.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/blueKingTower.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="blueLeftPrincessTower" fitHeight="66.0" fitWidth="67.0" layoutX="55.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="blueRightPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="329.0" layoutY="586.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <ProgressBar fx:id="elixirBar" prefHeight="18.0" prefWidth="452.0" progress="0.4" style="-fx-accent: #EF1DFE;" />
@@ -2932,5 +2963,6 @@
             <Insets top="60.0" />
          </padding>
       </VBox>
+      <ImageView fx:id="rightKingImageView" fitHeight="673.0" fitWidth="421.0" opacity="0.65" pickOnBounds="true" preserveRatio="true" />
    </children>
 </HBox>
