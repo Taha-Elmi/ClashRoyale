@@ -5,6 +5,7 @@ import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
+import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
@@ -21,7 +23,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameCon implements Controller {
     private Card chosenCard;
@@ -62,6 +68,15 @@ public class GameCon implements Controller {
     @FXML
     private Pane boardPane;
 
+    @FXML
+    private Label timerLabel;
+
+    @FXML
+    private ProgressBar elixirBar;
+
+    private Timer timer;
+
+    private LocalTime localTime;
 
     @FXML
     public void initialize() {
@@ -73,6 +88,40 @@ public class GameCon implements Controller {
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
+        startTimer();
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        localTime = LocalTime.of(0, 3, 0);
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        timerAdvance(localTime);
+                        elixirAdvance();
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(1000.0);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
+    private void timerAdvance(LocalTime localTime) {
+        localTime = localTime.minusSeconds(1);
+        timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
+        if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
+            timer.cancel();
+            Game.getInstance().finish();
+        }
+    }
+
+    private void elixirAdvance() {
+        if (elixirBar.getProgress() < 1)
+            elixirBar.setProgress(elixirBar.getProgress() + 0.1);
+        Game.getInstance().getPlayer1().setElixirs((int) elixirBar.getProgress() * 10);
     }
 
     private void setCardsImages() {
@@ -138,6 +187,7 @@ public class GameCon implements Controller {
         }
         pt.play();
     }
+
     private void playCard(Card card) {
         Game.getInstance().getPlayer1().playCard(card);
         setCardsImages();

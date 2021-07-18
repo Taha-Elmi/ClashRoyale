@@ -2,7 +2,6 @@ package Models.GameManager;
 
 import Models.Cards.Card;
 import Models.Client;
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,9 @@ public class Player {
     private void sendCardToTheLast(Card card) {
         cards.remove(card);
         cards.add(card);
+    }
+    public void setElixirs(int elixirs) {
+        this.elixirs = elixirs;
     }
 
 }

@@ -16,6 +16,10 @@ public class Game {
         instance = this;
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
     public void initialize() {}
 
     public void finish() {}
