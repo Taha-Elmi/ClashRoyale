@@ -13,6 +13,10 @@ public class Player {
     private int elixirs = 4;
     private Client client;
 
+    public void setElixirs(int elixirs) {
+        this.elixirs = elixirs;
+    }
+
     public void playCard(Card card){}
 
 }

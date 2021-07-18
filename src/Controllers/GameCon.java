@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
@@ -63,6 +64,9 @@ public class GameCon implements Controller{
     @FXML
     private Label timerLabel;
 
+    @FXML
+    private ProgressBar elixirBar;
+
     private Timer timer;
 
     private LocalTime localTime;
@@ -87,12 +91,8 @@ public class GameCon implements Controller{
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        localTime = localTime.minusSeconds(1);
-                        timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
-                        if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
-                            timer.cancel();
-                            Game.getInstance().finish();
-                        }
+                        timerAdvance(localTime);
+                        elixirAdvance();
                     }
                 });
             }
@@ -100,6 +100,21 @@ public class GameCon implements Controller{
 
         long frameTimeInMilliseconds = (long)(1000.0);
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
+    private void timerAdvance(LocalTime localTime) {
+        localTime = localTime.minusSeconds(1);
+        timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
+        if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
+            timer.cancel();
+            Game.getInstance().finish();
+        }
+    }
+
+    private void elixirAdvance() {
+        if (elixirBar.getProgress() < 1)
+            elixirBar.setProgress(elixirBar.getProgress() + 0.1);
+        Game.getInstance().getPlayer1().setElixirs((int) elixirBar.getProgress() * 10);
     }
 
     private void setCardsImages() {
