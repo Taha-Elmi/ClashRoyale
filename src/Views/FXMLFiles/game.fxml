@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
    <children>
@@ -2340,18 +2341,35 @@
             <ImageView fx:id="card1" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0" />
             <ImageView fx:id="card2" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
             <ImageView fx:id="card3" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-            <ImageView fx:id="card4" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
+            <ImageView fx:id="card4" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../Assets/Pictures/Cards/MiniPekka.png" />
+               </image></ImageView>
          </children>
       </GridPane>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label text="Next Card:">
+            <Label fx:id="timerLabel" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="TIMER">
+               <font>
+                  <Font size="35.0" />
+               </font>
                <VBox.margin>
-                  <Insets top="260.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
-            <ImageView fx:id="next" fitHeight="89.0" fitWidth="73.0" opacity="0.36" pickOnBounds="true" preserveRatio="true" />
+            <Label text="Next Card:">
+               <VBox.margin>
+                  <Insets top="400.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="next" fitHeight="89.0" fitWidth="73.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/Pictures/Cards/Archer.png" />
+               </image></ImageView>
          </children>
+         <padding>
+            <Insets top="60.0" />
+         </padding>
       </VBox>
    </children>
 </HBox>

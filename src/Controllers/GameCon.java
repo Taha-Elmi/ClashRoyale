@@ -3,6 +3,7 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,7 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameCon implements Controller{
     private Card chosenCard;
@@ -55,6 +60,12 @@ public class GameCon implements Controller{
     @FXML
     private Pane boardPane;
 
+    @FXML
+    private Label timerLabel;
+
+    private Timer timer;
+
+    private LocalTime localTime;
 
     @FXML
     public void initialize() {
@@ -66,6 +77,29 @@ public class GameCon implements Controller{
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
+        startTimer();
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        localTime = LocalTime.of(0, 3, 0);
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        localTime = localTime.minusSeconds(1);
+                        timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
+                        if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
+                            timer.cancel();
+                            Game.getInstance().finish();
+                        }
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(1000.0);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
     private void setCardsImages() {
