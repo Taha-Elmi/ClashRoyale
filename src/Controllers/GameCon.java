@@ -6,6 +6,8 @@ import Models.Cards.CardImage;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -108,34 +110,33 @@ public class GameCon implements Controller {
     }
     @FXML
     private void dragDroppedHandler(DragEvent de) {
-        bornCard(chosenCard,de);
+        bornCard(chosenCard, de);
         playCard(chosenCard);
         chosenCard = null;
     }
 
     private void bornCard(Card card,DragEvent de) {
-        try {
-            double x = de.getX();
-            double y = de.getY();
-            for (int i = 0; i < card.getNumber(); i++) {
-                ImageView imageView = new ImageView(card.born());
-                if (i % 2 == 0) {
-                    x += 20;
-                } else {
-                    y += 20;
-                }
-                imageView.setX(x);
-                imageView.setY(y);
-                boardPane.getChildren().add(imageView);
-                if (card instanceof Troop) {
-                    Troop troop = (Troop) card;
-                    Platform.runLater(() -> troop.move(imageView,new Point2D(420,60)));
-
-                }
+        double x = de.getX();
+        double y = de.getY();
+        ParallelTransition pt = new ParallelTransition();
+        for (int i = 0; i < card.getNumber(); i++) {
+            ImageView imageView = new ImageView(card.born());
+            if (i % 2 == 0) {
+                x += 20;
+            } else {
+                y += 20;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            imageView.setX(x);
+            imageView.setY(y);
+            boardPane.getChildren().add(imageView);
+            if (card instanceof Troop) {
+                Troop troop = (Troop) card;
+                Timeline timeline = new Timeline();
+                troop.readyForMove(imageView,new Point2D(400,50),timeline);
+                pt.getChildren().add(timeline);
+            }
         }
+        pt.play();
     }
     private void playCard(Card card) {
         Game.getInstance().getPlayer1().playCard(card);

@@ -42,15 +42,15 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         }
     }
 
-    public void move(ImageView imageView, Point2D dst) {
+    public void readyForMove(ImageView imageView, Point2D dst,Timeline timeline) {
+        setTimeline(timeline);
+        timeline.getKeyFrames().clear();
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(dst))),
                 new KeyValue(imageView.xProperty(),dst.getX()),
                 new KeyValue(imageView.yProperty(),dst.getY())
         ));
-        Thread thread = new Thread(() -> timeline.play());
-        thread.start();
     }
 
     public void setSpeed(Speed speed) {

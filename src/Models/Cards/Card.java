@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 abstract public class Card implements Cloneable {
-    protected Timeline timeline = new Timeline();
+    protected Timeline timeline;
     private final int cost;
     private int level;
     private final int number;
@@ -27,15 +27,18 @@ abstract public class Card implements Cloneable {
         return number;
     }
 
-    public abstract Image born();
-    public abstract void die();
-    protected abstract boolean isDead();
-    public abstract void setLevel(int level);
-
     public Timeline getTimeline() {
         return timeline;
     }
 
+    public void setTimeline(Timeline timeline) {
+        this.timeline = timeline;
+    }
+
+    public abstract Image born();
+    public abstract void die();
+    protected abstract boolean isDead();
+    public abstract void setLevel(int level);
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
