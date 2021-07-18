@@ -5,15 +5,15 @@ public class Game {
     private Board board;
     private Player player1;
     private Player player2;
-    private Manager manager1;
-    private Manager manager2;
+    private Manager manager;
     private TimeManager timeManager;
     private GameMode gameMode;
 
-    public Game(Player player1, Player player2, GameMode gameMode) {
+    public Game(Player player1, Player player2, GameMode gameMode,Manager manager) {
         this.player1 = player1;
         this.player2 = player2;
         this.gameMode = gameMode;
+        this.manager = manager;
         instance = this;
     }
 

@@ -2,6 +2,7 @@ package Controllers.Menu;
 
 import Controllers.Controller;
 import Main.Config;
+import Models.GameManager.*;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -36,6 +37,16 @@ public class SinglePlayerCon implements Controller {
         }
     }
     private void startSinglePlayerGame(String mode) {
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Manager manager = switch (mode) {
+            case "easy" -> new StupidRobotManager(player2);
+            case "medium" -> new SmartRobotManager(player2);
+            case "hard" -> new GeniusRobotManager(player2);
+            default -> throw new IllegalStateException("Unexpected value: " + mode);
+        };
+        Game game = new Game(player1,
+                player2,GameMode.SINGLE,manager);
         Config.mediaPlayer.stop();
         FXManager.goTo("game.fxml",Config.primaryStage);
         System.out.println("singlePlayerStarted");
