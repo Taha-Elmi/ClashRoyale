@@ -3,20 +3,25 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.troops.Troop;
+import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GameCon implements Controller{
+public class GameCon implements Controller {
     private Card chosenCard;
     @FXML
     private GridPane deck;
@@ -103,21 +108,37 @@ public class GameCon implements Controller{
     }
     @FXML
     private void dragDroppedHandler(DragEvent de) {
-        ImageView imageView = new ImageView(de.getDragboard().getImage());
-        imageView.maxHeight(10);
-        imageView.maxWidth(5);
-        imageView.setX(de.getX());
-        imageView.setY(de.getY());
+        bornCard(chosenCard,de);
         playCard(chosenCard);
         chosenCard = null;
-        // just a sample event to make sure it works.
-        boardPane.getChildren().add(imageView);
     }
 
+    private void bornCard(Card card,DragEvent de) {
+        try {
+            double x = de.getX();
+            double y = de.getY();
+            for (int i = 0; i < card.getNumber(); i++) {
+                ImageView imageView = new ImageView(card.born());
+                if (i % 2 == 0) {
+                    x += 20;
+                } else {
+                    y += 20;
+                }
+                imageView.setX(x);
+                imageView.setY(y);
+                boardPane.getChildren().add(imageView);
+                if (card instanceof Troop) {
+                    Troop troop = (Troop) card;
+                    Platform.runLater(() -> troop.move(imageView,new Point2D(420,60)));
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void playCard(Card card) {
-        List<Card> deckCards = Config.client.getDeckCards();
-        deckCards.remove(card);
+        Game.getInstance().getPlayer1().playCard(card);
         setCardsImages();
-        deckCards.add(card);
     }
 }

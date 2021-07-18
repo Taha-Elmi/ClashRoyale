@@ -1,14 +1,16 @@
 package Models.Cards.troops;
 
+import javafx.scene.image.Image;
+
 public class Wizard extends Troop {
 
     public Wizard(int level) {
-        super(5, level);
+        super(5, level,1);
     }
 
     @Override
-    public void born() {
-
+    public Image born() {
+        return null;
     }
 
     @Override

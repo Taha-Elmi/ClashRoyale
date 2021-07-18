@@ -1,15 +1,15 @@
 package Models.Cards.troops;
-import Models.Cards.Target;
+import javafx.scene.image.Image;
 
 public class Archer extends Troop {
 
     public Archer(int level) {
-        super(3, level);
+        super(3, level,3);
     }
 
     @Override
-    public void born() {
-
+    public Image born() {
+        return null;
     }
 
     @Override

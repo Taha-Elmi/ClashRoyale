@@ -2,17 +2,34 @@ package Models.GameManager;
 
 import Models.Cards.Card;
 import Models.Client;
+
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import Models.Towers.*;
 public class Player {
     private List<PrincessTower> princessTowers = new ArrayList<>();
     private KingTower kingTower;
-    private List<Card> cards = new ArrayList<>();
+    private List<Card> cards;
     private int crown = 0;
     private int elixirs = 4;
-    private Client client;
 
-    public void playCard(Card card){}
+    public Player( List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public void initialize() {
+        princessTowers.add(new PrincessTower());
+        princessTowers.add(new PrincessTower());
+        kingTower = new KingTower();
+    }
+    public void playCard(Card card){
+        sendCardToTheLast(card);
+
+    }
+    private void sendCardToTheLast(Card card) {
+        cards.remove(card);
+        cards.add(card);
+    }
 
 }

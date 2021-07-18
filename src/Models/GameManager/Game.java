@@ -2,7 +2,6 @@ package Models.GameManager;
 
 public class Game {
     private static Game instance;
-    private Board board;
     private Player player1;
     private Player player2;
     private Manager manager;
@@ -22,6 +21,14 @@ public class Game {
     public void finish() {}
 
     public void update() {}
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
 
     public static Game getInstance() {
         return instance;
