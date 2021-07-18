@@ -5,7 +5,6 @@ import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
-import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
@@ -14,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -22,10 +20,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -80,7 +76,7 @@ public class GameCon implements Controller {
 
     @FXML
     public void initialize() {
-        FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
+        FXManager.setBackground(FXManager.getImage("/Game/jungle2.jpg"), mainBorder);
         setCardsImages();
         name.setText(Config.client.getName());
         level.setText("" + Config.client.getLevel());
@@ -170,10 +166,12 @@ public class GameCon implements Controller {
         ParallelTransition pt = new ParallelTransition();
         for (int i = 0; i < card.getNumber(); i++) {
             ImageView imageView = new ImageView(card.born());
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(80);
             if (i % 2 == 0) {
-                x += 20;
+                x += 50;
             } else {
-                y += 20;
+                y += 50;
             }
             imageView.setX(x);
             imageView.setY(y);

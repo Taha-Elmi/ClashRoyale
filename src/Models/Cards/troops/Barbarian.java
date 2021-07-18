@@ -2,7 +2,6 @@ package Models.Cards.troops;
 
 import Models.Graphic.FXManager;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Barbarian extends Troop {
 
@@ -13,7 +12,7 @@ public class Barbarian extends Troop {
 
     @Override
     public Image born() {
-        return FXManager.getImage("/Game/Characters/Barbarian.gif");
+        return FXManager.getImage("/Gifs/Barbarian/forward.gif");
     }
 
     @Override
