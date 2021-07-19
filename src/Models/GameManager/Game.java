@@ -50,7 +50,7 @@ public class Game {
     }
 
     public void update() {
-
+        manager.action();
     }
 
     public Player getPlayer1() {
@@ -117,7 +117,7 @@ public class Game {
     }
 
     public void dieCard(CardImage cardImage) {
-        GameCon.getStaticBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
+        GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
         player1_list.remove(cardImage);
         player2_list.remove(cardImage);
     }

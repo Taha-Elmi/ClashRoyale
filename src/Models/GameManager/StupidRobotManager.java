@@ -3,6 +3,8 @@ package Models.GameManager;
 import Controllers.GameCon;
 import Models.Cards.Card;
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
+
 import java.util.Random;
 
 public class StupidRobotManager implements Manager,Runnable {
@@ -21,26 +23,12 @@ public class StupidRobotManager implements Manager,Runnable {
 
     @Override
     public void action() {
-
+        run();
     }
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        while (true) {
-            Card card = getRandomCard();
-            Game.getInstance().bornCard(card, getRandomPoint2D(), new Point2D(300, 50), GameCon.getStaticBoardPane(), 2);
-            Game.getInstance().playCardPlayer2(card);
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        playCard();
     }
 
     private Card getRandomCard() {
@@ -50,5 +38,13 @@ public class StupidRobotManager implements Manager,Runnable {
         double randomWidth = random.nextDouble() * validRandomWidth;
         double randomHeight = random.nextDouble() * validRandomHeight;
         return new Point2D(randomWidth,randomHeight);
+    }
+    private void playCard() {
+        Card card = getRandomCard();
+        Point2D src = getRandomPoint2D();
+        ImageView nearerTower = GameCon.getInstance().getNearerTowerImageView(src,2);
+        Point2D dst = new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY());
+        Game.getInstance().bornCard(card, src, dst, GameCon.getInstance().getBoardPane(), 2);
+        Game.getInstance().playCardPlayer2(card);
     }
 }

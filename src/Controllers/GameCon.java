@@ -23,7 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameCon implements Controller {
-    private static Pane staticBoardPane;
+    private static GameCon instance;
     private Card chosenCard;
     @FXML
     private GridPane deck;
@@ -111,9 +111,9 @@ public class GameCon implements Controller {
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
-        staticBoardPane = boardPane;
         startTimer();
         startMainLoop();
+        instance = this;
     }
 
     private void startMainLoop() {
@@ -261,9 +261,6 @@ public class GameCon implements Controller {
         }
     }
 
-    public static Pane getStaticBoardPane() {
-        return staticBoardPane;
-    }
     public ImageView getNearerTowerImageView(Point2D src,int player) {
         if (player == 1) {
             double redKingTowerDistance = src.distance(new Point2D(redKingTower.getLayoutX(), redKingTower.getLayoutY()));
@@ -287,19 +284,44 @@ public class GameCon implements Controller {
                 return null;
             }
         } else if (player == 2) {
+            double blueKingTowerDistance = src.distance(new Point2D(blueKingTower.getLayoutX(), blueKingTower.getLayoutY()));
+            double blueLeftPrincessTowerDistance = src.distance(new Point2D(blueLeftPrincessTower.getLayoutX(), blueLeftPrincessTower.getLayoutY()));
+            double blueRightPrincessTowerDistance = src.distance(new Point2D(blueRightPrincessTower.getLayoutX(), blueRightPrincessTower.getLayoutY()));
 
+            double min = blueKingTowerDistance;
+
+            if (min >= blueLeftPrincessTowerDistance)
+                min = blueLeftPrincessTowerDistance;
+            if (min >= blueRightPrincessTowerDistance)
+                min = blueRightPrincessTowerDistance;
+
+            if (min == blueKingTowerDistance) {
+                return blueKingTower;
+            } else if (min == blueLeftPrincessTowerDistance) {
+                return blueLeftPrincessTower;
+            } else if (min == blueRightPrincessTowerDistance) {
+                return blueRightPrincessTower;
+            } else {
+                return null;
+            }
         } else {
             Config.unknownInputException();
         }
         return null;
-        }
     }
-
     public static Timer getTimer() {
         return timer;
     }
 
     public static Timer getMainLoop() {
         return mainLoop;
+    }
+
+    public Pane getBoardPane() {
+        return boardPane;
+    }
+
+    public static GameCon getInstance() {
+        return instance;
     }
 }
