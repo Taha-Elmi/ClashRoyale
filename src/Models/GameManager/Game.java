@@ -9,6 +9,7 @@ import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.troops.Archer;
+import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
@@ -76,6 +77,9 @@ public class Game {
             if (card instanceof Archer) {
                 imageView.setFitWidth(WIDTH - 7);
                 imageView.setFitHeight(HEIGHT - 7);
+            } else if (card instanceof Giant) {
+                imageView.setFitWidth(WIDTH + 10);
+                imageView.setFitHeight(HEIGHT + 10);
             } else {
                 imageView.setFitWidth(WIDTH);
                 imageView.setFitHeight(HEIGHT);

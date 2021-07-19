@@ -17,6 +17,9 @@ import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
@@ -120,6 +123,7 @@ public class GameCon implements Controller {
         startTimer();
         startMainLoop();
         instance = this;
+        Config.playMusic("assets/musics/BattleTheme.mp3");
     }
 
     private void startMainLoop() {

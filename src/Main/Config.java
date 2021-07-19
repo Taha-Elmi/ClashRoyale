@@ -1,4 +1,5 @@
 package Main;
+import Database.FileUtils;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.buildings.Cannon;
@@ -9,8 +10,11 @@ import Models.Cards.spells.Rage;
 import Models.Cards.troops.*;
 import Models.Client;
 import Models.Graphic.FXManager;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,6 +41,13 @@ public class Config {
         }
     }
 
+    public static void playMusic(String path) {
+        Media media = FileUtils.loadMedia(path);
+        Config.mediaPlayer = new MediaPlayer(media);
+        Config.mediaPlayer.play();
+        Config.mediaPlayer.setOnEndOfMedia(() ->
+                Config.mediaPlayer.seek(Duration.ZERO));
+    }
     public static List<Card> getPlayer2Cards() {
         Random r = new Random();
         int randomNumberOrigin = 0;
