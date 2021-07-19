@@ -1,8 +1,6 @@
 package Models.GameManager;
 
 import Models.Cards.Card;
-import Models.Client;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import Models.Towers.*;
@@ -37,5 +35,8 @@ public class Player {
 
     public int getElixirs() {
         return elixirs;
+    }
+    public List<Card> getCards() {
+        return cards;
     }
 }

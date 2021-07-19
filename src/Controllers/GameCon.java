@@ -22,28 +22,22 @@ import javafx.scene.layout.Pane;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameCon implements Controller{
+public class GameCon implements Controller {
+    private static Pane staticBoardPane;
     private Card chosenCard;
-
     @FXML
     private GridPane deck;
-
     @FXML
     private ImageView card1;
-
     @FXML
     private ImageView card2;
-
     @FXML
     private ImageView card3;
-
     @FXML
     private ImageView card4;
-
     @FXML
     private Label opponentName;
 
@@ -118,7 +112,11 @@ public class GameCon implements Controller{
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
+        staticBoardPane = boardPane;
         startTimer();
+        Runnable runnable = (Runnable) Game.getInstance().getManager();
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     private void startTimer() {
@@ -233,59 +231,18 @@ public class GameCon implements Controller{
         elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
         updateCardsActiveness();
 
-        bornCard(chosenCard,de);
-        playCard(chosenCard);
-        chosenCard = null;
-    }
-
-    private void bornCard(Card card,DragEvent de) {
-        final int SPACE = 20;
-        final int WIDTH = 30;
-        final int HEIGHT = 50;
-        ParallelTransition pt = new ParallelTransition();
-        for (int i = 0; i < card.getNumber(); i++) {
-            ImageView imageView = new ImageView(card.born());
-            imageView.setFitWidth(WIDTH);
-            imageView.setFitHeight(HEIGHT);
-            double x = de.getX();
-            double y = de.getY();
-            if (i == 1) {
-                x += SPACE;
-                y += SPACE;
-            } else if (i == 2){
-                x -= SPACE;
-                y -= SPACE;
-            } else if (i == 3) {
-                x -= SPACE;
-                y += SPACE;
-            } else if (i == 4) {
-                x += SPACE;
-                y -= SPACE;
-            } else if (i == 0){
-                //nothing
-            } else {
-                Config.unknownInputException();
-            }
-            imageView.setX(x);
-            imageView.setY(y);
-            boardPane.getChildren().add(imageView);
-            if (card instanceof Troop) {
-                try {
-                    Troop troop = (Troop) card.clone();
-                    Game.getInstance().getPlayer1_list().add(new CardImage(troop, imageView.getImage()));
-                    Timeline timeline = new Timeline();
-                    troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
-                    pt.getChildren().add(timeline);
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-            }
+        try {
+            Game.getInstance().bornCard(chosenCard, new Point2D(de.getX(), de.getY())
+                    , new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()), boardPane);
+            Game.getInstance().playCardPlayer1(chosenCard);
+            setCardsImages();
+            chosenCard = null;
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        pt.play();
     }
 
-    private void playCard(Card card) {
-        Game.getInstance().getPlayer1().playCard(card);
-        setCardsImages();
+    public static Pane getStaticBoardPane() {
+        return staticBoardPane;
     }
 }
