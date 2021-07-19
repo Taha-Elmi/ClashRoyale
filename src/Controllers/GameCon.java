@@ -168,6 +168,8 @@ public class GameCon implements Controller {
     private void elixirAdvance() {
         if (Game.getInstance().getPlayer1().getElixirs() < 10)
             Game.getInstance().getPlayer1().setElixirs(Game.getInstance().getPlayer1().getElixirs() + 1);
+        if (Game.getInstance().getPlayer2().getElixirs() < 10)
+            Game.getInstance().getPlayer1().setElixirs(Game.getInstance().getPlayer1().getElixirs() + 1);
         elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
         updateCardsActiveness();
     }
