@@ -15,6 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class Config {
     //fields
@@ -34,6 +37,29 @@ public class Config {
         }
     }
 
+    public static List<Card> getPlayer2Cards() {
+        Random r = new Random();
+        int randomNumberOrigin = 0;
+        int randomNumberBound = 11;
+        int size = 8;
+        int[] unique = r.ints(randomNumberOrigin, randomNumberBound)
+                .distinct()
+                .limit(size)
+                .toArray();
+        List<Card> cloneOfCards = new ArrayList<>();
+        for (Card card: cards) {
+            try {
+                cloneOfCards.add((Card) card.clone());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        }
+        List<Card> player2Cards = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            player2Cards.add(cloneOfCards.get(unique[i]));
+        }
+        return player2Cards;
+    }
     static {
         cards.add(new Archer(1));
         cards.add(new BabyDragon(1));

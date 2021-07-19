@@ -37,8 +37,8 @@ public class SinglePlayerCon implements Controller {
         }
     }
     private void startSinglePlayerGame(String mode) {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = new Player(Config.client.getDeckCards());
+        Player player2 = new Player(Config.getPlayer2Cards());
         Manager manager = switch (mode) {
             case "easy" -> new StupidRobotManager(player2);
             case "medium" -> new SmartRobotManager(player2);

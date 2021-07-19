@@ -1,8 +1,16 @@
 package Models.Cards.troops;
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 abstract public class Troop extends Card implements Hitter, Damageable {
     private int hp;
@@ -13,8 +21,8 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     private int range;
     private boolean areaSplash;
     private int count;
-    public Troop(int cost,int level) {
-        super(cost,level);
+    public Troop(int cost,int level,int number) {
+        super(cost,level,number);
     }
 
     public void setTarget(Target target) {
@@ -36,8 +44,32 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         }
     }
 
+    public void readyForMove(ImageView imageView, Point2D dst,Timeline timeline) {
+        setTimeline(timeline);
+        timeline.getKeyFrames().clear();
+        Point2D src = new Point2D(imageView.getX(), imageView.getY());
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(dst))),
+                new KeyValue(imageView.xProperty(),dst.getX()),
+                new KeyValue(imageView.yProperty(),dst.getY())
+        ));
+    }
+
+    public void setSpeed(Speed speed) {
+        this.speed = speed;
+    }
+
+    private double speedToSecond(double speed, double length) {
+        System.out.println(length / speed);
+        return length / speed;
+    }
     @Override
     protected boolean isDead() {
         return hp <= 0;
+    }
+
+    @Override
+    public Image born() {
+        return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + "/forward.gif");
     }
 }

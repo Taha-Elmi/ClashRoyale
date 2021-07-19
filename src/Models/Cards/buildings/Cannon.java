@@ -2,6 +2,7 @@ package Models.Cards.buildings;
 
 import Models.Cards.Card;
 import Models.Cards.Target;
+import javafx.scene.image.Image;
 
 public class Cannon extends Building {
     private int damage;
@@ -11,8 +12,8 @@ public class Cannon extends Building {
     }
 
     @Override
-    public void born() {
-
+    public Image born() {
+        return null;
     }
 
     @Override

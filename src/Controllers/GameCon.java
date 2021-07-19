@@ -3,11 +3,15 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -36,6 +40,24 @@ public class GameCon implements Controller{
     private ImageView card4;
     @FXML
     private Label opponentName;
+
+    @FXML
+    private ImageView blueKingTower;
+
+    @FXML
+    private ImageView redKingTower;
+
+    @FXML
+    private ImageView blueLeftPrincessTower;
+
+    @FXML
+    private ImageView redLeftPrincessTower;
+
+    @FXML
+    private ImageView redRightPrincessTower;
+
+    @FXML
+    private ImageView blueRightPrincessTower;
 
     @FXML
     private Label opponentLevel;
@@ -160,21 +182,54 @@ public class GameCon implements Controller{
     }
     @FXML
     private void dragDroppedHandler(DragEvent de) {
-        ImageView imageView = new ImageView(de.getDragboard().getImage());
-        imageView.maxHeight(10);
-        imageView.maxWidth(5);
-        imageView.setX(de.getX());
-        imageView.setY(de.getY());
+        bornCard(chosenCard,de);
         playCard(chosenCard);
         chosenCard = null;
-        // just a sample event to make sure it works.
-        boardPane.getChildren().add(imageView);
+    }
+
+    private void bornCard(Card card,DragEvent de) {
+        final int SPACE = 20;
+        final int WIDTH = 30;
+        final int HEIGHT = 50;
+        ParallelTransition pt = new ParallelTransition();
+        for (int i = 0; i < card.getNumber(); i++) {
+            ImageView imageView = new ImageView(card.born());
+            imageView.setFitWidth(WIDTH);
+            imageView.setFitHeight(HEIGHT);
+            double x = de.getX();
+            double y = de.getY();
+            if (i == 1) {
+                x += SPACE;
+                y += SPACE;
+            } else if (i == 2){
+                x -= SPACE;
+                y -= SPACE;
+            } else if (i == 3) {
+                x -= SPACE;
+                y += SPACE;
+            } else if (i == 4) {
+                x += SPACE;
+                y -= SPACE;
+            } else if (i == 0){
+                //nothing
+            } else {
+                Config.unknownInputException();
+            }
+            imageView.setX(x);
+            imageView.setY(y);
+            boardPane.getChildren().add(imageView);
+            if (card instanceof Troop) {
+                Troop troop = (Troop) card;
+                Timeline timeline = new Timeline();
+                troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
+                pt.getChildren().add(timeline);
+            }
+        }
+        pt.play();
     }
 
     private void playCard(Card card) {
-        List<Card> deckCards = Config.client.getDeckCards();
-        deckCards.remove(card);
+        Game.getInstance().getPlayer1().playCard(card);
         setCardsImages();
-        deckCards.add(card);
     }
 }

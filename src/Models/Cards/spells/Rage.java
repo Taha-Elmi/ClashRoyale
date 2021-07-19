@@ -1,6 +1,7 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import javafx.scene.image.Image;
 
 public class Rage extends Spell {
     private double duration;
@@ -34,8 +35,8 @@ public class Rage extends Spell {
     }
 
     @Override
-    public void born() {
-
+    public Image born() {
+        return null;
     }
 
     @Override
