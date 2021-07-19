@@ -55,7 +55,7 @@ public class Game {
         return instance;
     }
 
-    public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane) {
+    public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane,int playerNumber) {
         final int SPACE = 20;
         final int WIDTH = 30;
         final int HEIGHT = 50;
@@ -88,7 +88,7 @@ public class Game {
             boardPane.getChildren().add(imageView);
             if (card instanceof Troop) {
                 try {
-                    CardImage cardImage = new CardImage((Card) card.clone(),card.born());
+                    CardImage cardImage = new CardImage((Card) card.clone(),imageView.getImage());
                     Troop troop = (Troop) cardImage.getCard();
                     Timeline timeline = new Timeline();
                     troop.readyForMove(imageView,new Point2D(dst.getX(),dst.getY()),timeline);

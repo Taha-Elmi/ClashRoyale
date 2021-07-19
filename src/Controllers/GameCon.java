@@ -3,11 +3,9 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
-import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
-import javafx.animation.ParallelTransition;
-import javafx.animation.Timeline;
+import Models.Towers.Tower;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,13 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -120,9 +116,6 @@ public class GameCon implements Controller {
         });
         staticBoardPane = boardPane;
         startTimer();
-        Runnable runnable = (Runnable) Game.getInstance().getManager();
-        Thread thread = new Thread(runnable);
-        thread.start();
     }
 
     private void startTimer() {
@@ -237,8 +230,10 @@ public class GameCon implements Controller {
             Game.getInstance().getPlayer1().setElixirs(Game.getInstance().getPlayer1().getElixirs() - chosenCard.getCost());
             elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
             updateCardsActiveness();
-            Game.getInstance().bornCard(chosenCard, new Point2D(de.getX(), de.getY())
-                    , new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()), boardPane);
+            Point2D src = new Point2D(de.getX(),de.getY());
+            ImageView nearerTower = getNearerTowerImageView(src,1);
+            Game.getInstance().bornCard(chosenCard,src
+                    ,new Point2D(nearerTower.getLayoutX(),nearerTower.getLayoutY()) , boardPane,1);
             Game.getInstance().playCardPlayer1(chosenCard);
             setCardsImages();
             chosenCard = null;
@@ -249,5 +244,34 @@ public class GameCon implements Controller {
 
     public static Pane getStaticBoardPane() {
         return staticBoardPane;
+    }
+    public ImageView getNearerTowerImageView(Point2D src,int player) {
+        if (player == 1) {
+            double redKingTowerDistance = src.distance(new Point2D(redKingTower.getLayoutX(), redKingTower.getLayoutY()));
+            double redLeftPrincessTowerDistance = src.distance(new Point2D(redLeftPrincessTower.getLayoutX(), redLeftPrincessTower.getLayoutY()));
+            double redRightPrincessTowerDistance = src.distance(new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()));
+
+            double min = redKingTowerDistance;
+
+            if (min >= redLeftPrincessTowerDistance)
+                min = redLeftPrincessTowerDistance;
+            if (min >= redRightPrincessTowerDistance)
+                min = redRightPrincessTowerDistance;
+
+            if (min == redKingTowerDistance) {
+                return redKingTower;
+            } else if (min == redLeftPrincessTowerDistance) {
+                return redLeftPrincessTower;
+            } else if (min == redRightPrincessTowerDistance) {
+                return redRightPrincessTower;
+            } else {
+                return null;
+            }
+        } else if (player == 2) {
+
+        } else {
+            Config.unknownInputException();
+        }
+        return null;
     }
 }

@@ -1,11 +1,10 @@
 package Models.GameManager;
 
 import Models.Cards.Card;
-import Models.Client;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import Models.Towers.*;
+
 public class Player {
     private List<PrincessTower> princessTowers = new ArrayList<>();
     private KingTower kingTower;

@@ -3,8 +3,6 @@ package Models.GameManager;
 import Controllers.GameCon;
 import Models.Cards.Card;
 import javafx.geometry.Point2D;
-
-import java.util.List;
 import java.util.Random;
 
 public class StupidRobotManager implements Manager,Runnable {
@@ -35,7 +33,7 @@ public class StupidRobotManager implements Manager,Runnable {
         }
         while (true) {
             Card card = getRandomCard();
-            Game.getInstance().bornCard(card, getRandomPoint2D(), new Point2D(300, 50), GameCon.getStaticBoardPane());
+            Game.getInstance().bornCard(card, getRandomPoint2D(), new Point2D(300, 50), GameCon.getStaticBoardPane(),2);
             Game.getInstance().playCardPlayer2(card);
             try {
                 Thread.sleep(10000);
