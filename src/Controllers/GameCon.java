@@ -242,4 +242,9 @@ public class GameCon implements Controller {
     public static Pane getStaticBoardPane() {
         return staticBoardPane;
     }
+
+    @FXML
+    void test(MouseEvent event) {
+        Game.getInstance().dieCard(Game.getInstance().getPlayer1_list().get(0));
+    }
 }

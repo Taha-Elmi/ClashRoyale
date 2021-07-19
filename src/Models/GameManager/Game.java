@@ -90,7 +90,7 @@ public class Game {
             boardPane.getChildren().add(imageView);
             if (card instanceof Troop) {
                 try {
-                    CardImage cardImage = new CardImage((Card) card.clone(),card.born());
+                    CardImage cardImage = new CardImage((Card) card.clone(), imageView.getImage());
                     switch (playerNumber) {
                         case 1 -> player1_list.add(cardImage);
                         case 2 -> player2_list.add(cardImage);
