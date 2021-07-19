@@ -272,6 +272,7 @@ public class GameCon implements Controller{
             if (card instanceof Troop) {
                 try {
                     Troop troop = (Troop) card.clone();
+                    Game.getInstance().getPlayer1_list().add(new CardImage(troop, imageView.getImage()));
                     Timeline timeline = new Timeline();
                     troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
                     pt.getChildren().add(timeline);

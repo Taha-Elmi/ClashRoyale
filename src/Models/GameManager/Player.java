@@ -30,6 +30,7 @@ public class Player {
         cards.remove(card);
         cards.add(card);
     }
+
     public void setElixirs(int elixirs) {
         this.elixirs = elixirs;
     }

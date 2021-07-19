@@ -1,15 +1,15 @@
 package Models.GameManager;
 
-import Models.Cards.Card;
+import Models.Cards.CardImage;
 
 import java.util.ArrayList;
 
 public class Game {
     private static Game instance;
     private Player player1;
-    private ArrayList<Card> player1_list;
+    private ArrayList<CardImage> player1_list;
     private Player player2;
-    private ArrayList<Card> player2_list;
+    private ArrayList<CardImage> player2_list;
     private Manager manager;
     private GameMode gameMode;
 //    private Difficulty difficulty
@@ -45,5 +45,13 @@ public class Game {
 
     public static Game getInstance() {
         return instance;
+    }
+
+    public ArrayList<CardImage> getPlayer1_list() {
+        return player1_list;
+    }
+
+    public ArrayList<CardImage> getPlayer2_list() {
+        return player2_list;
     }
 }
