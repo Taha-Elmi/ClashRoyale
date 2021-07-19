@@ -114,9 +114,6 @@ public class GameCon implements Controller {
         });
         staticBoardPane = boardPane;
         startTimer();
-        Runnable runnable = (Runnable) Game.getInstance().getManager();
-        Thread thread = new Thread(runnable);
-        thread.start();
     }
 
     private void startTimer() {
@@ -233,7 +230,7 @@ public class GameCon implements Controller {
 
         try {
             Game.getInstance().bornCard(chosenCard, new Point2D(de.getX(), de.getY())
-                    , new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()), boardPane);
+                    , new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()), boardPane, 1);
             Game.getInstance().playCardPlayer1(chosenCard);
             setCardsImages();
             chosenCard = null;

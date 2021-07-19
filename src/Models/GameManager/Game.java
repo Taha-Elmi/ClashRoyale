@@ -1,5 +1,6 @@
 package Models.GameManager;
 
+import Controllers.GameCon;
 import Models.Cards.CardImage;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import Models.Cards.troops.Troop;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
@@ -55,7 +57,7 @@ public class Game {
         return instance;
     }
 
-    public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane) {
+    public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane, int playerNumber) {
         final int SPACE = 20;
         final int WIDTH = 30;
         final int HEIGHT = 50;
@@ -89,6 +91,11 @@ public class Game {
             if (card instanceof Troop) {
                 try {
                     CardImage cardImage = new CardImage((Card) card.clone(),card.born());
+                    switch (playerNumber) {
+                        case 1 -> player1_list.add(cardImage);
+                        case 2 -> player2_list.add(cardImage);
+                        default -> throw new IllegalArgumentException();
+                    }
                     Troop troop = (Troop) cardImage.getCard();
                     Timeline timeline = new Timeline();
                     troop.readyForMove(imageView,new Point2D(dst.getX(),dst.getY()),timeline);
@@ -99,6 +106,12 @@ public class Game {
             }
         }
         pt.play();
+    }
+
+    public void dieCard(CardImage cardImage) {
+        GameCon.getStaticBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
+        player1_list.remove(cardImage);
+        player2_list.remove(cardImage);
     }
 
     public void playCardPlayer1(Card card) {
