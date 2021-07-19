@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import Models.Cards.CardImage;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Game {
     private static Game instance;
@@ -53,6 +54,36 @@ public class Game {
 
     public void update() {
         manager.action();
+        checkAllCards(player1_list, player2_list);
+        checkAllCards(player2_list, player1_list);
+    }
+
+    private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
+        for (CardImage cardImage : playerList) {
+            Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getLayoutX(),
+                    GameCon.getInstance().find(cardImage.getImage()).getLayoutY());
+            CardImage target = null;
+            double distance = 0;
+            for (CardImage enemy : enemyList) {
+                Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getLayoutX(),
+                        GameCon.getInstance().find(enemy.getImage()).getLayoutY());
+                if (target == null) {
+                    target = enemy;
+                    distance = src.distance(dst);
+                } else if (src.distance(dst) < distance) {
+                    target = enemy;
+                    distance = src.distance(dst);
+                }
+            }
+
+            if (target == null || distance > 125)
+                continue;
+
+            cardImage.getCard().getTimeline().stop();
+            ((Troop) cardImage.getCard()).readyForMove(GameCon.getInstance().find(cardImage.getImage()),
+                    new Point2D(GameCon.getInstance().find(target.getImage()).getLayoutX(), GameCon.getInstance().find(target.getImage()).getLayoutY()),
+                    new Timeline());
+        }
     }
 
     public Player getPlayer1() {
