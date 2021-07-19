@@ -220,10 +220,14 @@ public class GameCon implements Controller {
             imageView.setY(y);
             boardPane.getChildren().add(imageView);
             if (card instanceof Troop) {
-                Troop troop = (Troop) card;
-                Timeline timeline = new Timeline();
-                troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
-                pt.getChildren().add(timeline);
+                try {
+                    Troop troop = (Troop) card.clone();
+                    Timeline timeline = new Timeline();
+                    troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
+                    pt.getChildren().add(timeline);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         pt.play();
