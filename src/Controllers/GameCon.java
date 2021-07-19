@@ -183,21 +183,38 @@ public class GameCon implements Controller {
     }
     @FXML
     private void dragDroppedHandler(DragEvent de) {
-        bornCard(chosenCard, de);
+        bornCard(chosenCard,de);
         playCard(chosenCard);
         chosenCard = null;
     }
 
     private void bornCard(Card card,DragEvent de) {
-        double x = de.getX();
-        double y = de.getY();
+        final int SPACE = 20;
+        final int WIDTH = 30;
+        final int HEIGHT = 50;
         ParallelTransition pt = new ParallelTransition();
         for (int i = 0; i < card.getNumber(); i++) {
             ImageView imageView = new ImageView(card.born());
-            imageView.setFitWidth(30);
-            imageView.setFitHeight(50);
-            if (i == 0) {
-                
+            imageView.setFitWidth(WIDTH);
+            imageView.setFitHeight(HEIGHT);
+            double x = de.getX();
+            double y = de.getY();
+            if (i == 1) {
+                x += SPACE;
+                y += SPACE;
+            } else if (i == 2){
+                x -= SPACE;
+                y -= SPACE;
+            } else if (i == 3) {
+                x -= SPACE;
+                y += SPACE;
+            } else if (i == 4) {
+                x += SPACE;
+                y -= SPACE;
+            } else if (i == 0){
+                //nothing
+            } else {
+                Config.unknownInputException();
             }
             imageView.setX(x);
             imageView.setY(y);

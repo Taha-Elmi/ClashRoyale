@@ -6,11 +6,7 @@ public class Valkyrie extends Troop {
 
     public Valkyrie(int level) {
         super(4, level,1);
-    }
-
-    @Override
-    public Image born() {
-        return null;
+        setSpeed(Speed.MEDIUM);
     }
 
     @Override

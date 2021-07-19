@@ -6,11 +6,7 @@ public class Giant extends Troop {
 
     public Giant(int level) {
         super(5, level,1);
-    }
-
-    @Override
-    public Image born() {
-        return null;
+        setSpeed(Speed.SLOW);
     }
 
     @Override

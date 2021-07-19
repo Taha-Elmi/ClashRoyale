@@ -6,11 +6,7 @@ public class Wizard extends Troop {
 
     public Wizard(int level) {
         super(5, level,1);
-    }
-
-    @Override
-    public Image born() {
-        return null;
+        setSpeed(Speed.MEDIUM);
     }
 
     @Override

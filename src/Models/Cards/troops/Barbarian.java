@@ -11,11 +11,6 @@ public class Barbarian extends Troop {
     }
 
     @Override
-    public Image born() {
-        return FXManager.getImage("/Gifs/Barbarian/forward.gif");
-    }
-
-    @Override
     public void die() {
 
     }

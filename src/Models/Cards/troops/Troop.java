@@ -1,12 +1,14 @@
 package Models.Cards.troops;
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -64,5 +66,10 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     @Override
     protected boolean isDead() {
         return hp <= 0;
+    }
+
+    @Override
+    public Image born() {
+        return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + "/forward.gif");
     }
 }

@@ -5,11 +5,7 @@ import javafx.scene.image.Image;
 public class BabyDragon extends Troop {
     public BabyDragon(int level) {
         super(4, level,1);
-    }
-
-    @Override
-    public Image born() {
-        return null;
+        setSpeed(Speed.FAST);
     }
 
     @Override
