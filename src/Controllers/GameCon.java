@@ -80,8 +80,8 @@ public class GameCon implements Controller{
     @FXML
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
-//        leftKingImageView.setImage(FXManager.getImage("/Game/leftKings.png"));
-//        rightKingImageView.setImage(FXManager.getImage("/Game/rightKings.png"));
+        leftKingImageView.setImage(FXManager.getImage("/Game/leftKing.png"));
+        rightKingImageView.setImage(FXManager.getImage("/Game/rightKing.png"));
         setCardsImages();
         name.setText(Config.client.getName());
         level.setText("" + Config.client.getLevel());
