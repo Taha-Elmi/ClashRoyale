@@ -16,10 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
@@ -39,6 +41,24 @@ public class GameCon implements Controller {
     private ImageView card4;
     @FXML
     private Label opponentName;
+
+    @FXML
+    private ImageView blueKingTower;
+
+    @FXML
+    private ImageView redKingTower;
+
+    @FXML
+    private ImageView blueLeftPrincessTower;
+
+    @FXML
+    private ImageView redLeftPrincessTower;
+
+    @FXML
+    private ImageView redRightPrincessTower;
+
+    @FXML
+    private ImageView blueRightPrincessTower;
 
     @FXML
     private Label opponentLevel;
@@ -82,7 +102,6 @@ public class GameCon implements Controller {
 
     @FXML
     public void initialize() {
-        FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
 //        leftKingImageView.setImage(FXManager.getImage("/Game/leftKings.png"));
 //        rightKingImageView.setImage(FXManager.getImage("/Game/rightKings.png"));
         FXManager.setBackground(FXManager.getImage("/Game/jungle2.jpg"), mainBorder);
@@ -175,12 +194,10 @@ public class GameCon implements Controller {
         ParallelTransition pt = new ParallelTransition();
         for (int i = 0; i < card.getNumber(); i++) {
             ImageView imageView = new ImageView(card.born());
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(80);
-            if (i % 2 == 0) {
-                x += 50;
-            } else {
-                y += 50;
+            imageView.setFitWidth(30);
+            imageView.setFitHeight(50);
+            if (i == 0) {
+                
             }
             imageView.setX(x);
             imageView.setY(y);
@@ -188,7 +205,7 @@ public class GameCon implements Controller {
             if (card instanceof Troop) {
                 Troop troop = (Troop) card;
                 Timeline timeline = new Timeline();
-                troop.readyForMove(imageView,new Point2D(400,50),timeline);
+                troop.readyForMove(imageView,new Point2D(redRightPrincessTower.getLayoutX(),redRightPrincessTower.getLayoutY()),timeline);
                 pt.getChildren().add(timeline);
             }
         }
