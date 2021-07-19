@@ -33,7 +33,7 @@ public class StupidRobotManager implements Manager,Runnable {
         }
         while (true) {
             Card card = getRandomCard();
-            Game.getInstance().bornCard(card, getRandomPoint2D(), new Point2D(300, 50), GameCon.getStaticBoardPane(),2);
+            Game.getInstance().bornCard(card, getRandomPoint2D(), new Point2D(300, 50), GameCon.getStaticBoardPane(), 2);
             Game.getInstance().playCardPlayer2(card);
             try {
                 Thread.sleep(10000);

@@ -27,19 +27,14 @@ public class GameCon implements Controller {
     private Card chosenCard;
     @FXML
     private GridPane deck;
-
     @FXML
     private ImageView card1;
-
     @FXML
     private ImageView card2;
-
     @FXML
     private ImageView card3;
-
     @FXML
     private ImageView card4;
-
     @FXML
     private Label opponentName;
 
@@ -97,7 +92,9 @@ public class GameCon implements Controller {
     @FXML
     private ImageView rightKingImageView;
 
-    private Timer timer;
+    private static Timer timer;
+
+    private static Timer mainLoop;
 
     private LocalTime localTime;
 
@@ -116,6 +113,26 @@ public class GameCon implements Controller {
         });
         staticBoardPane = boardPane;
         startTimer();
+        startMainLoop();
+    }
+
+    private void startMainLoop() {
+        mainLoop = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Game.getInstance().update();
+                        if (Game.getInstance().isGameOver()) {
+                            Game.getInstance().finish();
+                        }
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(100.0);
+        mainLoop.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
     private void startTimer() {
@@ -133,7 +150,7 @@ public class GameCon implements Controller {
         };
 
         long frameTimeInMilliseconds = (long)(1000.0);
-        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+        timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
     private void timerAdvance() {
@@ -148,6 +165,8 @@ public class GameCon implements Controller {
     private void elixirAdvance() {
         if (Game.getInstance().getPlayer1().getElixirs() < 10)
             Game.getInstance().getPlayer1().setElixirs(Game.getInstance().getPlayer1().getElixirs() + 1);
+        if (Game.getInstance().getPlayer2().getElixirs() < 10)
+            Game.getInstance().getPlayer2().setElixirs(Game.getInstance().getPlayer2().getElixirs() + 1);
         elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
         updateCardsActiveness();
     }
@@ -273,5 +292,14 @@ public class GameCon implements Controller {
             Config.unknownInputException();
         }
         return null;
+        }
+    }
+
+    public static Timer getTimer() {
+        return timer;
+    }
+
+    public static Timer getMainLoop() {
+        return mainLoop;
     }
 }

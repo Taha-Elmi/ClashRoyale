@@ -1,5 +1,10 @@
 package Models.GameManager;
 
+import Controllers.GameCon;
+import Models.Cards.CardImage;
+
+import java.util.ArrayList;
+
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
@@ -7,6 +12,7 @@ import Models.Cards.troops.Troop;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
@@ -38,10 +44,14 @@ public class Game {
     }
 
     public void finish() {
-
+        GameCon.getTimer().cancel();
+        GameCon.getMainLoop().cancel();
+        // display scoreboard...
     }
 
-    public void update() {}
+    public void update() {
+
+    }
 
     public Player getPlayer1() {
         return player1;
@@ -88,7 +98,12 @@ public class Game {
             boardPane.getChildren().add(imageView);
             if (card instanceof Troop) {
                 try {
-                    CardImage cardImage = new CardImage((Card) card.clone(),imageView.getImage());
+                    CardImage cardImage = new CardImage((Card) card.clone(), imageView.getImage());
+                    switch (playerNumber) {
+                        case 1 -> player1_list.add(cardImage);
+                        case 2 -> player2_list.add(cardImage);
+                        default -> throw new IllegalArgumentException();
+                    }
                     Troop troop = (Troop) cardImage.getCard();
                     Timeline timeline = new Timeline();
                     troop.readyForMove(imageView,new Point2D(dst.getX(),dst.getY()),timeline);
@@ -101,11 +116,21 @@ public class Game {
         pt.play();
     }
 
+    public void dieCard(CardImage cardImage) {
+        GameCon.getStaticBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
+        player1_list.remove(cardImage);
+        player2_list.remove(cardImage);
+    }
+
     public void playCardPlayer1(Card card) {
         player1.playCard(card);
     }
     public void playCardPlayer2(Card card) {
         player2.playCard(card);
+    }
+
+    public boolean isGameOver() {
+        return false;
     }
 
     public Manager getManager() {
