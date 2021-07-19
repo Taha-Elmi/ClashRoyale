@@ -70,12 +70,21 @@ public class GameCon implements Controller {
     @FXML
     private ProgressBar elixirBar;
 
+    @FXML
+    private ImageView leftKingImageView;
+
+    @FXML
+    private ImageView rightKingImageView;
+
     private Timer timer;
 
     private LocalTime localTime;
 
     @FXML
     public void initialize() {
+        FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
+//        leftKingImageView.setImage(FXManager.getImage("/Game/leftKings.png"));
+//        rightKingImageView.setImage(FXManager.getImage("/Game/rightKings.png"));
         FXManager.setBackground(FXManager.getImage("/Game/jungle2.jpg"), mainBorder);
         setCardsImages();
         name.setText(Config.client.getName());
@@ -94,7 +103,7 @@ public class GameCon implements Controller {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        timerAdvance(localTime);
+                        timerAdvance();
                         elixirAdvance();
                     }
                 });
@@ -105,7 +114,7 @@ public class GameCon implements Controller {
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
-    private void timerAdvance(LocalTime localTime) {
+    private void timerAdvance() {
         localTime = localTime.minusSeconds(1);
         timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
         if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
