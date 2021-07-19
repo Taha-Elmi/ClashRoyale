@@ -12,7 +12,7 @@ public class Game {
     private ArrayList<Card> player2_list;
     private Manager manager;
     private GameMode gameMode;
-
+//    private Difficulty difficulty
     public Game(Player player1, Player player2, GameMode gameMode,Manager manager) {
         this.player1 = player1;
         this.player2 = player2;
@@ -23,9 +23,15 @@ public class Game {
         instance = this;
     }
 
-    public void initialize() {}
+    public void initialize() {
+        if (gameMode == GameMode.SINGLE) {
 
-    public void finish() {}
+        }
+    }
+
+    public void finish() {
+
+    }
 
     public void update() {}
 
