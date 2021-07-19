@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class StupidRobotManager implements Manager,Runnable {
     private Player player;
-    private final double validRandomWidth = 320;
-    private final double validRandomHeight = 520;
+    private final double validRandomWidth = 300;
+    private final double validRandomHeight = 340;
     Random random = new Random();
     public StupidRobotManager(Player player) {
         this.player = player;
@@ -28,20 +28,19 @@ public class StupidRobotManager implements Manager,Runnable {
 
     @Override
     public void run() {
-        playCard();
+        playCard(getRandomCard());
     }
 
     private Card getRandomCard() {
-        return player.getCards().get(random.nextInt(player.getCards().size()));
+        return player.getCards().get(random.nextInt(4));
     }
     private Point2D getRandomPoint2D() {
         double randomWidth = random.nextDouble() * validRandomWidth;
         double randomHeight = random.nextDouble() * validRandomHeight;
         return new Point2D(randomWidth,randomHeight);
     }
-    private void playCard() {
-        Card card;
-        if ((card = getRandomCard()).getCost() > Game.getInstance().getPlayer2().getElixirs())
+    private void playCard(Card card) {
+        if (card.getCost() > Game.getInstance().getPlayer2().getElixirs())
             return;
         Game.getInstance().getPlayer2().setElixirs(Game.getInstance().getPlayer2().getElixirs() - card.getCost());
         Point2D src = getRandomPoint2D();

@@ -1458,7 +1458,7 @@
                                         <Image url="@../Assets/Pictures/Game/Tiles/roadTexture_61.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="15">
+                                <ImageView fx:id="leftBridge" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="15">
                                     <image>
                                         <Image url="@../Assets/Pictures/Game/Tiles/roadTexture_84.png" />
                                     </image>
@@ -1513,7 +1513,7 @@
                                         <Image url="@../Assets/Pictures/Game/Tiles/roadTexture_61.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="14" GridPane.rowIndex="15">
+                                <ImageView fx:id="rightBridge" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="14" GridPane.rowIndex="15">
                                     <image>
                                         <Image url="@../Assets/Pictures/Game/Tiles/roadTexture_84.png" />
                                     </image>
@@ -2943,11 +2943,7 @@
                 <ImageView fx:id="card2" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
                 <ImageView fx:id="card3" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
                 <ImageView fx:id="card4" fitHeight="89.0" fitWidth="73.0" onDragDetected="#dragDetectionHandler" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-                <Label alignment="BOTTOM_CENTER" style="-fx-background-color: #E5FE01;" text="Next Card:" textFill="RED" GridPane.rowIndex="4">
-                    <font>
-                        <Font name="Centaur" size="18.0" />
-                    </font>
-                </Label>
+                <Label alignment="BOTTOM_CENTER" style="-fx-background-color: #E5FE01;" text="Next Card:" textFill="RED" GridPane.rowIndex="4" />
                 <ImageView fx:id="next" fitHeight="89.0" fitWidth="73.0" opacity="0.36" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5" />
             </children>
         </GridPane>

@@ -1,4 +1,5 @@
 package Models.Cards.troops;
+import Controllers.GameCon;
 import Models.Cards.Card;
 import Models.Cards.Target;
 import Models.Graphic.FXManager;
@@ -48,6 +49,15 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         setTimeline(timeline);
         timeline.getKeyFrames().clear();
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
+        boolean isUnderBridge = true;
+        if (isUnderBridge && !(this instanceof BabyDragon)) {
+            ImageView nearerBridge = GameCon.getInstance().getNearerBridge(src);
+            timeline.getKeyFrames().add(new KeyFrame(
+               Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(new Point2D(nearerBridge.getLayoutX(),nearerBridge.getLayoutY())))),
+               new KeyValue(imageView.xProperty(),nearerBridge.getLayoutX()),
+               new KeyValue(imageView.yProperty(),nearerBridge.getLayoutY())
+            ));
+        }
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(dst))),
                 new KeyValue(imageView.xProperty(),dst.getX()),

@@ -39,6 +39,12 @@ public class GameCon implements Controller {
     private Label opponentName;
 
     @FXML
+    private ImageView leftBridge;
+
+    @FXML
+    private ImageView rightBridge;
+
+    @FXML
     private ImageView blueKingTower;
 
     @FXML
@@ -238,7 +244,7 @@ public class GameCon implements Controller {
 
     @FXML
     private void dragOverHandler(DragEvent de) {
-        if (de.getDragboard().hasImage()) {
+        if (de.getDragboard().hasImage() && isValidToDrop(new Point2D(de.getX(),de.getY()),1)) {
             de.acceptTransferModes(TransferMode.ANY);
         }
     }
@@ -308,6 +314,41 @@ public class GameCon implements Controller {
             Config.unknownInputException();
         }
         return null;
+    }
+
+    public ImageView getNearerBridge(Point2D src) {
+        double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
+        double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
+
+        double min = leftBridgeDistance;
+
+        if (min >= rightBridgeDistance)
+            min = rightBridgeDistance;
+
+        if (min == leftBridgeDistance)
+            return leftBridge;
+        else if (min == rightBridgeDistance)
+            return rightBridge;
+        else
+            return null;
+    }
+    public boolean isValidToDrop(Point2D point2D,int playerNum) {
+        double x = point2D.getX();
+        double y = point2D.getY();
+        if (playerNum == 1) {
+            if (y > 345)
+                return true;
+            else
+                return false;
+        } else if (playerNum == 2) {
+            if (y > 345)
+                return true;
+            else
+                return false;
+        } else {
+            Config.unknownInputException();
+        }
+        return false;
     }
     public static Timer getTimer() {
         return timer;

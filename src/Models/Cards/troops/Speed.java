@@ -6,11 +6,11 @@ public enum Speed {
     SLOW,MEDIUM,FAST;
     public static double toDouble(Speed speed) {
         if (speed == Speed.SLOW) {
-            return 20;
+            return 10;
         } else if (speed == Speed.MEDIUM) {
-            return 40;
+            return 20;
         } else if (speed == Speed.FAST) {
-            return 60;
+            return 30;
         } else {
             Config.unknownInputException();
         }
