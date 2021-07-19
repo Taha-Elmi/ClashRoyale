@@ -40,7 +40,10 @@ public class StupidRobotManager implements Manager,Runnable {
         return new Point2D(randomWidth,randomHeight);
     }
     private void playCard() {
-        Card card = getRandomCard();
+        Card card;
+        if ((card = getRandomCard()).getCost() > Game.getInstance().getPlayer2().getElixirs())
+            return;
+        Game.getInstance().getPlayer2().setElixirs(Game.getInstance().getPlayer2().getElixirs() - card.getCost());
         Point2D src = getRandomPoint2D();
         ImageView nearerTower = GameCon.getInstance().getNearerTowerImageView(src,2);
         Point2D dst = new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY());
