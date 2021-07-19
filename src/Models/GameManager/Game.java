@@ -71,7 +71,6 @@ public class Game {
         final int SPACE = 20;
         final int WIDTH = 30;
         final int HEIGHT = 50;
-        ParallelTransition pt = new ParallelTransition();
         for (int i = 0; i < card.getNumber(); i++) {
             ImageView imageView = new ImageView(card.born(playerNumber));
             if (card instanceof Archer) {
@@ -117,13 +116,12 @@ public class Game {
                     Troop troop = (Troop) cardImage.getCard();
                     Timeline timeline = new Timeline();
                     troop.readyForMove(imageView,new Point2D(dst.getX(),dst.getY()),timeline);
-                    pt.getChildren().add(timeline);
+                    timeline.play();
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
             }
         }
-        pt.play();
     }
 
     public void dieCard(CardImage cardImage) {
