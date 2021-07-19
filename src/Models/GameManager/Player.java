@@ -34,4 +34,7 @@ public class Player {
         this.elixirs = elixirs;
     }
 
+    public int getElixirs() {
+        return elixirs;
+    }
 }

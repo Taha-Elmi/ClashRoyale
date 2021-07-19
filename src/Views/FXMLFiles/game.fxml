@@ -2916,6 +2916,9 @@
                             </image>
                         </ImageView>
                     </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
                 </Pane>
                 <ProgressBar fx:id="elixirBar" prefHeight="18.0" prefWidth="452.0" progress="0.4" style="-fx-accent: #EF1DFE;" />
             </children>
