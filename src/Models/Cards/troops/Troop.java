@@ -3,6 +3,7 @@ import Controllers.GameCon;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
@@ -90,5 +91,10 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             Config.unknownInputException();
         }
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
+    }
+
+    @Override
+    public void die() {
+        Game.getInstance().dieCard(Game.getInstance().cardToCardImage(this));
     }
 }

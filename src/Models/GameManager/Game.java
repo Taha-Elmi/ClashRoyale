@@ -130,6 +130,19 @@ public class Game {
         player2_list.remove(cardImage);
     }
 
+    public CardImage cardToCardImage(Card card) {
+        for (CardImage cardImage: player1_list) {
+            if (cardImage.getCard().equals(card)) {
+                return cardImage;
+            }
+        }
+        for (CardImage cardImage: player2_list) {
+            if (cardImage.getCard().equals(card)) {
+                return cardImage;
+            }
+        }
+        return null;
+    }
     public void playCardPlayer1(Card card) {
         player1.playCard(card);
     }
