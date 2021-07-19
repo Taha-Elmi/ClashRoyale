@@ -95,7 +95,9 @@ public class GameCon implements Controller {
     @FXML
     private ImageView rightKingImageView;
 
-    private Timer timer;
+    private static Timer timer;
+
+    private static Timer mainLoop;
 
     private LocalTime localTime;
 
@@ -114,6 +116,26 @@ public class GameCon implements Controller {
         });
         staticBoardPane = boardPane;
         startTimer();
+        startMainLoop();
+    }
+
+    private void startMainLoop() {
+        mainLoop = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Game.getInstance().update();
+                        if (Game.getInstance().isGameOver()) {
+                            Game.getInstance().finish();
+                        }
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(100.0);
+        mainLoop.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
     private void startTimer() {
@@ -131,7 +153,7 @@ public class GameCon implements Controller {
         };
 
         long frameTimeInMilliseconds = (long)(1000.0);
-        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+        timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
 
     private void timerAdvance() {
@@ -239,12 +261,15 @@ public class GameCon implements Controller {
         }
     }
 
-    public static Pane getStaticBoardPane() {
-        return staticBoardPane;
+    public static Timer getTimer() {
+        return timer;
     }
 
-    @FXML
-    void test(MouseEvent event) {
-        Game.getInstance().dieCard(Game.getInstance().getPlayer1_list().get(0));
+    public static Timer getMainLoop() {
+        return mainLoop;
+    }
+
+    public static Pane getStaticBoardPane() {
+        return staticBoardPane;
     }
 }

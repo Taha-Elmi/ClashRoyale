@@ -40,10 +40,14 @@ public class Game {
     }
 
     public void finish() {
-
+        GameCon.getTimer().cancel();
+        GameCon.getMainLoop().cancel();
+        // display scoreboard...
     }
 
-    public void update() {}
+    public void update() {
+
+    }
 
     public Player getPlayer1() {
         return player1;
@@ -119,6 +123,10 @@ public class Game {
     }
     public void playCardPlayer2(Card card) {
         player2.playCard(card);
+    }
+
+    public boolean isGameOver() {
+        return false;
     }
 
     public Manager getManager() {
