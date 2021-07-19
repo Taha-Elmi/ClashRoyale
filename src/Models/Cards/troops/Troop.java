@@ -1,5 +1,6 @@
 package Models.Cards.troops;
 import Controllers.GameCon;
+import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.Target;
 import Models.Graphic.FXManager;
@@ -79,7 +80,15 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     @Override
-    public Image born() {
-        return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + "/forward.gif");
+    public Image born(int playerNum) {
+        String nameOfGif = "";
+        if (playerNum == 1) {
+            nameOfGif = "/forward.gif";
+        } else if (playerNum == 2) {
+            nameOfGif = "/backward.gif";
+        } else {
+            Config.unknownInputException();
+        }
+        return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
     }
 }

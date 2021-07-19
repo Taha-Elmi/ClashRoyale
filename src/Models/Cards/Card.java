@@ -35,7 +35,7 @@ abstract public class Card implements Cloneable {
         this.timeline = timeline;
     }
 
-    public abstract Image born();
+    public abstract Image born(int playerNum);
     public abstract void die();
     protected abstract boolean isDead();
     public abstract void setLevel(int level);

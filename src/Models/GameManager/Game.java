@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.troops.Archer;
 import Models.Cards.troops.Troop;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
@@ -71,9 +72,14 @@ public class Game {
         final int HEIGHT = 50;
         ParallelTransition pt = new ParallelTransition();
         for (int i = 0; i < card.getNumber(); i++) {
-            ImageView imageView = new ImageView(card.born());
-            imageView.setFitWidth(WIDTH);
-            imageView.setFitHeight(HEIGHT);
+            ImageView imageView = new ImageView(card.born(playerNumber));
+            if (card instanceof Archer) {
+                imageView.setFitWidth(WIDTH - 7);
+                imageView.setFitHeight(HEIGHT - 7);
+            } else {
+                imageView.setFitWidth(WIDTH);
+                imageView.setFitHeight(HEIGHT);
+            }
             double x = src.getX();
             double y = src.getY();
             if (i == 1) {

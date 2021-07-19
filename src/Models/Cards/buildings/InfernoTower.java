@@ -52,7 +52,7 @@ public class InfernoTower extends Building {
     }
 
     @Override
-    public Image born() {
+    public Image born(int playerNum) {
         return null;
     }
 
