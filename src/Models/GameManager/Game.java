@@ -60,13 +60,14 @@ public class Game {
 
     private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
         for (CardImage cardImage : playerList) {
-            Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getLayoutX(),
-                    GameCon.getInstance().find(cardImage.getImage()).getLayoutY());
+            Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
+                    GameCon.getInstance().find(cardImage.getImage()).getY());
+            //System.out.println("X: " + src.getX() + "\tY: " + src.getY());
             CardImage target = null;
             double distance = 0;
             for (CardImage enemy : enemyList) {
-                Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getLayoutX(),
-                        GameCon.getInstance().find(enemy.getImage()).getLayoutY());
+                Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
+                        GameCon.getInstance().find(enemy.getImage()).getY());
                 if (target == null) {
                     target = enemy;
                     distance = src.distance(dst);
@@ -76,13 +77,13 @@ public class Game {
                 }
             }
 
-            if (target == null || distance > 20)
+            if (target == null || distance > 100)
                 continue;
 
             cardImage.getCard().getTimeline().stop();
             Timeline timeline = new Timeline();
             ((Troop) cardImage.getCard()).readyForMove(GameCon.getInstance().find(cardImage.getImage()),
-                    new Point2D(GameCon.getInstance().find(target.getImage()).getLayoutX(), GameCon.getInstance().find(target.getImage()).getLayoutY()),
+                    new Point2D(GameCon.getInstance().find(target.getImage()).getX(), GameCon.getInstance().find(target.getImage()).getY()),
                     timeline);
             timeline.play();
         }
