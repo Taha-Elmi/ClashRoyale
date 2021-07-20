@@ -20,16 +20,42 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     private int damage;
     private double hitSpeed;
     private Speed speed;
-    private Target target;
+    private Target targetCategory;
     private int range;
     private boolean areaSplash;
     private int count;
+    private Damageable target;
+    private boolean isDamaging;
+
     public Troop(int cost,int level,int number) {
         super(cost,level,number);
     }
 
-    public void setTarget(Target target) {
-        this.target = target;
+    public Point2D findTarget() {
+        // needs to be completed...
+        return null;
+    }
+
+    public void step() {
+        ImageView imageView = GameCon.getInstance().find(Game.getInstance().cardToCardImage(this).getImage());
+        Point2D src = new Point2D(imageView.getX(), imageView.getY());
+        Point2D dst = findTarget();
+        Point2D path = dst.subtract(src).multiply((1 / dst.distance(src)));
+        System.out.println(path.distance(0, 0)); // must print 1
+        getTimeline().stop();
+        getTimeline().getKeyFrames().clear();
+        getTimeline().getKeyFrames().add(
+                new KeyFrame(
+                        Duration.seconds(1),
+                        new KeyValue(imageView.xProperty(), src.add(path).getX()),
+                        new KeyValue(imageView.yProperty(), src.add(path).getY())
+                )
+        );
+        getTimeline().play();
+    }
+
+    public void setTarget(Target targetCategory) {
+        this.targetCategory = targetCategory;
     }
 
     @Override
@@ -75,6 +101,15 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         //System.out.println(length / speed);
         return length / speed;
     }
+    
+    private double speedToLength(Speed speed) {
+        return switch (speed) {
+            case SLOW -> 0.5 * 25;
+            case MEDIUM -> 1 * 25;
+            case FAST -> 2 * 25;
+        };
+    }
+
     @Override
     protected boolean isDead() {
         return hp <= 0;

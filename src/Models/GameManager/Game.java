@@ -201,9 +201,11 @@ public class Game {
         }
         return null;
     }
+
     public void playCardPlayer1(Card card) {
         player1.playCard(card);
     }
+
     public void playCardPlayer2(Card card) {
         player2.playCard(card);
     }
