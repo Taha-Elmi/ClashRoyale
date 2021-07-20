@@ -12,16 +12,23 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
+import Models.Graphic.FXManager;
 import Models.Towers.Tower;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
 
 import Models.Cards.CardImage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -122,9 +129,28 @@ public class Game {
                     distance = src.distance(dst);
                 }
             }
-            if (target == null || distance > 100)
+            if (target == null || distance > tower.getRange())
                 continue;
-            //new moving system
+            ImageView arrowImageView = new ImageView(FXManager.getImage("/Game/arrow.jpg"));
+            arrowImageView.setX(tower.getImageView().getLayoutX());
+            arrowImageView.setY(tower.getImageView().getLayoutY());
+            arrowImageView.setFitWidth(5);
+            arrowImageView.setFitHeight(20);
+            GameCon.getInstance().getBoardPane().getChildren().add(arrowImageView);
+            ImageView targetImageView = GameCon.getInstance().find(target.getImage());
+            Timeline timeline = new Timeline();
+            timeline.getKeyFrames().add(new KeyFrame(
+                    Duration.seconds(0.5),
+                    new KeyValue(arrowImageView.xProperty(),targetImageView.getX()),
+                    new KeyValue(arrowImageView.yProperty(),targetImageView.getY())
+            ));
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    GameCon.getInstance().getBoardPane().getChildren().remove(arrowImageView);
+                }
+            });
+            timeline.play();
             tower.hit(target.getCard());
         }
     }

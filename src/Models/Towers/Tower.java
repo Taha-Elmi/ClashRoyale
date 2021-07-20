@@ -3,9 +3,9 @@ package Models.Towers;
 import Models.Cards.Card;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
+import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.awt.*;
 
 abstract public class Tower implements Hitter, Damageable,Runnable {
     private int level;
@@ -14,11 +14,13 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     private double range;
     private double hitSpeed;
     private ImageView imageView;
+    private Timeline timeline;
 
-    public void setLevel(int level) {
-        this.level = level;
+    public Tower(int level) {
+        setLevel(level);
+        timeline = new Timeline();
     }
-
+    public abstract void setLevel(int level);
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -67,5 +69,13 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
 
     public int getDamage() {
         return damage;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
     }
 }

@@ -18,9 +18,9 @@ public class Player {
     }
 
     public void initialize() {
-        princessTowers.add(new PrincessTower());
-        princessTowers.add(new PrincessTower());
-        kingTower = new KingTower();
+        princessTowers.add(new PrincessTower(1));
+        princessTowers.add(new PrincessTower(1));
+        kingTower = new KingTower(1);
     }
     public void playCard(Card card){
         sendCardToTheLast(card);
