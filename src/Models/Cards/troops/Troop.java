@@ -71,7 +71,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     private double speedToSecond(double speed, double length) {
-        System.out.println(length / speed);
+        //System.out.println(length / speed);
         return length / speed;
     }
     @Override
