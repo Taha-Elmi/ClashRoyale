@@ -1,7 +1,10 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Rage extends Spell {
     private double duration;
@@ -35,12 +38,11 @@ public class Rage extends Spell {
     }
 
     @Override
-    public Image born(int playerNum) {
-        return null;
+    public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline) {
+        //Nothing.
     }
 
-    @Override
-    public void die() {
+    public void readyForThrow() {
 
     }
 

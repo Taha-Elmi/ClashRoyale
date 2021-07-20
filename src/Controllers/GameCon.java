@@ -3,6 +3,8 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.spells.Spell;
+import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import Models.Towers.Tower;
@@ -248,7 +250,7 @@ public class GameCon implements Controller {
 
     @FXML
     private void dragOverHandler(DragEvent de) {
-        if (de.getDragboard().hasImage() && isValidToDrop(new Point2D(de.getX(),de.getY()),1)) {
+        if (de.getDragboard().hasImage() && isValidToDrop(new Point2D(de.getX(),de.getY()),1,chosenCard)) {
             de.acceptTransferModes(TransferMode.ANY);
         }
     }
@@ -259,16 +261,21 @@ public class GameCon implements Controller {
             Game.getInstance().getPlayer1().setElixirs(Game.getInstance().getPlayer1().getElixirs() - chosenCard.getCost());
             elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
             updateCardsActiveness();
-            Point2D src = new Point2D(de.getX(),de.getY());
-            ImageView nearerTower = getNearerTowerImageView(src,1);
-            Game.getInstance().bornCard(chosenCard,src
-                    ,new Point2D(nearerTower.getLayoutX(),nearerTower.getLayoutY()) , boardPane,1);
-            Game.getInstance().playCardPlayer1(chosenCard);
-            setCardsImages();
-            chosenCard = null;
+            if (chosenCard instanceof Troop) {
+                Point2D src = new Point2D(de.getX(), de.getY());
+                ImageView nearerTower = getNearerTowerImageView(src, 1);
+                Game.getInstance().bornCard(chosenCard, src
+                        , new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY()), boardPane, 1);
+            } else if (chosenCard instanceof Spell) {
+                Point2D src = new Point2D(blueKingTower.getLayoutX(),blueKingTower.getLayoutY());
+                Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }
+        Game.getInstance().playCardPlayer1(chosenCard);
+        setCardsImages();
+        chosenCard = null;
     }
 
     public ImageView getNearerTowerImageView(Point2D src,int player) {
@@ -336,7 +343,10 @@ public class GameCon implements Controller {
         else
             return null;
     }
-    public boolean isValidToDrop(Point2D point2D,int playerNum) {
+    public boolean isValidToDrop(Point2D point2D,int playerNum,Card card) {
+        if (card instanceof Spell) {
+            return true;
+        }
         double x = point2D.getX();
         double y = point2D.getY();
         if (playerNum == 1) {
@@ -353,6 +363,11 @@ public class GameCon implements Controller {
             Config.unknownInputException();
         }
         return false;
+    }
+
+
+    public ImageView getRedKingTower() {
+        return redKingTower;
     }
     public static Timer getTimer() {
         return timer;

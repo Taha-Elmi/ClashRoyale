@@ -2,6 +2,9 @@ package Models.GameManager;
 
 import Controllers.GameCon;
 import Models.Cards.Card;
+import Models.Cards.spells.Rage;
+import Models.Cards.spells.Spell;
+import Models.Cards.troops.Troop;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
@@ -40,10 +43,15 @@ public class StupidRobotManager implements Manager,Runnable {
         return new Point2D(randomWidth,randomHeight);
     }
     private void playCard(Card card) {
-        if (card.getCost() > Game.getInstance().getPlayer2().getElixirs())
+        if (card.getCost() > Game.getInstance().getPlayer2().getElixirs() || card instanceof Rage)
             return;
         Game.getInstance().getPlayer2().setElixirs(Game.getInstance().getPlayer2().getElixirs() - card.getCost());
-        Point2D src = getRandomPoint2D();
+        Point2D src = null;
+        if (card instanceof Troop) {
+            src = getRandomPoint2D();
+        } else if (card instanceof Spell) {
+            src = new Point2D(GameCon.getInstance().getRedKingTower().getLayoutX(),GameCon.getInstance().getRedKingTower().getLayoutY());
+        }
         ImageView nearerTower = GameCon.getInstance().getNearerTowerImageView(src,2);
         Point2D dst = new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY());
         Game.getInstance().bornCard(card, src, dst, GameCon.getInstance().getBoardPane(), 2);

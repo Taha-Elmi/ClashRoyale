@@ -92,9 +92,4 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         }
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
     }
-
-    @Override
-    public void die() {
-        Game.getInstance().dieCard(Game.getInstance().cardToCardImage(this));
-    }
 }

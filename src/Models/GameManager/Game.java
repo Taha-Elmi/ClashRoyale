@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
@@ -68,59 +69,82 @@ public class Game {
     }
 
     public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane,int playerNumber) {
-        final int SPACE = 20;
-        final int WIDTH = 30;
-        final int HEIGHT = 50;
-        for (int i = 0; i < card.getNumber(); i++) {
-            ImageView imageView = new ImageView(card.born(playerNumber));
-            if (card instanceof Archer) {
-                imageView.setFitWidth(WIDTH - 7);
-                imageView.setFitHeight(HEIGHT - 7);
-            } else if (card instanceof Giant) {
-                imageView.setFitWidth(WIDTH + 10);
-                imageView.setFitHeight(HEIGHT + 10);
-            } else {
-                imageView.setFitWidth(WIDTH);
-                imageView.setFitHeight(HEIGHT);
-            }
-            double x = src.getX();
-            double y = src.getY();
-            if (i == 1) {
-                x += SPACE;
-                y += SPACE;
-            } else if (i == 2){
-                x -= SPACE;
-                y -= SPACE;
-            } else if (i == 3) {
-                x -= SPACE;
-                y += SPACE;
-            } else if (i == 4) {
-                x += SPACE;
-                y -= SPACE;
-            } else if (i == 0){
-                //nothing
-            } else {
-                Config.unknownInputException();
-            }
-            imageView.setX(x);
-            imageView.setY(y);
-            boardPane.getChildren().add(imageView);
-            if (card instanceof Troop) {
+        if (card instanceof Troop) {
+            final int SPACE = 20;
+            final int WIDTH = 30;
+            final int HEIGHT = 50;
+            for (int i = 0; i < card.getNumber(); i++) {
+                ImageView imageView = new ImageView(card.born(playerNumber));
+                if (card instanceof Archer) {
+                    imageView.setFitWidth(WIDTH - 7);
+                    imageView.setFitHeight(HEIGHT - 7);
+                } else if (card instanceof Giant) {
+                    imageView.setFitWidth(WIDTH + 10);
+                    imageView.setFitHeight(HEIGHT + 10);
+                } else {
+                    imageView.setFitWidth(WIDTH);
+                    imageView.setFitHeight(HEIGHT);
+                }
+                double x = src.getX();
+                double y = src.getY();
+                if (i == 1) {
+                    x += SPACE;
+                    y += SPACE;
+                } else if (i == 2) {
+                    x -= SPACE;
+                    y -= SPACE;
+                } else if (i == 3) {
+                    x -= SPACE;
+                    y += SPACE;
+                } else if (i == 4) {
+                    x += SPACE;
+                    y -= SPACE;
+                } else if (i == 0) {
+                    //nothing
+                } else {
+                    Config.unknownInputException();
+                }
+                imageView.setX(x);
+                imageView.setY(y);
+                boardPane.getChildren().add(imageView);
+                CardImage cardImage = null;
                 try {
-                    CardImage cardImage = new CardImage((Card) card.clone(), imageView.getImage());
-                    switch (playerNumber) {
-                        case 1 -> player1_list.add(cardImage);
-                        case 2 -> player2_list.add(cardImage);
-                        default -> throw new IllegalArgumentException();
-                    }
-                    Troop troop = (Troop) cardImage.getCard();
-                    Timeline timeline = new Timeline();
-                    troop.readyForMove(imageView,new Point2D(dst.getX(),dst.getY()),timeline);
-                    timeline.play();
+                    cardImage = new CardImage((Card) card.clone(), imageView.getImage());
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
+                Timeline timeline = new Timeline();
+                switch (playerNumber) {
+                    case 1 -> player1_list.add(cardImage);
+                    case 2 -> player2_list.add(cardImage);
+                    default -> throw new IllegalArgumentException();
+                }
+                Troop troop = (Troop) cardImage.getCard();
+                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
+                timeline.play();
             }
+        } else if (card instanceof Spell) {
+            ImageView imageView = new ImageView(card.born(1));
+            CardImage cardImage = null;
+            try {
+                cardImage = new CardImage((Card) card.clone(),imageView.getImage());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            Timeline timeline = new Timeline();
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(60);
+            imageView.setX(src.getX());
+            imageView.setY(src.getY());
+            boardPane.getChildren().add(imageView);
+            switch (playerNumber) {
+                case 1 -> player1_list.add(cardImage);
+                case 2 -> player2_list.add(cardImage);
+                default -> throw new IllegalArgumentException();
+            }
+            Spell spell = (Spell) cardImage.getCard();
+            spell.readyForThrow(imageView,dst,timeline);
+            timeline.play();
         }
     }
 

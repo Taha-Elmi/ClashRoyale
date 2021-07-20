@@ -1,7 +1,15 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Arrows extends Spell {
     private int areaDamage;
@@ -34,15 +42,6 @@ public class Arrows extends Spell {
         }
     }
 
-    @Override
-    public Image born(int playerNum) {
-        return null;
-    }
-
-    @Override
-    public void die() {
-
-    }
 
     @Override
     protected boolean isDead() {
