@@ -12,8 +12,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
@@ -385,6 +387,15 @@ public class GameCon implements Controller {
 
     public Pane getBoardPane() {
         return boardPane;
+    }
+
+    public ImageView find(Image image) {
+        for (Node node : boardPane.getChildren()) {
+            //node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()
+            if (node instanceof ImageView && ((ImageView) node).getImage() != null && ((ImageView) node).getImage().equals(image))
+                return (ImageView) node;
+        }
+        return null;
     }
 
     public static GameCon getInstance() {
