@@ -33,7 +33,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     @Override
-    public void getDamage(int damage) {
+    public void gotDamage(int damage) {
         hp -= damage;
         if (isDead())
             die();
@@ -43,7 +43,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     public void hit(Card card) {
         if (card instanceof Damageable) {
             Damageable damageable = (Damageable) card;
-            damageable.getDamage(damage);
+            damageable.gotDamage(damage);
         }
     }
 
@@ -91,5 +91,17 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             Config.unknownInputException();
         }
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

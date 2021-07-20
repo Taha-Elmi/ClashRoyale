@@ -9,12 +9,6 @@ public class Archer extends Troop {
         setSpeed(Speed.FAST);
     }
 
-
-    @Override
-    public void die() {
-
-    }
-
     @Override
     public void setLevel(int level) {
 

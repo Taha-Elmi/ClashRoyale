@@ -43,7 +43,7 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
         return hp <= 0;
     }
     @Override
-    public void getDamage(int damage) {
+    public void gotDamage(int damage) {
         hp -= damage;
         if (isDead())
             die();
@@ -53,7 +53,7 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     public void hit(Card card) {
         if (card instanceof Damageable) {
             Damageable damageable = (Damageable) card;
-            damageable.getDamage(damage);
+            damageable.gotDamage(damage);
         }
     }
 
@@ -63,5 +63,9 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
 
     public ImageView getImageView() {
         return imageView;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

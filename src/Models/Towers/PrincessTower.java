@@ -29,10 +29,6 @@ public class PrincessTower extends Tower {
         } else;
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 
     @Override
     public void run() {

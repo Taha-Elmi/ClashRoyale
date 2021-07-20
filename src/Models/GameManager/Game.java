@@ -12,6 +12,7 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
+import Models.Towers.Tower;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
@@ -55,8 +56,10 @@ public class Game {
 
     public void update() {
         manager.action();
-        checkAllCards(player1_list, player2_list);
-        checkAllCards(player2_list, player1_list);
+//        checkAllCards(player1_list, player2_list);
+//        checkAllCards(player2_list, player1_list);
+        checkTowers(player1,player2_list);
+        checkTowers(player2,player1_list);
     }
 
     private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
@@ -87,6 +90,42 @@ public class Game {
                     new Point2D(GameCon.getInstance().find(target.getImage()).getX(), GameCon.getInstance().find(target.getImage()).getY()),
                     timeline);
             timeline.play();
+        }
+    }
+
+    private void checkTowers(Player player,ArrayList<CardImage> enemyList) {
+        final int TOWERS_NUM = 3;
+        Tower tower;
+        Point2D src;
+        Point2D dst;
+        for (int i = 0; i < TOWERS_NUM; i++) {
+            if (i == 0) {
+                tower = player.getKingTower();
+            } else if (i == 1) {
+                tower = player.getPrincessTowers().get(0);
+            } else if (i == 2) {
+                tower = player.getPrincessTowers().get(1);
+            } else {
+                tower = null;
+            }
+            src = new Point2D(tower.getImageView().getLayoutX(),tower.getImageView().getLayoutY());
+            CardImage target = null;
+            double distance = 0;
+            for (CardImage enemy : enemyList) {
+                dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
+                        GameCon.getInstance().find(enemy.getImage()).getY());
+                if (target == null) {
+                    target = enemy;
+                    distance = src.distance(dst);
+                } else if (src.distance(dst) < distance) {
+                    target = enemy;
+                    distance = src.distance(dst);
+                }
+            }
+            if (target == null || distance > 100)
+                continue;
+            //new moving system
+            tower.hit(target.getCard());
         }
     }
 

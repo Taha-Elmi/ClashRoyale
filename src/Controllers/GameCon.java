@@ -124,15 +124,15 @@ public class GameCon implements Controller {
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
+        Game.getInstance().getPlayer1().getKingTower().setImageView(blueKingTower);
+        Game.getInstance().getPlayer1().getPrincessTowers().get(0).setImageView(blueLeftPrincessTower);
+        Game.getInstance().getPlayer1().getPrincessTowers().get(1).setImageView(blueRightPrincessTower);
+        Game.getInstance().getPlayer2().getKingTower().setImageView(redKingTower);
+        Game.getInstance().getPlayer2().getPrincessTowers().get(0).setImageView(redLeftPrincessTower);
+        Game.getInstance().getPlayer2().getPrincessTowers().get(1).setImageView(redRightPrincessTower);
         startTimer();
         startMainLoop();
         instance = this;
-        Game.getInstance().getPlayer1().getKingTower().setImageView(blueKingTower);
-        Game.getInstance().getPlayer1().getPrincessTowers().get(0).setImageView(blueLeftPrincessTower);
-        Game.getInstance().getPlayer1().getPrincessTowers().get(0).setImageView(blueRightPrincessTower);
-        Game.getInstance().getPlayer2().getKingTower().setImageView(redKingTower);
-        Game.getInstance().getPlayer2().getPrincessTowers().get(0).setImageView(redLeftPrincessTower);
-        Game.getInstance().getPlayer2().getPrincessTowers().get(0).setImageView(redRightPrincessTower);
         Config.playMusic("assets/musics/BattleTheme.mp3");
     }
 

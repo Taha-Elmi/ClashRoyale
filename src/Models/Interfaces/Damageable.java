@@ -10,5 +10,5 @@ public interface Damageable {
      *
      * @param damage the damage
      */
-    void getDamage(int damage);
+    void gotDamage(int damage);
 }

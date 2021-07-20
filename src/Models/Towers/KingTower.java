@@ -36,10 +36,6 @@ public class KingTower extends Tower {
         }
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 
     @Override
     public void run() {
