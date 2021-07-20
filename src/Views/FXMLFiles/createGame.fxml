@@ -8,10 +8,13 @@
 
 <VBox fx:id="mainPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.CreateGameCon">
    <children>
-      <Label fx:id="portLabel" text="The Game is on Port: 1234" textFill="WHITE">
+      <Label fx:id="portLabel" text="Other Player Can Access the Game Via:" textFill="WHITE">
          <font>
-            <Font name="Bell MT" size="26.0" />
-         </font></Label>
+            <Font name="Bell MT" size="22.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="25.0" />
+         </VBox.margin></Label>
       <Label text="Waiting for another player to join..." textFill="WHITE">
          <font>
             <Font name="Harrington" size="24.0" />

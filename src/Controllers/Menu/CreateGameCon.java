@@ -9,8 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class CreateGameCon {
 
@@ -37,7 +39,14 @@ public class CreateGameCon {
                 port++;
             }
         }
-        portLabel.setText("The Game is on Port: " + port);
+
+        try {
+            portLabel.setText("Other Player Can Access the Game Via:\n" +
+                    "IP: " + Inet4Address.getLocalHost().getHostAddress() + "\tPORT: " + port);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,6 +67,6 @@ public class CreateGameCon {
         } catch (IOException e) {
             System.out.print("");
         }
-        FXManager.goTo("playGame.fxml", Config.primaryStage);
+        FXManager.goTo("1v1.fxml", Config.primaryStage);
     }
 }
