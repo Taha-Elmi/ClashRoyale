@@ -22,7 +22,7 @@ public class Multiplayer1V1Con {
 
     @FXML
     void createGameButtonOnAction(ActionEvent event) {
-
+        FXManager.goTo("createGame.fxml", Config.primaryStage);
     }
 
     @FXML
