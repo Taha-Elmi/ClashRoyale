@@ -14,6 +14,7 @@ public class Player {
 
     public Player( List<Card> cards) {
         this.cards = cards;
+        initialize();
     }
 
     public void initialize() {
@@ -39,5 +40,13 @@ public class Player {
     }
     public List<Card> getCards() {
         return cards;
+    }
+
+    public KingTower getKingTower() {
+        return kingTower;
+    }
+
+    public List<PrincessTower> getPrincessTowers() {
+        return princessTowers;
     }
 }

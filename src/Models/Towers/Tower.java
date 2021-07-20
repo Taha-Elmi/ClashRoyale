@@ -3,6 +3,9 @@ package Models.Towers;
 import Models.Cards.Card;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
+import javafx.scene.image.ImageView;
+
+import java.awt.*;
 
 abstract public class Tower implements Hitter, Damageable,Runnable {
     private int level;
@@ -10,6 +13,7 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     private int damage;
     private double range;
     private double hitSpeed;
+    private ImageView imageView;
 
     public void setLevel(int level) {
         this.level = level;
@@ -51,5 +55,13 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
             Damageable damageable = (Damageable) card;
             damageable.getDamage(damage);
         }
+    }
+
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
     }
 }

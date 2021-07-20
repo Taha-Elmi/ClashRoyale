@@ -7,7 +7,7 @@ public class PrincessTower extends Tower {
 
     }
 
-    private void initialize() {
+    public void initialize() {
         setLevel(1);
         setHitSpeed(0.8);
         setRange(7.5);

@@ -1,5 +1,6 @@
 package Models.Cards.spells;
 
+import Controllers.GameCon;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Graphic.FXManager;
