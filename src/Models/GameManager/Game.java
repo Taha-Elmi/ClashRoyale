@@ -76,13 +76,15 @@ public class Game {
                 }
             }
 
-            if (target == null || distance > 125)
+            if (target == null || distance > 20)
                 continue;
 
             cardImage.getCard().getTimeline().stop();
+            Timeline timeline = new Timeline();
             ((Troop) cardImage.getCard()).readyForMove(GameCon.getInstance().find(cardImage.getImage()),
                     new Point2D(GameCon.getInstance().find(target.getImage()).getLayoutX(), GameCon.getInstance().find(target.getImage()).getLayoutY()),
-                    new Timeline());
+                    timeline);
+            timeline.play();
         }
     }
 
