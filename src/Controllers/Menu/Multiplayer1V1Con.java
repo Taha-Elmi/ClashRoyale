@@ -27,7 +27,7 @@ public class Multiplayer1V1Con {
 
     @FXML
     void joinGameButtonOnAction(ActionEvent event) {
-
+        FXManager.goTo("joinGame.fxml", Config.primaryStage);
     }
 
 }
