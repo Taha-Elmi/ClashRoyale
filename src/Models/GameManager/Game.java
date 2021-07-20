@@ -55,15 +55,18 @@ public class Game {
 
     public void update() {
         manager.action();
-        checkAllCards(player1_list, player2_list);
-        checkAllCards(player2_list, player1_list);
+//        checkAllCards(player1_list, player2_list);
+//        checkAllCards(player2_list, player1_list);
+        for (CardImage cardImage : player1_list) {
+            if (cardImage.getCard() instanceof Troop)
+                ((Troop) cardImage.getCard()).step();
+        }
     }
 
     private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
         for (CardImage cardImage : playerList) {
             Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
                     GameCon.getInstance().find(cardImage.getImage()).getY());
-            //System.out.println("X: " + src.getX() + "\tY: " + src.getY());
             CardImage target = null;
             double distance = 0;
             for (CardImage enemy : enemyList) {

@@ -2,6 +2,7 @@ package Models.Cards.troops;
 import Controllers.GameCon;
 import Main.Config;
 import Models.Cards.Card;
+import Models.Cards.CardImage;
 import Models.Cards.Target;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
@@ -14,6 +15,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 abstract public class Troop extends Card implements Hitter, Damageable {
     private int hp;
@@ -32,8 +35,59 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     public Point2D findTarget() {
-        // needs to be completed...
-        return null;
+        CardImage cardImage = Game.getInstance().cardToCardImage(this);
+        ArrayList<CardImage> enemyList = (Game.getInstance().getPlayer1_list().contains(cardImage) ?
+                Game.getInstance().getPlayer1_list() : Game.getInstance().getPlayer2_list());
+        Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
+                GameCon.getInstance().find(cardImage.getImage()).getY());
+        CardImage possibleTarget = null;
+        double distance =  0;
+
+        // finding the nearest enemy troop
+        for (CardImage enemy : enemyList) {
+            if (!(enemy.getCard() instanceof Troop))
+                continue;
+
+            Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
+                    GameCon.getInstance().find(enemy.getImage()).getY());
+
+            if (possibleTarget == null || src.distance(dst) < distance) {
+                possibleTarget = enemy;
+                distance = src.distance(dst);
+            }
+        }
+
+        // checking if the nearest troop is valid to be target
+        if (possibleTarget != null && distance <= 100) {
+            target = (Troop) possibleTarget.getCard();
+
+            CardImage cardImageToReturn = Game.getInstance().cardToCardImage((Card) target);
+            if ((isUnderBridge() && ((Troop) target).isUnderBridge()) || (!isUnderBridge() && !((Troop) target).isUnderBridge()))
+                return new Point2D(GameCon.getInstance().find(cardImageToReturn.getImage()).getX(),
+                    GameCon.getInstance().find(cardImageToReturn.getImage()).getY());
+            else
+                return new Point2D(GameCon.getInstance().getNearerBridge(src).getLayoutX(),
+                        GameCon.getInstance().getNearerBridge(src).getLayoutY());
+        }
+
+        // checking if there is a bridge ahead or not
+        int playerNumber = (enemyList == Game.getInstance().getPlayer2_list() ? 1 : 2);
+
+        if ((playerNumber == 1 && isUnderBridge()) || (playerNumber == 2 && !isUnderBridge()))
+            return new Point2D(GameCon.getInstance().getNearerBridge(src).getLayoutX(),
+                    GameCon.getInstance().getNearerBridge(src).getLayoutY());
+
+        return new Point2D(GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getLayoutX(),
+                GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getLayoutY());
+    }
+
+    public boolean isUnderBridge() {
+        CardImage cardImage = Game.getInstance().cardToCardImage(this);
+        ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
+        System.out.println("X: " + imageView.getLayoutX() + "\tY: " + imageView.getLayoutY());
+        if (imageView.getY() > GameCon.getInstance().getNearerBridge(new Point2D(imageView.getX(), imageView.getY())).getLayoutY())
+            return true;
+        return false;
     }
 
     public void step() {

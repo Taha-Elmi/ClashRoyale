@@ -286,7 +286,7 @@ public class GameCon implements Controller {
         chosenCard = null;
     }
 
-    public ImageView getNearerTowerImageView(Point2D src,int player) {
+    public ImageView getNearerTowerImageView(Point2D src, int player) {
         if (player == 1) {
             double redKingTowerDistance = src.distance(new Point2D(redKingTower.getLayoutX(), redKingTower.getLayoutY()));
             double redLeftPrincessTowerDistance = src.distance(new Point2D(redLeftPrincessTower.getLayoutX(), redLeftPrincessTower.getLayoutY()));
@@ -339,10 +339,11 @@ public class GameCon implements Controller {
         double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
         double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
 
-        double min = leftBridgeDistance;
+        System.out.println("LEFT: " + leftBridgeDistance);
+        System.out.println("RIGHT: " + rightBridgeDistance);
+        System.out.println();
 
-        if (min >= rightBridgeDistance)
-            min = rightBridgeDistance;
+        double min = Math.min(leftBridgeDistance, rightBridgeDistance);
 
         if (min == leftBridgeDistance)
             return leftBridge;
@@ -351,6 +352,7 @@ public class GameCon implements Controller {
         else
             return null;
     }
+
     public boolean isValidToDrop(Point2D point2D,int playerNum,Card card) {
         if (card instanceof Spell) {
             return true;
