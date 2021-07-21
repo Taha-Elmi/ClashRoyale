@@ -49,8 +49,12 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     @Override
     public void gotDamage(int damage) {
         hp -= damage;
-        if (isDead())
+        Game.getInstance().updateHps();
+        if (isDead()) {
+            hp = 0;
+            Game.getInstance().updateHps();
             die();
+        }
     }
 
     @Override
@@ -88,5 +92,9 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
 
     public Timeline getTimeline() {
         return timeline;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }

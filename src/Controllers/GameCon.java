@@ -438,6 +438,13 @@ public class GameCon implements Controller {
         }
     }
 
+    public void setHp(int n, int playerNumber) {
+        switch (playerNumber) {
+            case 1 -> hp.setText("HP: " + n);
+            case 2 -> opponentHp.setText("HP: " + n);
+        }
+    }
+
     public ImageView getRedKingTower() {
         return redKingTower;
     }

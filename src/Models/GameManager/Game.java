@@ -334,6 +334,20 @@ public class Game {
         GameCon.getInstance().setCrowns(counter, 1);
     }
 
+    public void updateHps() {
+        int sum = 0;
+        sum += player1.getKingTower().getHp();
+        sum += player1.getPrincessTowers().get(0).getHp();
+        sum += player1.getPrincessTowers().get(1).getHp();
+        GameCon.getInstance().setHp(sum, 1);
+
+        sum = 0;
+        sum += player2.getKingTower().getHp();
+        sum += player2.getPrincessTowers().get(0).getHp();
+        sum += player2.getPrincessTowers().get(1).getHp();
+        GameCon.getInstance().setHp(sum, 2);
+    }
+
     public CardImage cardToCardImage(Card card) {
         for (CardImage cardImage: player1_list) {
             if (cardImage.getCard().equals(card)) {
