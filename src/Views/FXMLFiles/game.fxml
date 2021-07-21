@@ -16,22 +16,74 @@
 <HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
     <children>
         <ImageView fx:id="leftKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" />
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <VBox alignment="CENTER" prefHeight="700.0" prefWidth="167.0">
             <children>
-                <Label fx:id="opponentName" text="Label" />
-                <Label fx:id="opponentLevel" text="Label" />
-                <Label fx:id="opponentHp" text="Label">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="88.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redCrown.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="opponentCrowns" prefHeight="56.0" prefWidth="50.0" style="-fx-background-color: red;" text=": 3" textFill="WHITE">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="70.0" />
+               </VBox.margin>
+            </HBox>
+                <Label fx:id="opponentName" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="StupidRobot" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font></Label>
+                <Label fx:id="opponentLevel" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font></Label>
+                <Label fx:id="opponentHp" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Label" textFill="WHITE">
                     <VBox.margin>
                         <Insets bottom="50.0" />
                     </VBox.margin>
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font>
                 </Label>
-                <Label fx:id="name" text="Label">
+                <Label fx:id="name" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Label" textFill="WHITE">
                     <VBox.margin>
                         <Insets top="50.0" />
                     </VBox.margin>
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font>
                 </Label>
-                <Label fx:id="level" text="Label" />
-                <Label fx:id="hp" text="Label" />
+                <Label fx:id="level" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font></Label>
+                <Label fx:id="hp" styleClass="outline" stylesheets="@../CSSFiles/outline.css" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="26.0" />
+               </font></Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/blueCrown.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="crowns" prefHeight="56.0" prefWidth="47.0" style="-fx-background-color: #0082ff;" text=": 3" textFill="WHITE">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="70.0" />
+               </VBox.margin>
+            </HBox>
             </children>
         </VBox>
         <VBox prefHeight="200.0" prefWidth="450.0">

@@ -6,6 +6,8 @@ import Models.Cards.CardImage;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
+import Models.GameManager.GameMode;
+import Models.GameManager.Player;
 import Models.Graphic.FXManager;
 import Models.Towers.Tower;
 import javafx.application.Platform;
@@ -78,6 +80,9 @@ public class GameCon implements Controller {
     private Label opponentHp;
 
     @FXML
+    private Label opponentCrowns;
+
+    @FXML
     private Label name;
 
     @FXML
@@ -85,6 +90,9 @@ public class GameCon implements Controller {
 
     @FXML
     private Label hp;
+
+    @FXML
+    private Label crowns;
 
     @FXML
     private HBox mainBorder;
@@ -128,8 +136,18 @@ public class GameCon implements Controller {
         setCardsImages();
         updateCardsActiveness();
         name.setText(Config.client.getName());
-        level.setText("" + Config.client.getLevel());
-        hp.setText("MAX");
+        level.setText("lvl: " + Config.client.getLevel());
+        hp.setText("HP: MAX");
+        setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
+        if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
+            String robotName = Game.getInstance().getManager().getClass().getSimpleName();
+            opponentName.setText(robotName.substring(0, robotName.length() - 7));
+            opponentLevel.setText("lvl: " + Config.client.getLevel());
+            opponentHp.setText("HP: MAX");
+            setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
+        } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
+
+        }
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
@@ -198,6 +216,10 @@ public class GameCon implements Controller {
             Game.getInstance().getPlayer2().setElixirs(Game.getInstance().getPlayer2().getElixirs() + 1);
         elixirBar.setProgress((double) Game.getInstance().getPlayer1().getElixirs() / 10);
         updateCardsActiveness();
+    }
+
+    private void setPlayerCardsLevel(Player player, int level) {
+
     }
 
     private void setCardsImages() {
@@ -356,6 +378,7 @@ public class GameCon implements Controller {
         }
         return null;
     }
+
     public ImageView getNearerBridge(Point2D src) {
         double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
         double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
@@ -396,6 +419,7 @@ public class GameCon implements Controller {
     public ImageView getRedKingTower() {
         return redKingTower;
     }
+
     public static Timer getTimer() {
         return timer;
     }
