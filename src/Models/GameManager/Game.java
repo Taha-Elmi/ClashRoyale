@@ -61,11 +61,11 @@ public class Game {
         checkTowers(player2,player1_list);
         for (CardImage cardImage : player1_list) {
             if (cardImage.getCard() instanceof Troop)
-                ((Troop) cardImage.getCard()).step(1);
+                ((Troop) cardImage.getCard()).step();
         }
         for (CardImage cardImage : player2_list) {
             if (cardImage.getCard() instanceof Troop)
-                ((Troop) cardImage.getCard()).step(2);
+                ((Troop) cardImage.getCard()).step();
         }
     }
 
@@ -73,7 +73,6 @@ public class Game {
         for (CardImage cardImage : playerList) {
             Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
                     GameCon.getInstance().find(cardImage.getImage()).getY());
-            //System.out.println("X: " + src.getX() + "\tY: " + src.getY());
             CardImage target = null;
             double distance = 0;
             for (CardImage enemy : enemyList) {
