@@ -161,6 +161,10 @@ public class Game {
         return player2;
     }
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
     public static Game getInstance() {
         return instance;
     }

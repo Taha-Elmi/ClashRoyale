@@ -12,7 +12,7 @@ public class Player {
     private int crown = 0;
     private int elixirs = 4;
 
-    public Player( List<Card> cards) {
+    public Player(List<Card> cards) {
         this.cards = cards;
         initialize();
     }
