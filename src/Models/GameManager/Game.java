@@ -61,11 +61,11 @@ public class Game {
         checkTowers(player2,player1_list);
         for (CardImage cardImage : player1_list) {
             if (cardImage.getCard() instanceof Troop)
-                ((Troop) cardImage.getCard()).step();
+                ((Troop) cardImage.getCard()).step(1);
         }
         for (CardImage cardImage : player2_list) {
             if (cardImage.getCard() instanceof Troop)
-                ((Troop) cardImage.getCard()).step();
+                ((Troop) cardImage.getCard()).step(2);
         }
     }
 

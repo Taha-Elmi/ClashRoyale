@@ -34,10 +34,12 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         super(cost,level,number);
     }
 
-    public Point2D findTarget() {
-        CardImage cardImage = Game.getInstance().cardToCardImage(this);
-        ArrayList<CardImage> enemyList = (Game.getInstance().getPlayer1_list().contains(cardImage) ?
+    public Point2D findTarget(int playerNumber) {
+        ArrayList<CardImage> enemyList = (playerNumber == 1 ?
                 Game.getInstance().getPlayer1_list() : Game.getInstance().getPlayer2_list());
+        CardImage cardImage = Game.getInstance().cardToCardImage(this);
+//        ArrayList<CardImage> enemyList = (Game.getInstance().getPlayer1_list().contains(cardImage) ?
+//                Game.getInstance().getPlayer2_list() : Game.getInstance().getPlayer1_list());
         Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
                 GameCon.getInstance().find(cardImage.getImage()).getY());
         CardImage possibleTarget = null;
@@ -71,8 +73,6 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         }
 
         // checking if there is a bridge ahead or not
-        int playerNumber = (enemyList == Game.getInstance().getPlayer2_list() ? 1 : 2);
-
         if ((playerNumber == 1 && isUnderBridge()) || (playerNumber == 2 && !isUnderBridge()))
             return new Point2D(GameCon.getInstance().getNearerBridge(src).getLayoutX(),
                     GameCon.getInstance().getNearerBridge(src).getLayoutY());
@@ -84,17 +84,19 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     public boolean isUnderBridge() {
         CardImage cardImage = Game.getInstance().cardToCardImage(this);
         ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
-        System.out.println("X: " + imageView.getLayoutX() + "\tY: " + imageView.getLayoutY());
+        System.out.println("is under bridge::: X: " + imageView.getX() + "\tY: " + imageView.getY());
         if (imageView.getY() > GameCon.getInstance().getNearerBridge(new Point2D(imageView.getX(), imageView.getY())).getLayoutY())
             return true;
         return false;
     }
 
-    public void step() {
+    public void step(int playerNumber) {
         ImageView imageView = GameCon.getInstance().find(Game.getInstance().cardToCardImage(this).getImage());
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
-        Point2D dst = findTarget();
+        Point2D dst = findTarget(playerNumber);
         Point2D path = dst.subtract(src).multiply((1 / dst.distance(src)));
+//        System.out.println("src: " + src);
+//        System.out.println("dst: " + dst);
         System.out.println(path.distance(0, 0)); // must print 1
         getTimeline().stop();
         getTimeline().getKeyFrames().clear();
