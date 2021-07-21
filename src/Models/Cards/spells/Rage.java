@@ -20,9 +20,12 @@ import javafx.util.Duration;
 
 import java.sql.Timestamp;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class Rage extends Spell {
     private double duration;
+    private int counter;
+
     public Rage(int level) {
         super(3,level,5);
         setLevel(level);
@@ -71,10 +74,26 @@ public class Rage extends Spell {
                 circle.setStyle(cssLayout);
                 circle.setFill(Color.PURPLE);
                 GameCon.getInstance().getBoardPane().getChildren().add(circle);
-                Timer timer = new Timer();
+                Timer timer = new Timer(); //time to end: getDuration
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        task();
+                        counter++;
+                        if (counter >= duration)
+                            timer.cancel();
+                    }
+                };
+                long frameTimeInMilliseconds = (long)(1000.0);
+                timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+
                 Game.getInstance().checkSpell(spell,dst,playerNum);
             }
         });
+    }
+
+    private void task() {
+
     }
 
     @Override
