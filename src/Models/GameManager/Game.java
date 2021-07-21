@@ -118,6 +118,14 @@ public class Game {
             if (tower.isDead()) {
                 continue;
             }
+
+            //here we handle the hitSpeed
+            if (tower.getCounter() < tower.getHitSpeed()) {
+                tower.counterIncrease();
+                continue;
+            } else
+                tower.setCounter(0);
+
             src = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
             CardImage target = null;
             double distance = 0;

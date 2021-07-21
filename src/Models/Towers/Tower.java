@@ -12,6 +12,7 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     private int damage;
     private double range;
     private double hitSpeed;
+    private double counter;
     private ImageView imageView;
     private ImageView owner;
     private Timeline timeline;
@@ -19,10 +20,13 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     public Tower(int level) {
         setLevel(level);
         timeline = new Timeline();
+        counter = 0;
     }
+
     public void setLevel(int level) {
         this.level = level;
     }
+
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -96,5 +100,21 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
 
     public int getHp() {
         return hp;
+    }
+
+    public double getHitSpeed() {
+        return hitSpeed;
+    }
+
+    public double getCounter() {
+        return counter;
+    }
+
+    public void setCounter(double counter) {
+        this.counter = counter;
+    }
+
+    public void counterIncrease() {
+        counter += 0.1;
     }
 }
