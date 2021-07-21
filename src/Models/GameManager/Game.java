@@ -129,7 +129,7 @@ public class Game {
                     distance = src.distance(dst);
                 }
             }
-            if (target == null || distance > tower.getRange())
+            if (target == null || target.getCard() instanceof Spell || distance > tower.getRange())
                 continue;
             ImageView arrowImageView;
 
