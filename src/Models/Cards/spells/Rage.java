@@ -71,17 +71,7 @@ public class Rage extends Spell {
                 circle.setStyle(cssLayout);
                 circle.setFill(Color.PURPLE);
                 GameCon.getInstance().getBoardPane().getChildren().add(circle);
-                timeline1.getKeyFrames().add(new KeyFrame(
-                        Duration.seconds(getDuration())
-                ));
                 Timer timer = new Timer();
-                timeline1.setOnFinished(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        System.out.println("*");
-                        GameCon.getInstance().getBoardPane().getChildren().remove(circle);
-                    }
-                });
                 Game.getInstance().checkSpell(spell,dst,playerNum);
             }
         });
