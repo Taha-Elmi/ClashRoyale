@@ -339,10 +339,6 @@ public class GameCon implements Controller {
         double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
         double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
 
-//        System.out.println("LEFT: " + leftBridgeDistance);
-//        System.out.println("RIGHT: " + rightBridgeDistance);
-//        System.out.println();
-
         double min = Math.min(leftBridgeDistance, rightBridgeDistance);
 
         if (min == leftBridgeDistance)

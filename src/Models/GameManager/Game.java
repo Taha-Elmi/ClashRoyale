@@ -55,8 +55,6 @@ public class Game {
 
     public void update() {
         manager.action();
-//        checkAllCards(player1_list, player2_list);
-//        checkAllCards(player2_list, player1_list);
         checkTowers(player1,player2_list);
         checkTowers(player2,player1_list);
         for (CardImage cardImage : player1_list) {

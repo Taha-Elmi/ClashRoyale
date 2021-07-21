@@ -85,7 +85,6 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     public boolean isUnderBridge() {
         CardImage cardImage = Game.getInstance().cardToCardImage(this);
         ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
-        //System.out.println("is under bridge::: X: " + imageView.getX() + "\tY: " + imageView.getY());
         if (imageView.getY() > GameCon.getInstance().getNearerBridge(new Point2D(imageView.getX(), imageView.getY())).getLayoutY())
             return true;
         return false;
