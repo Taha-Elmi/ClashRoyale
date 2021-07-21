@@ -57,7 +57,6 @@ public class FireBall extends Spell implements Hitter {
     @Override
     public void hit(Damageable damageable) {
         damageable.gotDamage(areaDamage);
-        System.out.println(damageable);
     }
 
     @Override

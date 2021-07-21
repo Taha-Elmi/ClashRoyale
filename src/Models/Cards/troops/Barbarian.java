@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 
 public class Barbarian extends Troop {
 
+    private final static Speed speed = Speed.MEDIUM;
     public Barbarian(int level) {
         super(5, level,5);
         setSpeed(Speed.MEDIUM);
@@ -34,4 +35,8 @@ public class Barbarian extends Troop {
     }
 
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }

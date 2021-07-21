@@ -40,7 +40,11 @@ abstract public class Card implements Cloneable {
 
     public abstract Image born(int playerNum);
     public void die() {
-        Game.getInstance().dieCard(Game.getInstance().cardToCardImage(this));
+        try {
+            Game.getInstance().dieCard(Game.getInstance().cardToCardImage(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     protected abstract boolean isDead();
     public abstract void setLevel(int level);

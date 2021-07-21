@@ -9,12 +9,12 @@ import Models.GameManager.Game;
 import Models.GameManager.GameMode;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
-import Models.Towers.Tower;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -132,12 +132,19 @@ public class GameCon implements Controller {
     @FXML
     private ImageView rightKingImageView;
 
+    @FXML
+    private Button backButton;
+
     private static Timer timer;
 
     private static Timer mainLoop;
 
     private LocalTime localTime;
 
+    @FXML
+    public void backToMainMenuButton() {
+        FXManager.openWindow("backToMainMenu.fxml");
+    }
     @FXML
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
@@ -339,6 +346,16 @@ public class GameCon implements Controller {
             double redLeftPrincessTowerDistance = src.distance(new Point2D(redLeftPrincessTower.getX(), redLeftPrincessTower.getY()));
             double redRightPrincessTowerDistance = src.distance(new Point2D(redRightPrincessTower.getX(), redRightPrincessTower.getY()));
 
+            if (!boardPane.getChildren().contains(redKingTower)) {
+                redKingTowerDistance = 999999999;
+            }
+            if (!boardPane.getChildren().contains(redLeftPrincessTower)) {
+                redLeftPrincessTowerDistance = 999999999;
+            }
+            if (!boardPane.getChildren().contains(redRightPrincessTower)) {
+                redRightPrincessTowerDistance = 999999999;
+            }
+
             double min = redKingTowerDistance;
 
             if (min >= redLeftPrincessTowerDistance)
@@ -360,8 +377,16 @@ public class GameCon implements Controller {
             double blueLeftPrincessTowerDistance = src.distance(new Point2D(blueLeftPrincessTower.getX(), blueLeftPrincessTower.getY()));
             double blueRightPrincessTowerDistance = src.distance(new Point2D(blueRightPrincessTower.getX(), blueRightPrincessTower.getY()));
 
+            if (!boardPane.getChildren().contains(blueKingTower)) {
+                blueKingTowerDistance = 999999999;
+            }
+            if (!boardPane.getChildren().contains(blueLeftPrincessTower)) {
+                blueLeftPrincessTowerDistance = 999999999;
+            }
+            if (!boardPane.getChildren().contains(blueRightPrincessTower)) {
+                blueRightPrincessTowerDistance = 999999999;
+            }
             double min = blueKingTowerDistance;
-
             if (min >= blueLeftPrincessTowerDistance)
                 min = blueLeftPrincessTowerDistance;
             if (min >= blueRightPrincessTowerDistance)
@@ -384,15 +409,16 @@ public class GameCon implements Controller {
 
     public ImageView getRandomTower() {
         Random random = new Random();
-        int randInt = random.nextInt(3);
-        if (randInt == 0) {
-            return blueKingTower;
-        } else if (randInt == 1) {
-            return blueLeftPrincessTower;
-        } else if (randInt == 2) {
-            return blueRightPrincessTower;
+        while (true) {
+            int randInt = random.nextInt(3);
+            if (randInt == 0 && boardPane.getChildren().contains(blueKingTower)) {
+                return blueKingTower;
+            } else if (randInt == 1 && boardPane.getChildren().contains(blueLeftPrincessTower)) {
+                return blueLeftPrincessTower;
+            } else if (randInt == 2 && boardPane.getChildren().contains(blueRightPrincessTower)) {
+                return blueRightPrincessTower;
+            }
         }
-        return null;
     }
 
     public ImageView getNearerBridge(Point2D src) {

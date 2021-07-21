@@ -6,6 +6,7 @@ public class KingTower extends Tower {
 
     public KingTower(int level) {
         super(level);
+        setRange(7.5);
     }
 
 

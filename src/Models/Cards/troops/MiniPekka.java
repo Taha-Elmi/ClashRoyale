@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 public class MiniPekka extends Troop {
 
+    private final static Speed speed = Speed.FAST;
     public MiniPekka(int level) {
         super(4, level,1);
         setSpeed(Speed.FAST);
@@ -32,4 +33,8 @@ public class MiniPekka extends Troop {
         }
     }
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }

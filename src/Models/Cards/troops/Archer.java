@@ -5,9 +5,10 @@ import javafx.scene.image.Image;
 
 public class Archer extends Troop {
 
+    private static final Speed speed = Speed.FAST;
     public Archer(int level) {
         super(3, level,3);
-        setSpeed(Speed.FAST);
+        setSpeed(speed);
     }
 
     @Override
@@ -32,4 +33,8 @@ public class Archer extends Troop {
         }
     }
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }

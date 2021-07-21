@@ -1,10 +1,10 @@
 package Models.Cards.troops;
 
 import Main.Config;
-import javafx.scene.image.Image;
 
 public class Valkyrie extends Troop {
 
+    private final static Speed speed = Speed.MEDIUM;
     public Valkyrie(int level) {
         super(4, level,1);
         setSpeed(Speed.MEDIUM);
@@ -32,4 +32,8 @@ public class Valkyrie extends Troop {
         }
     }
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }

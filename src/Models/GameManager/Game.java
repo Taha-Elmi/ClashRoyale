@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Main.Config;
 import Models.Cards.Card;
+import Models.Cards.buildings.Building;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
@@ -57,8 +58,8 @@ public class Game {
 
     public void update() {
         manager.action();
-        checkTowers(player1,player2_list);
-        checkTowers(player2,player1_list);
+        checkTowers(player1,player2_list,1);
+        checkTowers(player2,player1_list,2);
         for (CardImage cardImage : player1_list) {
             if (cardImage.getCard() instanceof Troop)
                 ((Troop) cardImage.getCard()).step();
@@ -99,7 +100,7 @@ public class Game {
         }
     }
 
-    private void checkTowers(Player player,ArrayList<CardImage> enemyList) {
+    private void checkTowers(Player player,ArrayList<CardImage> enemyList,int playerNum) {
         final int TOWERS_NUM = 3;
         Tower tower;
         Point2D src;
@@ -113,6 +114,9 @@ public class Game {
                 tower = player.getPrincessTowers().get(1);
             } else {
                 tower = null;
+            }
+            if (tower.isDead()) {
+                continue;
             }
             src = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
             CardImage target = null;
@@ -128,10 +132,16 @@ public class Game {
                     distance = src.distance(dst);
                 }
             }
-            if (target == null || distance > tower.getRange())
+            if (target == null || target.getCard() instanceof Spell || distance > tower.getRange() * 25)
                 continue;
-            ImageView arrowImageView = new ImageView(FXManager.getImage("/Game/arrow.jpg"));
-            arrowImageView.setX(tower.getImageView().getX());
+            ImageView arrowImageView;
+
+            if (playerNum == 1) {
+                arrowImageView = new ImageView(FXManager.getImage("/Game/forward_arrow.jpg"));
+            } else {
+                arrowImageView = new ImageView(FXManager.getImage("/Game/backward_arrow.jpg"));
+            }
+            arrowImageView.setX(tower.getImageView().getX() + 35);
             arrowImageView.setY(tower.getImageView().getY());
             arrowImageView.setFitWidth(5);
             arrowImageView.setFitHeight(20);
@@ -143,15 +153,18 @@ public class Game {
                     new KeyValue(arrowImageView.xProperty(),targetImageView.getX()),
                     new KeyValue(arrowImageView.yProperty(),targetImageView.getY())
             ));
+            Tower finalTower = tower;
+            CardImage finalTarget = target;
             timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     GameCon.getInstance().getBoardPane().getChildren().remove(arrowImageView);
+                    Damageable damageable = (Damageable) finalTarget.getCard();
+                    System.out.println(damageable);
+                    finalTower.hit(damageable);
                 }
             });
             timeline.play();
-            Damageable damageable = (Damageable) target.getCard();
-            tower.hit(damageable);
         }
     }
 
@@ -227,7 +240,7 @@ public class Game {
 //                timeline.play();
             }
         } else if (card instanceof Spell) {
-            ImageView imageView = new ImageView(card.born(1));
+            ImageView imageView = new ImageView(card.born(playerNumber));
             CardImage cardImage = null;
             try {
                 cardImage = new CardImage((Card) card.clone(),imageView.getImage());
@@ -303,7 +316,8 @@ public class Game {
             spell.act(towersTarget[i]);
         }
     }
-    public void dieCard(CardImage cardImage) {
+
+    public void dieCard(CardImage cardImage) throws Exception {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
         player1_list.remove(cardImage);
         player2_list.remove(cardImage);

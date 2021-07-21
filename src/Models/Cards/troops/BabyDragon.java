@@ -4,6 +4,7 @@ import Main.Config;
 import javafx.scene.image.Image;
 
 public class BabyDragon extends Troop {
+    private final static Speed speed = Speed.MEDIUM;
     public BabyDragon(int level) {
         super(4, level,1);
         setSpeed(Speed.FAST);
@@ -31,4 +32,8 @@ public class BabyDragon extends Troop {
         }
     }
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }
