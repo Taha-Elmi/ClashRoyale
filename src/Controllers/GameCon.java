@@ -207,7 +207,7 @@ public class GameCon implements Controller {
 
     private void startTimer() {
         timer = new Timer();
-        localTime = LocalTime.of(0, 0, 20);
+        localTime = LocalTime.of(0, 3, 0);
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable() {
@@ -229,7 +229,6 @@ public class GameCon implements Controller {
         if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
             Game.getInstance().finish();
             System.out.println("FINISHED!");
-            timer.cancel();
         }
     }
 
@@ -495,6 +494,42 @@ public class GameCon implements Controller {
                 return (ImageView) node;
         }
         return null;
+    }
+
+    public Label getTimerLabel() {
+        return timerLabel;
+    }
+
+    public Label getOpponentName() {
+        return opponentName;
+    }
+
+    public Label getOpponentCrowns() {
+        return opponentCrowns;
+    }
+
+    public Label getOpponentHp() {
+        return opponentHp;
+    }
+
+    public Label getOpponentLevel() {
+        return opponentLevel;
+    }
+
+    public Label getName() {
+        return name;
+    }
+
+    public Label getCrowns() {
+        return crowns;
+    }
+
+    public Label getHp() {
+        return hp;
+    }
+
+    public Label getLevel() {
+        return level;
     }
 
     public static GameCon getInstance() {
