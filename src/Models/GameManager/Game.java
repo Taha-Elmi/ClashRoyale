@@ -318,7 +318,9 @@ public class Game {
 
     public void dieTower(Tower tower) {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
+        GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getOwnerImageView().getImage()));
     }
+
     public CardImage cardToCardImage(Card card) {
         for (CardImage cardImage: player1_list) {
             if (cardImage.getCard().equals(card)) {

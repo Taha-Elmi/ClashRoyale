@@ -170,11 +170,17 @@ public class GameCon implements Controller {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
         Game.getInstance().getPlayer1().getKingTower().setImageView(blueKingTower);
+        Game.getInstance().getPlayer1().getKingTower().setOwnerImageView(blueKingImageView);
         Game.getInstance().getPlayer1().getPrincessTowers().get(0).setImageView(blueLeftPrincessTower);
+        Game.getInstance().getPlayer1().getPrincessTowers().get(0).setOwnerImageView(leftBluePrincessImageView);
         Game.getInstance().getPlayer1().getPrincessTowers().get(1).setImageView(blueRightPrincessTower);
+        Game.getInstance().getPlayer1().getPrincessTowers().get(1).setOwnerImageView(rightBluePrincessImageView);
         Game.getInstance().getPlayer2().getKingTower().setImageView(redKingTower);
+        Game.getInstance().getPlayer2().getKingTower().setOwnerImageView(redKingImageView);
         Game.getInstance().getPlayer2().getPrincessTowers().get(0).setImageView(redLeftPrincessTower);
+        Game.getInstance().getPlayer2().getPrincessTowers().get(0).setOwnerImageView(leftRedPrincessImageView);
         Game.getInstance().getPlayer2().getPrincessTowers().get(1).setImageView(redRightPrincessTower);
+        Game.getInstance().getPlayer2().getPrincessTowers().get(1).setOwnerImageView(rightRedPrincessImageView);
         startTimer();
         startMainLoop();
         instance = this;
