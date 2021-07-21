@@ -431,6 +431,12 @@ public class GameCon implements Controller {
         return false;
     }
 
+    public void setCrowns(int n, int playerNumber) {
+        switch (playerNumber) {
+            case 1 -> crowns.setText(" " + n);
+            case 2 -> opponentCrowns.setText(" " + n);
+        }
+    }
 
     public ImageView getRedKingTower() {
         return redKingTower;

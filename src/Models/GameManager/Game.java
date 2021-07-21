@@ -13,6 +13,7 @@ import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
+import Models.Towers.PrincessTower;
 import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -310,6 +311,27 @@ public class Game {
     public void dieTower(Tower tower) {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getOwnerImageView().getImage()));
+        checkCrowns();
+    }
+
+    private void checkCrowns() {
+        int counter = 0;
+        if (player1.getKingTower().isDead())
+            counter++;
+        for (PrincessTower princessTower : player1.getPrincessTowers()) {
+            if (princessTower.isDead())
+                counter++;
+        }
+        GameCon.getInstance().setCrowns(counter, 2);
+
+        counter = 0;
+        if (player2.getKingTower().isDead())
+            counter++;
+        for (PrincessTower princessTower : player2.getPrincessTowers()) {
+            if (princessTower.isDead())
+                counter++;
+        }
+        GameCon.getInstance().setCrowns(counter, 1);
     }
 
     public CardImage cardToCardImage(Card card) {
