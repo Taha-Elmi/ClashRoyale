@@ -5,7 +5,7 @@ public class PrincessTower extends Tower {
 
     public PrincessTower(int level) {
         super(level);
-        setRange(7 * 25);
+        setRange(7);
     }
 
     @Override
