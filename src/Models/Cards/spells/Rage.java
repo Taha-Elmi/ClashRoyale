@@ -67,6 +67,8 @@ public class Rage extends Spell {
                 Circle circle = new Circle(getRadius() * 25);
                 circle.setCenterX(dst.getX());
                 circle.setCenterY(dst.getY());
+                String cssLayout = "-fx-opacity: 0.3";
+                circle.setStyle(cssLayout);
                 circle.setFill(Color.PURPLE);
                 GameCon.getInstance().getBoardPane().getChildren().add(circle);
                 timeline1.getKeyFrames().add(new KeyFrame(

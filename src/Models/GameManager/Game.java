@@ -112,6 +112,9 @@ public class Game {
             } else {
                 tower = null;
             }
+            if (tower.isDead()) {
+                continue;
+            }
             src = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
             CardImage target = null;
             double distance = 0;

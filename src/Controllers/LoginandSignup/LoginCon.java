@@ -52,6 +52,7 @@ public class LoginCon extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Config.playMusic("assets/musics/MainTheme.mp3");
         FXManager.goTo("MainMenu.fxml", (Stage) loginButton.getScene().getWindow());
     }
 

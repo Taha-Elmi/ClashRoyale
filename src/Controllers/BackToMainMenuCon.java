@@ -25,6 +25,7 @@ public class BackToMainMenuCon implements Controller {
             Config.mediaPlayer.stop();
             ((Stage) yesButton.getScene().getWindow()).close();
             FXManager.setStageNormal(Config.primaryStage);
+            Config.playMusic("assets/musics/MainTheme.mp3");
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
         } else if (ae.getSource() == noButton) {
             ((Stage) yesButton.getScene().getWindow()).close();

@@ -44,7 +44,6 @@ public class MainMenuCon implements Controller {
     }
 
     public void initialize() {
-        Config.playMusic("assets/musics/MainTheme.mp3");
         Image image = new Image(getClass().getResourceAsStream("/Views/Assets/Pictures/BackGrounds/MainMenu.jpg"));
         FXManager.setBackground(image,mainBorder);
     }
