@@ -135,7 +135,7 @@ public class Game {
             } else {
                 arrowImageView = new ImageView(FXManager.getImage("/Game/backward_arrow.jpg"));
             }
-            arrowImageView.setX(tower.getImageView().getX() + 50);
+            arrowImageView.setX(tower.getImageView().getX() + 35);
             arrowImageView.setY(tower.getImageView().getY());
             arrowImageView.setFitWidth(5);
             arrowImageView.setFitHeight(20);
@@ -143,20 +143,22 @@ public class Game {
             ImageView targetImageView = GameCon.getInstance().find(target.getImage());
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().add(new KeyFrame(
-                    Duration.seconds(5),
+                    Duration.seconds(1),
                     new KeyValue(arrowImageView.xProperty(),targetImageView.getX()),
                     new KeyValue(arrowImageView.yProperty(),targetImageView.getY())
             ));
+            Tower finalTower = tower;
+            CardImage finalTarget = target;
             timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     GameCon.getInstance().getBoardPane().getChildren().remove(arrowImageView);
+                    Damageable damageable = (Damageable) finalTarget.getCard();
+                    System.out.println(damageable);
+                    finalTower.hit(damageable);
                 }
             });
             timeline.play();
-            Damageable damageable = (Damageable) target.getCard();
-            System.out.println(damageable);
-            tower.hit(damageable);
         }
     }
 
