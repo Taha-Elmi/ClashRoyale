@@ -273,9 +273,9 @@ public class GameCon implements Controller {
                 Point2D src = new Point2D(de.getX(), de.getY());
                 ImageView nearerTower = getNearerTowerImageView(src, 1);
                 Game.getInstance().bornCard(chosenCard, src
-                        , new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY()), boardPane, 1);
+                        , new Point2D(nearerTower.getX(), nearerTower.getY()), boardPane, 1);
             } else if (chosenCard instanceof Spell) {
-                Point2D src = new Point2D(blueKingTower.getLayoutX(),blueKingTower.getLayoutY());
+                Point2D src = new Point2D(blueKingTower.getX(),blueKingTower.getY());
                 Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
             }
         }catch (Exception e) {
@@ -288,9 +288,9 @@ public class GameCon implements Controller {
 
     public ImageView getNearerTowerImageView(Point2D src,int player) {
         if (player == 1) {
-            double redKingTowerDistance = src.distance(new Point2D(redKingTower.getLayoutX(), redKingTower.getLayoutY()));
-            double redLeftPrincessTowerDistance = src.distance(new Point2D(redLeftPrincessTower.getLayoutX(), redLeftPrincessTower.getLayoutY()));
-            double redRightPrincessTowerDistance = src.distance(new Point2D(redRightPrincessTower.getLayoutX(), redRightPrincessTower.getLayoutY()));
+            double redKingTowerDistance = src.distance(new Point2D(redKingTower.getX(), redKingTower.getY()));
+            double redLeftPrincessTowerDistance = src.distance(new Point2D(redLeftPrincessTower.getX(), redLeftPrincessTower.getY()));
+            double redRightPrincessTowerDistance = src.distance(new Point2D(redRightPrincessTower.getX(), redRightPrincessTower.getY()));
 
             double min = redKingTowerDistance;
 
@@ -309,9 +309,9 @@ public class GameCon implements Controller {
                 return null;
             }
         } else if (player == 2) {
-            double blueKingTowerDistance = src.distance(new Point2D(blueKingTower.getLayoutX(), blueKingTower.getLayoutY()));
-            double blueLeftPrincessTowerDistance = src.distance(new Point2D(blueLeftPrincessTower.getLayoutX(), blueLeftPrincessTower.getLayoutY()));
-            double blueRightPrincessTowerDistance = src.distance(new Point2D(blueRightPrincessTower.getLayoutX(), blueRightPrincessTower.getLayoutY()));
+            double blueKingTowerDistance = src.distance(new Point2D(blueKingTower.getX(), blueKingTower.getY()));
+            double blueLeftPrincessTowerDistance = src.distance(new Point2D(blueLeftPrincessTower.getX(), blueLeftPrincessTower.getY()));
+            double blueRightPrincessTowerDistance = src.distance(new Point2D(blueRightPrincessTower.getX(), blueRightPrincessTower.getY()));
 
             double min = blueKingTowerDistance;
 

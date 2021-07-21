@@ -1,6 +1,8 @@
 package Models.Towers;
 
+import Controllers.GameCon;
 import Models.Cards.Card;
+import Models.GameManager.Game;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
 import javafx.animation.Timeline;
@@ -20,7 +22,9 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
         setLevel(level);
         timeline = new Timeline();
     }
-    public abstract void setLevel(int level);
+    public void setLevel(int level) {
+        this.level = level;
+    }
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -38,7 +42,7 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     }
 
     public void die() {
-
+        Game.getInstance().dieTower(this);
     }
 
     public boolean isDead() {
@@ -52,11 +56,8 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     }
 
     @Override
-    public void hit(Card card) {
-        if (card instanceof Damageable) {
-            Damageable damageable = (Damageable) card;
-            damageable.gotDamage(damage);
-        }
+    public void hit(Damageable damageable) {
+        damageable.gotDamage(damage);
     }
 
     public void setImageView(ImageView imageView) {
@@ -73,6 +74,10 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
 
     public double getRange() {
         return range;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public Timeline getTimeline() {

@@ -40,11 +40,8 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     @Override
-    public void hit(Card card) {
-        if (card instanceof Damageable) {
-            Damageable damageable = (Damageable) card;
-            damageable.gotDamage(damage);
-        }
+    public void hit(Damageable damageable) {
+        damageable.gotDamage(damage);
     }
 
     public void readyForMove(ImageView imageView, Point2D dst,Timeline timeline) {

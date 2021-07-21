@@ -11,6 +11,7 @@ public class KingTower extends Tower {
 
     @Override
     public void setLevel(int level) {
+        super.setLevel(level);
         if (level == 1) {
             setDamage(50);
             setHp(2400);

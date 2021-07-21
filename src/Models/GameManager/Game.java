@@ -7,31 +7,23 @@ import java.util.ArrayList;
 
 import Main.Config;
 import Models.Cards.Card;
-import Models.Cards.CardImage;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
 import Models.Graphic.FXManager;
+import Models.Interfaces.Damageable;
 import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
 
-import Models.Cards.CardImage;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
-import java.util.Timer;
 
 public class Game {
     private static Game instance;
@@ -115,7 +107,7 @@ public class Game {
             } else {
                 tower = null;
             }
-            src = new Point2D(tower.getImageView().getLayoutX(),tower.getImageView().getLayoutY());
+            src = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
             CardImage target = null;
             double distance = 0;
             for (CardImage enemy : enemyList) {
@@ -132,15 +124,15 @@ public class Game {
             if (target == null || distance > tower.getRange())
                 continue;
             ImageView arrowImageView = new ImageView(FXManager.getImage("/Game/arrow.jpg"));
-            arrowImageView.setX(tower.getImageView().getLayoutX());
-            arrowImageView.setY(tower.getImageView().getLayoutY());
+            arrowImageView.setX(tower.getImageView().getX());
+            arrowImageView.setY(tower.getImageView().getY());
             arrowImageView.setFitWidth(5);
             arrowImageView.setFitHeight(20);
             GameCon.getInstance().getBoardPane().getChildren().add(arrowImageView);
             ImageView targetImageView = GameCon.getInstance().find(target.getImage());
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().add(new KeyFrame(
-                    Duration.seconds(0.5),
+                    Duration.seconds(1),
                     new KeyValue(arrowImageView.xProperty(),targetImageView.getX()),
                     new KeyValue(arrowImageView.yProperty(),targetImageView.getY())
             ));
@@ -151,7 +143,8 @@ public class Game {
                 }
             });
             timeline.play();
-            tower.hit(target.getCard());
+            Damageable damageable = (Damageable) target.getCard();
+            tower.hit(damageable);
         }
     }
 
@@ -242,17 +235,72 @@ public class Game {
                 default -> throw new IllegalArgumentException();
             }
             Spell spell = (Spell) cardImage.getCard();
-            spell.readyForThrow(imageView,dst,timeline);
+            spell.readyForThrow(imageView,dst,timeline,playerNumber);
             timeline.play();
         }
     }
 
+    public void checkSpell(Spell spell,Point2D src,int playerNum) {
+        ArrayList<CardImage> enemyList = null;
+        ArrayList<Tower> enemyTowers = new ArrayList<>();
+        if (playerNum == 1) {
+            enemyList = player2_list;
+            enemyTowers.add(player2.getKingTower());
+            enemyTowers.add(player2.getPrincessTowers().get(0));
+            enemyTowers.add(player2.getPrincessTowers().get(1));
+        }
+        else if (playerNum == 2) {
+            enemyList = player1_list;
+            enemyTowers.add(player1.getKingTower());
+            enemyTowers.add(player1.getPrincessTowers().get(0));
+            enemyTowers.add(player1.getPrincessTowers().get(1));
+        }
+
+        Point2D dst;
+        CardImage[] targets = new CardImage[enemyList.size()];
+        int index = 0;
+        double distance = 0;
+        for (CardImage enemy : enemyList) {
+            dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
+                    GameCon.getInstance().find(enemy.getImage()).getY());
+            distance = src.distance(dst);
+
+            if (distance > spell.getRadius() * 25) {
+                continue;
+            }
+            targets[index] = enemy;
+            index++;
+        }
+        index--;
+        for (int i = 0; i < index; i++) {
+            Damageable damageable = (Damageable) targets[i].getCard();
+            spell.act(damageable);
+        }
+        index = 0;
+        Tower[] towersTarget = new Tower[3];
+        for (Tower tower: enemyTowers) {
+            dst = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
+            distance = src.distance(dst);
+            if (distance > spell.getRadius() * 25) {
+                continue;
+            }
+            towersTarget[index] = tower;
+            index++;
+        }
+        index--;
+        for (int i = 0; i <= index; i++) {
+            spell.act(towersTarget[i]);
+        }
+    }
     public void dieCard(CardImage cardImage) {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
         player1_list.remove(cardImage);
         player2_list.remove(cardImage);
     }
 
+    public void dieTower(Tower tower) {
+        GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
+    }
     public CardImage cardToCardImage(Card card) {
         for (CardImage cardImage: player1_list) {
             if (cardImage.getCard().equals(card)) {
