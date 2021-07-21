@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +16,23 @@
 
 <HBox fx:id="mainBorder" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameCon">
     <children>
-        <ImageView fx:id="leftKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Button disable="true" mnemonicParsing="false" text="Button" visible="false">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+              <ImageView fx:id="leftKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets top="120.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+         <HBox.margin>
+            <Insets left="10.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
         <VBox alignment="CENTER" prefHeight="700.0" prefWidth="167.0">
             <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -2967,6 +2984,36 @@
                                 <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
                             </image>
                         </ImageView>
+                  <ImageView fx:id="redKingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="163.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redKing.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="blueKingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="163.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/blueKing.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftRedPrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="23.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="rightRedPrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="303.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftBluePrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="23.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="rightBluePrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="303.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincess.png" />
+                     </image>
+                  </ImageView>
                     </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -3014,6 +3061,18 @@
                 <Insets top="60.0" />
             </padding>
         </VBox>
-        <ImageView fx:id="rightKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" />
+      <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" text="Button" />
+              <ImageView fx:id="rightKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets top="120.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets right="10.0" top="10.0" />
+         </padding>
+      </VBox>
     </children>
 </HBox>

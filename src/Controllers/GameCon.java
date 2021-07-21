@@ -74,6 +74,24 @@ public class GameCon implements Controller {
     private ImageView blueRightPrincessTower;
 
     @FXML
+    private ImageView redKingImageView;
+
+    @FXML
+    private ImageView blueKingImageView;
+
+    @FXML
+    private ImageView leftRedPrincessImageView;
+
+    @FXML
+    private ImageView rightRedPrincessImageView;
+
+    @FXML
+    private ImageView leftBluePrincessImageView;
+
+    @FXML
+    private ImageView rightBluePrincessImageView;
+
+    @FXML
     private Label opponentLevel;
 
     @FXML
