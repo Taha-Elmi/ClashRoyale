@@ -126,13 +126,8 @@ public class Game {
                     distance = src.distance(dst);
                 }
             }
-            System.out.println("fuck you");
-            System.out.println(target == null);
-            System.out.println(distance);
-            System.out.println(tower.getRange());
             if (target == null || distance > tower.getRange())
                 continue;
-            System.out.println("im here");
             ImageView arrowImageView;
 
             if (playerNum == 1) {
@@ -233,7 +228,7 @@ public class Game {
 //                timeline.play();
             }
         } else if (card instanceof Spell) {
-            ImageView imageView = new ImageView(card.born(1));
+            ImageView imageView = new ImageView(card.born(playerNumber));
             CardImage cardImage = null;
             try {
                 cardImage = new CardImage((Card) card.clone(),imageView.getImage());
