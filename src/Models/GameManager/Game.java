@@ -51,7 +51,8 @@ public class Game {
     public void finish() {
         GameCon.getTimer().cancel();
         GameCon.getMainLoop().cancel();
-        // display scoreboard...
+
+        FXManager.openWindow("scoreboard");
     }
 
     public void update() {
@@ -323,6 +324,7 @@ public class Game {
                 counter++;
         }
         GameCon.getInstance().setCrowns(counter, 2);
+        player2.setCrown(counter);
 
         counter = 0;
         if (player2.getKingTower().isDead())
@@ -332,6 +334,7 @@ public class Game {
                 counter++;
         }
         GameCon.getInstance().setCrowns(counter, 1);
+        player1.setCrown(counter);
     }
 
     public void updateHps() {
@@ -340,12 +343,14 @@ public class Game {
         sum += player1.getPrincessTowers().get(0).getHp();
         sum += player1.getPrincessTowers().get(1).getHp();
         GameCon.getInstance().setHp(sum, 1);
+        player1.setHp(sum);
 
         sum = 0;
         sum += player2.getKingTower().getHp();
         sum += player2.getPrincessTowers().get(0).getHp();
         sum += player2.getPrincessTowers().get(1).getHp();
         GameCon.getInstance().setHp(sum, 2);
+        player2.setHp(sum);
     }
 
     public CardImage cardToCardImage(Card card) {

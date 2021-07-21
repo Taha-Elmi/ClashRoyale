@@ -11,6 +11,7 @@ public class Player {
     private List<Card> cards;
     private int crown = 0;
     private int elixirs = 4;
+    private int hp;
 
     public Player(List<Card> cards) {
         this.cards = cards;
@@ -38,6 +39,7 @@ public class Player {
     public int getElixirs() {
         return elixirs;
     }
+
     public List<Card> getCards() {
         return cards;
     }
@@ -48,5 +50,21 @@ public class Player {
 
     public List<PrincessTower> getPrincessTowers() {
         return princessTowers;
+    }
+
+    public int getCrown() {
+        return crown;
+    }
+
+    public void setCrown(int crown) {
+        this.crown = crown;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }
