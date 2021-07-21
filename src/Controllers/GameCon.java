@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -106,12 +107,19 @@ public class GameCon implements Controller {
     @FXML
     private ImageView rightKingImageView;
 
+    @FXML
+    private Button backButton;
+
     private static Timer timer;
 
     private static Timer mainLoop;
 
     private LocalTime localTime;
 
+    @FXML
+    public void backToMainMenuButton() {
+        FXManager.openWindow("backToMainMenu.fxml");
+    }
     @FXML
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
