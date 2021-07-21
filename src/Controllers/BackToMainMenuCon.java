@@ -22,6 +22,7 @@ public class BackToMainMenuCon implements Controller {
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == yesButton) {
+            Config.mediaPlayer.stop();
             ((Stage) yesButton.getScene().getWindow()).close();
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
         } else if (ae.getSource() == noButton) {

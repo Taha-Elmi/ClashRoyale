@@ -3063,7 +3063,7 @@
         </VBox>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Button alignment="TOP_RIGHT" mnemonicParsing="false" text="Button" />
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" text="BACK TO MAIN MENU" fx:id="backButton" onAction="#backToMainMenuButton" />
               <ImageView fx:id="rightKingImageView" fitHeight="416.0" fitWidth="257.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets top="120.0" />

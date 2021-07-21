@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="222.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.SinglePlayerCon">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="222.0" xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Controllers.BackToMainMenuCon">
     <children>
         <Label alignment="CENTER" prefHeight="30.0" prefWidth="139.0" text="Are you sure?">
             <font>
@@ -19,8 +21,8 @@
         </Label>
       <HBox alignment="CENTER" prefHeight="45.0" prefWidth="222.0" spacing="10.0">
          <children>
-            <Button fx:id="yesButton" mnemonicParsing="false" text="Yes" />
-            <Button fx:id="noButton" mnemonicParsing="false" text="No" />
+            <Button fx:id="yesButton" onAction="#actionHandler" mnemonicParsing="false" text="Yes" />
+            <Button fx:id="noButton" onAction="#actionHandler" mnemonicParsing="false" text="No" />
          </children>
       </HBox>
     </children>
