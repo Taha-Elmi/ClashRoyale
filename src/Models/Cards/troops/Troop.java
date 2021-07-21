@@ -29,7 +29,6 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     private int count;
     private Damageable target;
     private boolean isDamaging;
-
     public Troop(int cost,int level,int number) {
         super(cost,level,number);
     }
@@ -147,7 +146,6 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     public void setSpeed(Speed speed) {
         this.speed = speed;
     }
-
     private double speedToSecond(double speed, double length) {
         //System.out.println(length / speed);
         return length / speed;
@@ -158,6 +156,9 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             case SLOW -> 0.5 * 25;
             case MEDIUM -> 1 * 25;
             case FAST -> 2 * 25;
+            case RAGE_SLOW -> 0.5 * 1.4 * 25;
+            case RAGE_MEDIUM -> 1 * 25 * 1.4;
+            case RAGE_FAST -> 2 * 25 * 1.4;
         };
     }
 
@@ -189,5 +190,10 @@ abstract public class Troop extends Card implements Hitter, Damageable {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+    public abstract void setSpeedToDefault();
+
+    public Speed getSpeed() {
+        return speed;
     }
 }

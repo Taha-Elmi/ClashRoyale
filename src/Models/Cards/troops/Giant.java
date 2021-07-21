@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 public class Giant extends Troop {
 
+    private final static Speed speed = Speed.SLOW;
     public Giant(int level) {
         super(5, level,1);
         setSpeed(Speed.SLOW);
@@ -29,4 +30,8 @@ public class Giant extends Troop {
         }
     }
 
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
+    }
 }

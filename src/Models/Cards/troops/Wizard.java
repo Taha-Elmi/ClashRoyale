@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 
 public class Wizard extends Troop {
 
+    private final static Speed speed = Speed.MEDIUM;
     public Wizard(int level) {
         super(5, level,1);
         setSpeed(Speed.MEDIUM);
@@ -30,5 +31,10 @@ public class Wizard extends Troop {
         } else {
             Config.unknownInputException();
         }
+    }
+
+    @Override
+    public void setSpeedToDefault() {
+        setSpeed(speed);
     }
 }

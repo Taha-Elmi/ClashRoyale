@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Main.Config;
 import Models.Cards.Card;
+import Models.Cards.buildings.Building;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
@@ -314,7 +315,8 @@ public class Game {
             spell.act(towersTarget[i]);
         }
     }
-    public void dieCard(CardImage cardImage) {
+
+    public void dieCard(CardImage cardImage) throws Exception {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
         player1_list.remove(cardImage);
         player2_list.remove(cardImage);
