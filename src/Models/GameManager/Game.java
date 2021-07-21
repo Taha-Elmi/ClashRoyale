@@ -55,8 +55,8 @@ public class Game {
 
     public void update() {
         manager.action();
-        checkTowers(player1,player2_list);
-        checkTowers(player2,player1_list);
+        checkTowers(player1,player2_list,1);
+        checkTowers(player2,player1_list,2);
         for (CardImage cardImage : player1_list) {
             if (cardImage.getCard() instanceof Troop)
                 ((Troop) cardImage.getCard()).step();
@@ -97,7 +97,7 @@ public class Game {
         }
     }
 
-    private void checkTowers(Player player,ArrayList<CardImage> enemyList) {
+    private void checkTowers(Player player,ArrayList<CardImage> enemyList,int playerNum) {
         final int TOWERS_NUM = 3;
         Tower tower;
         Point2D src;
@@ -126,10 +126,21 @@ public class Game {
                     distance = src.distance(dst);
                 }
             }
+            System.out.println("fuck you");
+            System.out.println(target == null);
+            System.out.println(distance);
+            System.out.println(tower.getRange());
             if (target == null || distance > tower.getRange())
                 continue;
-            ImageView arrowImageView = new ImageView(FXManager.getImage("/Game/arrow.jpg"));
-            arrowImageView.setX(tower.getImageView().getX());
+            System.out.println("im here");
+            ImageView arrowImageView;
+
+            if (playerNum == 1) {
+                arrowImageView = new ImageView(FXManager.getImage("/Game/forward_arrow.jpg"));
+            } else {
+                arrowImageView = new ImageView(FXManager.getImage("/Game/backward_arrow.jpg"));
+            }
+            arrowImageView.setX(tower.getImageView().getX() + 50);
             arrowImageView.setY(tower.getImageView().getY());
             arrowImageView.setFitWidth(5);
             arrowImageView.setFitHeight(20);
@@ -137,7 +148,7 @@ public class Game {
             ImageView targetImageView = GameCon.getInstance().find(target.getImage());
             Timeline timeline = new Timeline();
             timeline.getKeyFrames().add(new KeyFrame(
-                    Duration.seconds(1),
+                    Duration.seconds(5),
                     new KeyValue(arrowImageView.xProperty(),targetImageView.getX()),
                     new KeyValue(arrowImageView.yProperty(),targetImageView.getY())
             ));
@@ -149,6 +160,7 @@ public class Game {
             });
             timeline.play();
             Damageable damageable = (Damageable) target.getCard();
+            System.out.println(damageable);
             tower.hit(damageable);
         }
     }

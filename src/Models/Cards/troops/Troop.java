@@ -95,7 +95,6 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
         Point2D dst = findTarget();
         Point2D path = dst.subtract(src).multiply((speedToLength(speed) / dst.distance(src)));
-        System.out.println(path.distance(0, 0)); // must print 1
         getTimeline().stop();
         getTimeline().getKeyFrames().clear();
         setTimeline(new Timeline());
