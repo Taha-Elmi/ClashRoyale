@@ -2967,6 +2967,36 @@
                                 <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
                             </image>
                         </ImageView>
+                  <ImageView fx:id="redKingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="163.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redKing.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="blueKingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="163.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/blueKing.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftRedPrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="23.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="rightRedPrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="303.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/redPrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftBluePrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="23.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincess.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="rightBluePrincessImageView" fitHeight="80.0" fitWidth="89.0" layoutX="303.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/Pictures/Game/bluePrincess.png" />
+                     </image>
+                  </ImageView>
                     </children>
                <VBox.margin>
                   <Insets top="10.0" />
