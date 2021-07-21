@@ -9,11 +9,6 @@ public class BabyDragon extends Troop {
     }
 
     @Override
-    public void die() {
-
-    }
-
-    @Override
     public void setLevel(int level) {
 
     }

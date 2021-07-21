@@ -46,7 +46,7 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
     }
 
     @Override
-    public void getDamage(int damage) {
+    public void gotDamage(int damage) {
         hp -= damage;
         if (isDead())
             die();

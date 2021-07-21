@@ -1,6 +1,8 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import Models.Cards.Card;
+import Models.Interfaces.Damageable;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -49,7 +51,7 @@ public class Arrows extends Spell {
     }
 
     @Override
-    public void run() {
+    public void act(Damageable damageable) {
 
     }
 }

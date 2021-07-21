@@ -113,18 +113,15 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     @Override
-    public void getDamage(int damage) {
+    public void gotDamage(int damage) {
         hp -= damage;
         if (isDead())
             die();
     }
 
     @Override
-    public void hit(Card card) {
-        if (card instanceof Damageable) {
-            Damageable damageable = (Damageable) card;
-            damageable.getDamage(damage);
-        }
+    public void hit(Damageable damageable) {
+        damageable.gotDamage(damage);
     }
 
     public void readyForMove(ImageView imageView, Point2D dst,Timeline timeline) {
@@ -180,5 +177,17 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             Config.unknownInputException();
         }
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

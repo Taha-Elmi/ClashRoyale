@@ -2885,32 +2885,32 @@
                                 </ImageView>
                             </children>
                         </GridPane>
-                        <ImageView fx:id="redKingTower" fitHeight="103.0" fitWidth="112.0" layoutX="179.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="redKingTower" fitHeight="103.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true" x="179.0" y="15.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/redKingTower.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="redLeftPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="56.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="redLeftPrincessTower" fitHeight="72.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" x="56.0" y="100.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/redPrincessTower.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="redRightPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="330.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="redRightPrincessTower" fitHeight="72.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" x="330.0" y="100.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/redPrincessTower.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="blueKingTower" fitHeight="110.0" fitWidth="100.0" layoutX="178.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="blueKingTower" fitHeight="110.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" x="178.0" y="550.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/blueKingTower.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="blueLeftPrincessTower" fitHeight="66.0" fitWidth="67.0" layoutX="55.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="blueLeftPrincessTower" fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" x="55.0" y="500.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="blueRightPrincessTower" fitHeight="72.0" fitWidth="67.0" layoutX="329.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="blueRightPrincessTower" fitHeight="72.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" x="329.0" y="500.0">
                             <image>
                                 <Image url="@../Assets/Pictures/Game/bluePrincessTower.png" />
                             </image>

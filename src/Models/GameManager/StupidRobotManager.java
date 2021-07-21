@@ -50,10 +50,10 @@ public class StupidRobotManager implements Manager,Runnable {
         if (card instanceof Troop) {
             src = getRandomPoint2D();
         } else if (card instanceof Spell) {
-            src = new Point2D(GameCon.getInstance().getRedKingTower().getLayoutX(),GameCon.getInstance().getRedKingTower().getLayoutY());
+            src = new Point2D(GameCon.getInstance().getRedKingTower().getX(),GameCon.getInstance().getRedKingTower().getY());
         }
         ImageView nearerTower = GameCon.getInstance().getNearerTowerImageView(src,2);
-        Point2D dst = new Point2D(nearerTower.getLayoutX(), nearerTower.getLayoutY());
+        Point2D dst = new Point2D(nearerTower.getX(), nearerTower.getY());
         Game.getInstance().bornCard(card, src, dst, GameCon.getInstance().getBoardPane(), 2);
         Game.getInstance().playCardPlayer2(card);
     }

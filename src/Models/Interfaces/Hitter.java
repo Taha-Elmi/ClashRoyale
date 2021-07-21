@@ -11,5 +11,5 @@ public interface Hitter {
      *
      * @param card the card
      */
-    void hit(Card card);
+    void hit(Damageable damageable);
 }

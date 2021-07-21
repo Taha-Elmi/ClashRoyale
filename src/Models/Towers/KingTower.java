@@ -4,14 +4,14 @@ import Models.Cards.Card;
 
 public class KingTower extends Tower {
 
-    public void initialize() {
-        setLevel(1); // that will automatically set damage and hp based on level;
-        setRange(7);
-        setHitSpeed(1);
+    public KingTower(int level) {
+        super(level);
     }
+
 
     @Override
     public void setLevel(int level) {
+        super.setLevel(level);
         if (level == 1) {
             setDamage(50);
             setHp(2400);
@@ -36,10 +36,6 @@ public class KingTower extends Tower {
         }
     }
 
-    @Override
-    public void hit(Card card) {
-
-    }
 
     @Override
     public void run() {

@@ -2,6 +2,7 @@ package Models.Cards.buildings;
 
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Interfaces.Damageable;
 import javafx.scene.image.Image;
 
 public class InfernoTower extends Building {
@@ -69,7 +70,7 @@ public class InfernoTower extends Building {
 
 
     @Override
-    public void hit(Card card) {
+    public void hit(Damageable damageable) {
 
     }
 

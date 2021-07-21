@@ -1,6 +1,8 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import Models.Cards.Card;
+import Models.Interfaces.Damageable;
 import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -38,8 +40,13 @@ public class Rage extends Spell {
     }
 
     @Override
-    public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline) {
+    public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline,int playerNum) {
         //Nothing.
+    }
+
+    @Override
+    public void act(Damageable damageable) {
+
     }
 
     public void readyForThrow() {
@@ -51,8 +58,4 @@ public class Rage extends Spell {
         return false;
     }
 
-    @Override
-    public void run() {
-
-    }
 }
