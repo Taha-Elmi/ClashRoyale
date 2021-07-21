@@ -409,15 +409,16 @@ public class GameCon implements Controller {
 
     public ImageView getRandomTower() {
         Random random = new Random();
-        int randInt = random.nextInt(3);
-        if (randInt == 0 && boardPane.getChildren().contains(blueKingTower)) {
-            return blueKingTower;
-        } else if (randInt == 1 && boardPane.getChildren().contains(blueLeftPrincessTower)) {
-            return blueLeftPrincessTower;
-        } else if (randInt == 2 && boardPane.getChildren().contains(blueRightPrincessTower)) {
-            return blueRightPrincessTower;
+        while (true) {
+            int randInt = random.nextInt(3);
+            if (randInt == 0 && boardPane.getChildren().contains(blueKingTower)) {
+                return blueKingTower;
+            } else if (randInt == 1 && boardPane.getChildren().contains(blueLeftPrincessTower)) {
+                return blueLeftPrincessTower;
+            } else if (randInt == 2 && boardPane.getChildren().contains(blueRightPrincessTower)) {
+                return blueRightPrincessTower;
+            }
         }
-        return null;
     }
 
     public ImageView getNearerBridge(Point2D src) {
