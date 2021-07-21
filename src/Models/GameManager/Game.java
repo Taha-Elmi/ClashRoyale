@@ -59,9 +59,11 @@ public class Game {
 //        checkAllCards(player2_list, player1_list);
         checkTowers(player1,player2_list);
         checkTowers(player2,player1_list);
-//        checkAllCards(player1_list, player2_list);
-//        checkAllCards(player2_list, player1_list);
         for (CardImage cardImage : player1_list) {
+            if (cardImage.getCard() instanceof Troop)
+                ((Troop) cardImage.getCard()).step();
+        }
+        for (CardImage cardImage : player2_list) {
             if (cardImage.getCard() instanceof Troop)
                 ((Troop) cardImage.getCard()).step();
         }
@@ -218,8 +220,8 @@ public class Game {
                     default -> throw new IllegalArgumentException();
                 }
                 Troop troop = (Troop) cardImage.getCard();
-                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
-                timeline.play();
+//                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
+//                timeline.play();
             }
         } else if (card instanceof Spell) {
             ImageView imageView = new ImageView(card.born(1));
