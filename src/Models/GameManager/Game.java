@@ -55,17 +55,22 @@ public class Game {
 
     public void update() {
         manager.action();
-//        checkAllCards(player1_list, player2_list);
-//        checkAllCards(player2_list, player1_list);
         checkTowers(player1,player2_list);
         checkTowers(player2,player1_list);
+        for (CardImage cardImage : player1_list) {
+            if (cardImage.getCard() instanceof Troop)
+                ((Troop) cardImage.getCard()).step();
+        }
+        for (CardImage cardImage : player2_list) {
+            if (cardImage.getCard() instanceof Troop)
+                ((Troop) cardImage.getCard()).step();
+        }
     }
 
     private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
         for (CardImage cardImage : playerList) {
             Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
                     GameCon.getInstance().find(cardImage.getImage()).getY());
-            //System.out.println("X: " + src.getX() + "\tY: " + src.getY());
             CardImage target = null;
             double distance = 0;
             for (CardImage enemy : enemyList) {
@@ -212,8 +217,8 @@ public class Game {
                     default -> throw new IllegalArgumentException();
                 }
                 Troop troop = (Troop) cardImage.getCard();
-                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
-                timeline.play();
+//                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
+//                timeline.play();
             }
         } else if (card instanceof Spell) {
             ImageView imageView = new ImageView(card.born(1));
@@ -314,9 +319,11 @@ public class Game {
         }
         return null;
     }
+
     public void playCardPlayer1(Card card) {
         player1.playCard(card);
     }
+
     public void playCardPlayer2(Card card) {
         player2.playCard(card);
     }

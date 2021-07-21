@@ -15,6 +15,7 @@ abstract public class Card implements Cloneable {
         this.number = number;
         this.level = level;
         setLevel(level);
+        timeline = new Timeline();
     }
 
     public int getCost() {
