@@ -46,7 +46,7 @@ public class SignupCon extends Controller {
         } catch (IllegalArgumentException e) {
             return;
         }
-        playMainThemeMusic();
+        Config.playMusic("assets/musics/MainTheme.mp3");
         FXManager.goTo("MainMenu.fxml",(Stage) signupButton.getScene().getWindow());
     }
     private void signupProcess() throws IllegalArgumentException {

@@ -1,8 +1,20 @@
 package Models.Cards.spells;
 
 import Main.Config;
+import Models.Cards.Card;
+import Models.Interfaces.Damageable;
+import Models.Interfaces.Hitter;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
-public class Arrows extends Spell {
+public class Arrows extends Spell implements Hitter {
     private int areaDamage;
     public Arrows(int level) {
         super(3, level, 4);
@@ -33,15 +45,6 @@ public class Arrows extends Spell {
         }
     }
 
-    @Override
-    public void born() {
-
-    }
-
-    @Override
-    public void die() {
-
-    }
 
     @Override
     protected boolean isDead() {
@@ -49,7 +52,12 @@ public class Arrows extends Spell {
     }
 
     @Override
-    public void run() {
+    public void act(Damageable damageable) {
+        hit(damageable);
+    }
 
+    @Override
+    public void hit(Damageable damageable) {
+        damageable.gotDamage(areaDamage);
     }
 }

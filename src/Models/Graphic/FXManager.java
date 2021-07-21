@@ -88,4 +88,9 @@ public class FXManager {
         stage.setResizable(false);
         stage.setFullScreen(true);
     }
+    public static void setStageNormal(Stage stage) {
+        stage.setMaximized(false);
+        stage.setResizable(false);
+        stage.setFullScreen(false);
+    }
 }

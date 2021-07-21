@@ -82,11 +82,4 @@ public abstract class Controller {
             throwable.printStackTrace();
         }
     }
-    protected void playMainThemeMusic() {
-        Media media = FileUtils.loadMedia("assets/musics/MainTheme.mp3");
-        Config.mediaPlayer = new MediaPlayer(media);
-        Config.mediaPlayer.play();
-        Config.mediaPlayer.setOnEndOfMedia(() ->
-                Config.mediaPlayer.seek(Duration.ZERO));
-    }
 }
