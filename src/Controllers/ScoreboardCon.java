@@ -55,6 +55,7 @@ public class ScoreboardCon {
                 Game.getInstance().getPlayer1().getCrown(), Game.getInstance().getPlayer2().getCrown(), result);
         Config.mediaPlayer.stop();
         Config.playMusic("assets/musics/MainTheme.mp3");
+        FXManager.setStageNormal(Config.primaryStage);
         FXManager.goTo("MainMenu.fxml", Config.primaryStage);
     }
 }
