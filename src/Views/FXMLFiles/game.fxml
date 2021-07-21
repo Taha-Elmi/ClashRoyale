@@ -42,7 +42,7 @@
                         <Image url="@../Assets/Pictures/Game/redCrown.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="opponentCrowns" prefHeight="56.0" prefWidth="50.0" style="-fx-background-color: red;" text=": 3" textFill="WHITE">
+                  <Label fx:id="opponentCrowns" prefHeight="56.0" prefWidth="50.0" style="-fx-background-color: red;" text=" 0" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
@@ -91,7 +91,7 @@
                         <Image url="@../Assets/Pictures/Game/blueCrown.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="crowns" prefHeight="56.0" prefWidth="47.0" style="-fx-background-color: #0082ff;" text=": 3" textFill="WHITE">
+                  <Label fx:id="crowns" prefHeight="56.0" prefWidth="47.0" style="-fx-background-color: #0082ff;" text=" 0" textFill="WHITE">
                      <font>
                         <Font size="40.0" />
                      </font>
