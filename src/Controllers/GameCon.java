@@ -207,7 +207,7 @@ public class GameCon implements Controller {
 
     private void startTimer() {
         timer = new Timer();
-        localTime = LocalTime.of(0, 3, 0);
+        localTime = LocalTime.of(0, 0, 20);
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable() {
@@ -227,8 +227,9 @@ public class GameCon implements Controller {
         localTime = localTime.minusSeconds(1);
         timerLabel.setText(localTime.format(DateTimeFormatter.ofPattern("mm:ss")));
         if (localTime.isBefore(LocalTime.of(0, 0, 1))) {
-            timer.cancel();
             Game.getInstance().finish();
+            System.out.println("FINISHED!");
+            timer.cancel();
         }
     }
 

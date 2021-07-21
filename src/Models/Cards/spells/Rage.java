@@ -10,6 +10,7 @@ import Models.Interfaces.Damageable;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -83,9 +84,10 @@ public class Rage extends Spell {
                     public void run() {
                         task(playerNum,dst);
                         counter++;
-                        System.out.println(counter);
                         if (counter >= duration) {
-                            GameCon.getInstance().getBoardPane().getChildren().remove(circle);
+                            Platform.runLater( () ->
+                                    GameCon.getInstance().getBoardPane().getChildren().remove(circle)
+                            );
                             timer.cancel();
                         }
                     }

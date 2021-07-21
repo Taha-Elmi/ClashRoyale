@@ -53,7 +53,7 @@ public class Game {
         GameCon.getTimer().cancel();
         GameCon.getMainLoop().cancel();
 
-        FXManager.openWindow("scoreboard");
+        FXManager.goTo("scoreboard.fxml", Config.primaryStage);
     }
 
     public void update() {
