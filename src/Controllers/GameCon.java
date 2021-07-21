@@ -122,14 +122,14 @@ public class GameCon implements Controller {
         setCardsImages();
         updateCardsActiveness();
         name.setText(Config.client.getName());
-        level.setText("" + Config.client.getLevel());
-        hp.setText("MAX");
+        level.setText("lvl: " + Config.client.getLevel());
+        hp.setText("HP: MAX");
         setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
         if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
             String robotName = Game.getInstance().getManager().getClass().getSimpleName();
             opponentName.setText(robotName.substring(0, robotName.length() - 7));
-            opponentLevel.setText("" + Config.client.getLevel());
-            opponentHp.setText("MAX");
+            opponentLevel.setText("lvl: " + Config.client.getLevel());
+            opponentHp.setText("HP: MAX");
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
         } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
 
