@@ -26,6 +26,7 @@ import javafx.scene.media.MediaPlayer;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -335,6 +336,18 @@ public class GameCon implements Controller {
         return null;
     }
 
+    public ImageView getRandomTower() {
+        Random random = new Random();
+        int randInt = random.nextInt(3);
+        if (randInt == 0) {
+            return blueKingTower;
+        } else if (randInt == 1) {
+            return blueLeftPrincessTower;
+        } else if (randInt == 2) {
+            return blueRightPrincessTower;
+        }
+        return null;
+    }
     public ImageView getNearerBridge(Point2D src) {
         double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
         double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
