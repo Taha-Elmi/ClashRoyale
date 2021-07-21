@@ -79,6 +79,9 @@ public class GameCon implements Controller {
     private Label opponentHp;
 
     @FXML
+    private Label opponentCrowns;
+
+    @FXML
     private Label name;
 
     @FXML
@@ -86,6 +89,9 @@ public class GameCon implements Controller {
 
     @FXML
     private Label hp;
+
+    @FXML
+    private Label crowns;
 
     @FXML
     private HBox mainBorder;
