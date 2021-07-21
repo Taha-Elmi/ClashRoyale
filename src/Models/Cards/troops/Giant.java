@@ -11,7 +11,22 @@ public class Giant extends Troop {
 
     @Override
     public void setLevel(int level) {
-
+        if (level == 1) {
+            setHp(2000);
+            setDamage(126);
+        } else if(level == 2) {
+            setHp(2200);
+            setDamage(138);
+        } else if (level == 3) {
+            setHp(2420);
+            setDamage(152);
+        } else if (level == 4) {
+            setHp(2660);
+            setDamage(167);
+        } else if (level == 5) {
+            setHp(2920);
+            setDamage(183);
+        }
     }
 
 }

@@ -13,6 +13,7 @@ abstract public class Card implements Cloneable {
     public Card(int cost,int level,int number) {
         this.cost = cost;
         this.number = number;
+        this.level = level;
         setLevel(level);
     }
 

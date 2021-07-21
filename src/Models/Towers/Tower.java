@@ -1,12 +1,9 @@
 package Models.Towers;
 
-import Controllers.GameCon;
-import Models.Cards.Card;
 import Models.GameManager.Game;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 abstract public class Tower implements Hitter, Damageable,Runnable {
