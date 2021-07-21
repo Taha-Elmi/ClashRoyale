@@ -45,6 +45,8 @@ abstract public class Troop extends Card implements Hitter, Damageable {
 
         // finding the nearest enemy troop
         for (CardImage enemy : enemyList) {
+            if (this instanceof Giant)
+                break;
             if (!(enemy.getCard() instanceof Troop))
                 continue;
 
@@ -62,7 +64,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             target = (Troop) possibleTarget.getCard();
 
             CardImage cardImageToReturn = Game.getInstance().cardToCardImage((Card) target);
-            if ((isUnderBridge() && ((Troop) target).isUnderBridge()) || (!isUnderBridge() && !((Troop) target).isUnderBridge()))
+            if ((isUnderBridge() && ((Troop) target).isUnderBridge()) || (!isUnderBridge() && !((Troop) target).isUnderBridge()) || this instanceof BabyDragon)
                 return new Point2D(GameCon.getInstance().find(cardImageToReturn.getImage()).getX(),
                     GameCon.getInstance().find(cardImageToReturn.getImage()).getY());
             else
@@ -72,12 +74,12 @@ abstract public class Troop extends Card implements Hitter, Damageable {
 
         // checking if there is a bridge ahead or not
         int playerNumber = (enemyList == Game.getInstance().getPlayer1_list() ? 2 : 1);
-        if ((playerNumber == 1 && isUnderBridge()) || (playerNumber == 2 && !isUnderBridge()))
+        if (((playerNumber == 1 && isUnderBridge()) || (playerNumber == 2 && !isUnderBridge())) && !(this instanceof BabyDragon))
             return new Point2D(GameCon.getInstance().getNearerBridge(src).getLayoutX(),
                     GameCon.getInstance().getNearerBridge(src).getLayoutY());
 
-        return new Point2D(GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getLayoutX(),
-                GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getLayoutY());
+        return new Point2D(GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getX(),
+                GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getY());
     }
 
     public boolean isUnderBridge() {
@@ -97,6 +99,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         System.out.println(path.distance(0, 0)); // must print 1
         getTimeline().stop();
         getTimeline().getKeyFrames().clear();
+        setTimeline(new Timeline());
         getTimeline().getKeyFrames().add(
                 new KeyFrame(
                         Duration.seconds(1),
