@@ -8,6 +8,7 @@ import Models.GameManager.Game;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
+import Models.Interfaces.Flyer;
 import Models.Interfaces.Hitter;
 import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
@@ -49,9 +50,11 @@ abstract public class Troop extends Card implements Hitter, Damageable {
 
         // finding the nearest enemy troop
         for (CardImage enemy : enemyList) {
-            if (this instanceof Giant)
+            if (targetCategory == Target.BUILDINGS)
                 break;
             if (!(enemy.getCard() instanceof Troop))
+                continue;
+            if (targetCategory == Target.GROUND && enemy.getCard() instanceof Flyer)
                 continue;
 
             Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
@@ -107,12 +110,10 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         checkIfIsDamaging();
         if (isDamaging) {
             if (counter < hitSpeed) {
-                System.out.println("YOOOHOOOO");
                 counter += 0.1;
                 return;
             }
             hit(target);
-            System.out.println("I'm damaging.");
             counter = 0;
             return;
         }

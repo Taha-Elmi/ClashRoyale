@@ -2,9 +2,10 @@ package Models.Cards.troops;
 
 import Main.Config;
 import Models.Cards.Target;
+import Models.Interfaces.Flyer;
 import javafx.scene.image.Image;
 
-public class BabyDragon extends Troop {
+public class BabyDragon extends Troop implements Flyer {
     private final static Speed speed = Speed.FAST;
 
     public BabyDragon(int level) {
