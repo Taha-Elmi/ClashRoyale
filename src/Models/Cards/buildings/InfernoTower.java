@@ -1,7 +1,9 @@
 package Models.Cards.buildings;
 
+import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import javafx.scene.image.Image;
 
@@ -54,7 +56,11 @@ public class InfernoTower extends Building {
 
     @Override
     public Image born(int playerNum) {
-        return null;
+        return switch (playerNum) {
+            case 1 -> FXManager.getImage("/Gifs/Inferno/blue.gif");
+            case 2 -> FXManager.getImage("/Gifs/Inferno/red.gif");
+            default -> throw new IllegalStateException("Unexpected value: " + playerNum);
+        };
     }
 
 

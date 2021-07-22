@@ -4,6 +4,7 @@ import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.Target;
+import Models.Cards.spells.Spell;
 import Models.GameManager.Game;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
@@ -52,7 +53,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         for (CardImage enemy : enemyList) {
             if (targetCategory == Target.BUILDINGS)
                 break;
-            if (!(enemy.getCard() instanceof Troop))
+            if (enemy.getCard() instanceof Spell)
                 continue;
             if (targetCategory == Target.GROUND && enemy.getCard() instanceof Flyer)
                 continue;

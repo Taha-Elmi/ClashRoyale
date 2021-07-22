@@ -29,7 +29,7 @@ public class KingTower extends Tower {
             setHp(2736);
         } else if (level == 4) {
             setDamage(60);
-            setHp(60);
+            setHp(2904);
         } else if (level == 5) {
             setDamage(64);
             setHp(3096);

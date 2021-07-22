@@ -79,6 +79,7 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
     public boolean isDead() {
         return hp <= 0;
     }
+
     public void readyForBorn(ImageView imageView, int playerNumber, Point2D src) {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -110,9 +111,9 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
         List<CardImage> cardImages;
         if (playerNum == 1) {
-            cardImages = Game.getInstance().getPlayer1_list();
-        } else {
             cardImages = Game.getInstance().getPlayer2_list();
+        } else {
+            cardImages = Game.getInstance().getPlayer1_list();
         }
         Point2D dst;
         CardImage target = null;
@@ -131,10 +132,9 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
         if (target == null || target.getCard() instanceof Spell || distance > getRange() * 70)
             return;
 
-        Circle circle = new Circle(15);
+        Circle circle = new Circle(8);
         circle.setCenterY(imageView.getY());
         circle.setCenterX(imageView.getX());
-        GameCon.getInstance().getBoardPane().getChildren().add(circle);
         ImageView targetImageView = GameCon.getInstance().find(target.getImage());
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
@@ -151,6 +151,7 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
                 hit(damageable);
             }
         });
+        GameCon.getInstance().getBoardPane().getChildren().add(circle);
         timeline.play();
     }
 
