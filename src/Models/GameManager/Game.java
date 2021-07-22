@@ -168,7 +168,6 @@ public class Game {
                 public void handle(ActionEvent actionEvent) {
                     GameCon.getInstance().getBoardPane().getChildren().remove(arrowImageView);
                     Damageable damageable = (Damageable) finalTarget.getCard();
-                    System.out.println(damageable);
                     finalTower.hit(damageable);
                 }
             });

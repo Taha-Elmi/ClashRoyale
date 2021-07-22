@@ -1,14 +1,20 @@
 package Models.Cards.troops;
 
 import Main.Config;
+import Models.Cards.Target;
 import javafx.scene.image.Image;
 
 public class Wizard extends Troop {
 
     private final static Speed speed = Speed.MEDIUM;
+
     public Wizard(int level) {
         super(5, level,1);
         setSpeed(Speed.MEDIUM);
+        setHitSpeed(1.7);
+        setTargetCategory(Target.AIRandGROUND);
+        setRange(5 * 25);
+        setAreaSplash(true);
     }
 
     @Override

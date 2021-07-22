@@ -145,7 +145,7 @@ public class Rage extends Spell {
             return;
         }
     }
-    @Override
+
     protected boolean isDead() {
         return false;
     }

@@ -1,14 +1,20 @@
 package Models.Cards.troops;
 import Main.Config;
+import Models.Cards.Target;
 import Models.Graphic.FXManager;
 import javafx.scene.image.Image;
 
 public class Archer extends Troop {
 
-    private static final Speed speed = Speed.FAST;
+    private static final Speed speed = Speed.MEDIUM;
+
     public Archer(int level) {
         super(3, level,3);
-        setSpeed(speed);
+        setSpeed(Speed.MEDIUM);
+        setTargetCategory(Target.AIRandGROUND);
+        setHitSpeed(1.2);
+        setRange(5 * 25);
+        setAreaSplash(false);
     }
 
     @Override

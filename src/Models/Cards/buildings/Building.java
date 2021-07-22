@@ -53,7 +53,7 @@ abstract public class Building extends Card implements Hitter, Damageable,Runnab
     }
 
     @Override
-    protected boolean isDead() {
+    public boolean isDead() {
         return hp <= 0;
     }
 }

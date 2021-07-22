@@ -45,8 +45,6 @@ public class Arrows extends Spell implements Hitter {
         }
     }
 
-
-    @Override
     protected boolean isDead() {
         return false;
     }

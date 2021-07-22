@@ -1,13 +1,19 @@
 package Models.Cards.troops;
 
 import Main.Config;
+import Models.Cards.Target;
 import javafx.scene.image.Image;
 
 public class BabyDragon extends Troop {
-    private final static Speed speed = Speed.MEDIUM;
+    private final static Speed speed = Speed.FAST;
+
     public BabyDragon(int level) {
         super(4, level,1);
         setSpeed(Speed.FAST);
+        setHitSpeed(1.8);
+        setTargetCategory(Target.AIRandGROUND);
+        setRange(3 * 25);
+        setAreaSplash(true);
     }
 
     @Override
