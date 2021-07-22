@@ -13,10 +13,13 @@ import java.util.Random;
 
 public class StupidRobotManager implements Manager,Runnable {
     private Player player;
+    private String name;
     private final double validRandomWidth = 300;
     private final double validRandomHeight = 280;
     Random random = new Random();
-    public StupidRobotManager(Player player) {
+
+    public StupidRobotManager(String name, Player player) {
+        this.name = name;
         this.player = player;
     }
 
@@ -33,6 +36,16 @@ public class StupidRobotManager implements Manager,Runnable {
     @Override
     public void run() {
         playCard(getRandomCard());
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 
     private Card getRandomCard() {
@@ -56,7 +69,8 @@ public class StupidRobotManager implements Manager,Runnable {
             src = new Point2D(GameCon.getInstance().getRedKingTower().getX(),GameCon.getInstance().getRedKingTower().getY());
             targetTower = GameCon.getInstance().getRandomTower();
         } else if (card instanceof Building) {
-            targetTower = GameCon.getInstance().getNearerTowerImageView(src,2);
+            return;
+//            targetTower = GameCon.getInstance().getNearerTowerImageView(src,2);
         }
         Point2D dst = new Point2D(targetTower.getX(), targetTower.getY());
         Game.getInstance().bornCard(card, src, dst, GameCon.getInstance().getBoardPane(), 2);

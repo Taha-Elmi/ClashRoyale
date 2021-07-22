@@ -46,7 +46,7 @@ abstract public class Card implements Cloneable {
             e.printStackTrace();
         }
     }
-    protected abstract boolean isDead();
+
     public abstract void setLevel(int level);
     @Override
     public Object clone() throws CloneNotSupportedException {

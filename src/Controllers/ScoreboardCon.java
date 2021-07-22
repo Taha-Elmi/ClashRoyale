@@ -69,13 +69,12 @@ public class ScoreboardCon {
         level.setText(GameCon.getInstance().getLevel().getText());
         name.setText(GameCon.getInstance().getName().getText());
         if (Game.getInstance().getResult() == BattleHistory.Result.WIN) {
-            mainLabel.setStyle("-fx-text-fill: blue");
-            mainLabel.setText(Config.client.getName() + " Won!");
+            mainLabel.setStyle("-fx-text-fill: blue;\n" + "-fx-font-size: 50px;");
+            mainLabel.setText(Config.client.getName() + "\nWon!");
             happyKing.setImage(FXManager.getImage("/Game/happyBlueKing.png"));
         } else {
-            mainLabel.setStyle("-fx-text-fill: red");
-            String botName = Game.getInstance().getManager().getClass().getSimpleName();
-            mainLabel.setText(botName.substring(0, botName.length() - 7) + " Won!");
+            mainLabel.setStyle("-fx-text-fill: red;\n" + "-fx-font-size: 50px;");
+            mainLabel.setText(Game.getInstance().getManager().getName() + "\nWon!");
             happyKing.setImage(FXManager.getImage("/Game/happyRedKing.png"));
         }
     }

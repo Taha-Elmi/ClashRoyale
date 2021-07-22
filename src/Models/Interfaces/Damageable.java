@@ -11,4 +11,6 @@ public interface Damageable {
      * @param damage the damage
      */
     void gotDamage(int damage);
+
+    boolean isDead();
 }

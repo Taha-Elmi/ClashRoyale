@@ -3,12 +3,15 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.buildings.Building;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.GameManager.GameMode;
+import Models.GameManager.HumanManager;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
+import Models.Towers.Tower;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -143,6 +146,7 @@ public class GameCon implements Controller {
 
     @FXML
     public void backToMainMenuButton() {
+        Config.primaryStage.setFullScreen(false);
         FXManager.openWindow("backToMainMenu.fxml");
     }
     @FXML
@@ -153,20 +157,24 @@ public class GameCon implements Controller {
         rightKingImageView.setImage(FXManager.getImage("/Game/rightKing.png"));
         setCardsImages();
         updateCardsActiveness();
+
         name.setText(Config.client.getName());
         level.setText("lvl: " + Config.client.getLevel());
         Game.getInstance().updateHps();
 //        hp.setText("HP: MAX");
         setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
+
+        opponentName.setText(Game.getInstance().getManager().getName());
+        opponentHp.setText("HP: MAX");
         if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
-            String robotName = Game.getInstance().getManager().getClass().getSimpleName();
-            opponentName.setText(robotName.substring(0, robotName.length() - 7));
             opponentLevel.setText("lvl: " + Config.client.getLevel());
 //            opponentHp.setText("HP: MAX");
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
         } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
-
+            opponentLevel.setText("lvl: " + ((HumanManager)Game.getInstance().getManager()).getLevel());
+            setPlayerCardsLevel(Game.getInstance().getPlayer2(), ((HumanManager)Game.getInstance().getManager()).getLevel());
         }
+
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });
@@ -194,9 +202,6 @@ public class GameCon implements Controller {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         Game.getInstance().update();
-                        if (Game.getInstance().isGameOver()) {
-                            Game.getInstance().finish();
-                        }
                     }
                 });
             }
@@ -243,7 +248,12 @@ public class GameCon implements Controller {
     }
 
     private void setPlayerCardsLevel(Player player, int level) {
-
+        for (Card card: Game.getInstance().getPlayer1().getCards()) {
+            card.setLevel(level);
+        }
+        for (Card card: player.getCards()) {
+            card.setLevel(level);
+        }
     }
 
     private void setCardsImages() {
@@ -331,6 +341,9 @@ public class GameCon implements Controller {
                         , new Point2D(nearerTower.getX(), nearerTower.getY()), boardPane, 1);
             } else if (chosenCard instanceof Spell) {
                 Point2D src = new Point2D(blueKingTower.getX(),blueKingTower.getY());
+                Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
+            } else if (chosenCard instanceof Building) {
+                Point2D src = new Point2D(de.getX() - 13, de.getY() - 13);
                 Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
             }
         }catch (Exception e) {
@@ -437,6 +450,15 @@ public class GameCon implements Controller {
     }
 
     public boolean isValidToDrop(Point2D point2D,int playerNum,Card card) {
+        boolean leftPrincessTowerIsDead;
+        boolean rightPrincessTowerIsDead;
+        if (playerNum == 1) {
+            leftPrincessTowerIsDead = Game.getInstance().getPlayer2().getPrincessTowers().get(0).isDead();
+            rightPrincessTowerIsDead = Game.getInstance().getPlayer2().getPrincessTowers().get(1).isDead();
+        } else {
+            leftPrincessTowerIsDead = Game.getInstance().getPlayer1().getPrincessTowers().get(0).isDead();
+            rightPrincessTowerIsDead = Game.getInstance().getPlayer1().getPrincessTowers().get(1).isDead();
+        }
         if (card instanceof Spell) {
             return true;
         }
@@ -445,10 +467,29 @@ public class GameCon implements Controller {
         if (playerNum == 1) {
             if (y > 345)
                 return true;
-            else
+            else {
+                boolean[] returnValues = new boolean[2];
+                returnValues[0] = false;
+                returnValues[1] = false;
+                if (leftPrincessTowerIsDead) {
+                    if (y > 227 && x < 203) {
+                        returnValues[0] = true;
+                    }
+                }
+                if (rightPrincessTowerIsDead) {
+                    if (y > 227 && x > 253) {
+                        returnValues[1] = true;
+                    }
+                }
+                for (int i = 0; i < 2; i++) {
+                    if (returnValues[i] == true) {
+                        return true;
+                    }
+                }
                 return false;
+            }
         } else if (playerNum == 2) {
-            if (y > 345)
+            if (y < 345)
                 return true;
             else
                 return false;
@@ -536,4 +577,5 @@ public class GameCon implements Controller {
     public static GameCon getInstance() {
         return instance;
     }
+
 }

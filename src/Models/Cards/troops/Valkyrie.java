@@ -1,13 +1,20 @@
 package Models.Cards.troops;
 
 import Main.Config;
+import Models.Cards.Target;
 
 public class Valkyrie extends Troop {
 
     private final static Speed speed = Speed.MEDIUM;
+
     public Valkyrie(int level) {
         super(4, level,1);
         setSpeed(Speed.MEDIUM);
+        setHitSpeed(1.5);
+        setTargetCategory(Target.GROUND);
+        setRange(25);
+        setAreaSplash(true);
+
     }
 
     @Override
@@ -31,6 +38,9 @@ public class Valkyrie extends Troop {
             Config.unknownInputException();
         }
     }
+
+    @Override
+    public void damageEmote() {}
 
     @Override
     public void setSpeedToDefault() {

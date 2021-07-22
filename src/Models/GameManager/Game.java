@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.buildings.Building;
+import Models.Cards.spells.Rage;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
+import Models.Towers.KingTower;
 import Models.Towers.PrincessTower;
 import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
@@ -147,6 +149,14 @@ public class Game {
             if (tower.isDead()) {
                 continue;
             }
+
+            //here we handle the hitSpeed
+            if (tower.getCounter() < tower.getHitSpeed()) {
+                tower.counterIncrease();
+                continue;
+            } else
+                tower.setCounter(0);
+
             src = new Point2D(tower.getImageView().getX(),tower.getImageView().getY());
             CardImage target = null;
             double distance = 0;
@@ -189,7 +199,6 @@ public class Game {
                 public void handle(ActionEvent actionEvent) {
                     GameCon.getInstance().getBoardPane().getChildren().remove(arrowImageView);
                     Damageable damageable = (Damageable) finalTarget.getCard();
-                    System.out.println(damageable);
                     finalTower.hit(damageable);
                 }
             });
@@ -258,7 +267,7 @@ public class Game {
                 boardPane.getChildren().add(imageView);
                 CardImage cardImage = null;
                 try {
-                    cardImage = new CardImage((Card) card.clone(), imageView.getImage());
+                    cardImage = new CardImage((Card) card.clone(), imageView.getImage(), playerNumber);
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
@@ -268,15 +277,12 @@ public class Game {
                     case 2 -> player2_list.add(cardImage);
                     default -> throw new IllegalArgumentException();
                 }
-                Troop troop = (Troop) cardImage.getCard();
-//                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
-//                timeline.play();
             }
         } else if (card instanceof Spell) {
             ImageView imageView = new ImageView(card.born(playerNumber));
             CardImage cardImage = null;
             try {
-                cardImage = new CardImage((Card) card.clone(),imageView.getImage());
+                cardImage = new CardImage((Card) card.clone(), imageView.getImage());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }
@@ -294,6 +300,26 @@ public class Game {
             Spell spell = (Spell) cardImage.getCard();
             spell.readyForThrow(imageView,dst,timeline,playerNumber);
             timeline.play();
+        } else if (card instanceof Building) {
+            ImageView imageView = new ImageView(card.born(playerNumber));
+            CardImage cardImage = null;
+            try {
+                cardImage = new CardImage((Card) card.clone(), imageView.getImage());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(60);
+            imageView.setX(dst.getX());
+            imageView.setY(dst.getY());
+            boardPane.getChildren().add(imageView);
+            switch (playerNumber) {
+                case 1 -> player1_list.add(cardImage);
+                case 2 -> player2_list.add(cardImage);
+                default -> throw new IllegalArgumentException();
+            }
+            Building building = (Building) cardImage.getCard();
+            building.readyForBorn(imageView,playerNumber,dst);
         }
     }
 
@@ -351,16 +377,18 @@ public class Game {
     }
 
     public void dieCard(CardImage cardImage) throws Exception {
-        GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
-        player1_list.remove(cardImage);
-        player2_list.remove(cardImage);
+        try {
+            GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
+            player1_list.remove(cardImage);
+            player2_list.remove(cardImage);
+        }catch (NullPointerException e){}
     }
 
     public void dieTower(Tower tower) {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getOwnerImageView().getImage()));
         checkCrowns();
-        if (player1.getCrown() == 3 || player2.getCrown() == 3)
+        if (tower instanceof KingTower)
             finish();
     }
 

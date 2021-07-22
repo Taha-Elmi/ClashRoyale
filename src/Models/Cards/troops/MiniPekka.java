@@ -1,14 +1,20 @@
 package Models.Cards.troops;
 
 import Main.Config;
+import Models.Cards.Target;
 import javafx.scene.image.Image;
 
 public class MiniPekka extends Troop {
 
     private final static Speed speed = Speed.FAST;
+
     public MiniPekka(int level) {
         super(4, level,1);
         setSpeed(Speed.FAST);
+        setHitSpeed(1.8);
+        setTargetCategory(Target.GROUND);
+        setRange(25);
+        setAreaSplash(false);
     }
 
     @Override
@@ -32,6 +38,9 @@ public class MiniPekka extends Troop {
             Config.unknownInputException();
         }
     }
+
+    @Override
+    public void damageEmote() {}
 
     @Override
     public void setSpeedToDefault() {

@@ -62,15 +62,13 @@ public class Rage extends Spell {
 
     @Override
     public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline,int playerNum) {
-        imageView.setFitWidth(5);
-        imageView.setFitHeight(10);
+        imageView.setFitWidth(10);
+        imageView.setFitHeight(20);
         super.readyForThrow(imageView,dst,timeline,playerNum);
-        Spell spell = this;
         timeline.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 die();
-                Timeline timeline1 = new Timeline();
                 Circle circle = new Circle(getRadius() * 25);
                 circle.setCenterX(dst.getX());
                 circle.setCenterY(dst.getY());
@@ -145,7 +143,7 @@ public class Rage extends Spell {
             return;
         }
     }
-    @Override
+
     protected boolean isDead() {
         return false;
     }

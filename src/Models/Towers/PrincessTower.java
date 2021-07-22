@@ -5,7 +5,8 @@ public class PrincessTower extends Tower {
 
     public PrincessTower(int level) {
         super(level);
-        setRange(7);
+        setRange(7.5);
+        setHitSpeed(0.8);
     }
 
     @Override
@@ -13,7 +14,7 @@ public class PrincessTower extends Tower {
         super.setLevel(level);
         if (level == 1) {
             setDamage(50);
-            setHp(1400);
+            setHp(100);
         } else if (level == 2) {
             setHp(1512);
             setDamage(54);

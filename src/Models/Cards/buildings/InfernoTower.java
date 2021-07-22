@@ -57,22 +57,12 @@ public class InfernoTower extends Building {
         return null;
     }
 
-    @Override
-    public void die() {
-
-    }
-
 
     @Override
     public void run() {
 
     }
 
-
-    @Override
-    public void hit(Damageable damageable) {
-
-    }
 
     public void setMaximumDamage(int maximumDamage) {
         this.maximumDamage = maximumDamage;
