@@ -1,6 +1,8 @@
 package Models.Towers;
 
 import Models.Cards.Card;
+import Models.GameManager.Game;
+import Models.Graphic.FXManager;
 
 public class KingTower extends Tower {
     private boolean isAwake;
@@ -43,6 +45,11 @@ public class KingTower extends Tower {
     public void wakeUp() {
         if (isAwake)
             return;
+
+        if (Game.getInstance().getPlayer1().getKingTower() == this)
+            getOwnerImageView().setImage(FXManager.getImage("/Game/blueKingWakeUp.gif"));
+        else
+            getOwnerImageView().setImage(FXManager.getImage("/Game/redKingWakeUp.gif"));
         setRange(7);
         isAwake = true;
     }
