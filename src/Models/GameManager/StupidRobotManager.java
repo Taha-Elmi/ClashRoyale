@@ -13,10 +13,13 @@ import java.util.Random;
 
 public class StupidRobotManager implements Manager,Runnable {
     private Player player;
+    private String name;
     private final double validRandomWidth = 300;
     private final double validRandomHeight = 280;
     Random random = new Random();
-    public StupidRobotManager(Player player) {
+
+    public StupidRobotManager(String name, Player player) {
+        this.name = name;
         this.player = player;
     }
 
@@ -33,6 +36,16 @@ public class StupidRobotManager implements Manager,Runnable {
     @Override
     public void run() {
         playCard(getRandomCard());
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 
     private Card getRandomCard() {

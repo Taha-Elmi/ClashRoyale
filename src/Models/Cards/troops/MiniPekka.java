@@ -40,6 +40,9 @@ public class MiniPekka extends Troop {
     }
 
     @Override
+    public void damageEmote() {}
+
+    @Override
     public void setSpeedToDefault() {
         setSpeed(speed);
     }

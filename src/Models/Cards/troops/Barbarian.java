@@ -40,6 +40,8 @@ public class Barbarian extends Troop {
         }
     }
 
+    @Override
+    public void damageEmote() {}
 
     @Override
     public void setSpeedToDefault() {

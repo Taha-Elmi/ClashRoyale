@@ -90,4 +90,8 @@ public class CardImage {
         else
             image = backwardGif;
     }
+
+    public boolean isGoingForward() {
+        return forwardGif != null;
+    }
 }
