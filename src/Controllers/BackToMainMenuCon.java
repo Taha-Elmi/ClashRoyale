@@ -28,6 +28,7 @@ public class BackToMainMenuCon implements Controller {
             Config.playMusic("assets/musics/MainTheme.mp3");
             FXManager.goTo("MainMenu.fxml", Config.primaryStage);
         } else if (ae.getSource() == noButton) {
+            FXManager.setStageReadyForGame(Config.primaryStage);
             ((Stage) yesButton.getScene().getWindow()).close();
         } else {
             Config.unknownInputException();

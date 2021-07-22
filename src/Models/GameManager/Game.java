@@ -267,6 +267,26 @@ public class Game {
             Spell spell = (Spell) cardImage.getCard();
             spell.readyForThrow(imageView,dst,timeline,playerNumber);
             timeline.play();
+        } else if (card instanceof Building) {
+            ImageView imageView = new ImageView(card.born(playerNumber));
+            CardImage cardImage = null;
+            try {
+                cardImage = new CardImage((Card) card.clone(), imageView.getImage());
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(60);
+            imageView.setX(dst.getX());
+            imageView.setY(dst.getY());
+            boardPane.getChildren().add(imageView);
+            switch (playerNumber) {
+                case 1 -> player1_list.add(cardImage);
+                case 2 -> player2_list.add(cardImage);
+                default -> throw new IllegalArgumentException();
+            }
+            Building building = (Building) cardImage.getCard();
+            building.readyForBorn(imageView,playerNumber,dst);
         }
     }
 

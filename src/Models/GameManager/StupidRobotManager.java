@@ -56,7 +56,8 @@ public class StupidRobotManager implements Manager,Runnable {
             src = new Point2D(GameCon.getInstance().getRedKingTower().getX(),GameCon.getInstance().getRedKingTower().getY());
             targetTower = GameCon.getInstance().getRandomTower();
         } else if (card instanceof Building) {
-            targetTower = GameCon.getInstance().getNearerTowerImageView(src,2);
+            return;
+//            targetTower = GameCon.getInstance().getNearerTowerImageView(src,2);
         }
         Point2D dst = new Point2D(targetTower.getX(), targetTower.getY());
         Game.getInstance().bornCard(card, src, dst, GameCon.getInstance().getBoardPane(), 2);

@@ -3,6 +3,7 @@ package Controllers;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
+import Models.Cards.buildings.Building;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
@@ -143,6 +144,7 @@ public class GameCon implements Controller {
 
     @FXML
     public void backToMainMenuButton() {
+        Config.primaryStage.setFullScreen(false);
         FXManager.openWindow("backToMainMenu.fxml");
     }
     @FXML
@@ -327,6 +329,9 @@ public class GameCon implements Controller {
                         , new Point2D(nearerTower.getX(), nearerTower.getY()), boardPane, 1);
             } else if (chosenCard instanceof Spell) {
                 Point2D src = new Point2D(blueKingTower.getX(),blueKingTower.getY());
+                Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
+            } else if (chosenCard instanceof Building) {
+                Point2D src = new Point2D(de.getX() - 13, de.getY() - 13);
                 Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
             }
         }catch (Exception e) {

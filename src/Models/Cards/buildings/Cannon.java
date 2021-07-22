@@ -1,7 +1,9 @@
 package Models.Cards.buildings;
 
+import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import javafx.scene.image.Image;
 
@@ -14,12 +16,14 @@ public class Cannon extends Building {
 
     @Override
     public Image born(int playerNum) {
+        if (playerNum == 1) {
+            return FXManager.getImage("/Gifs/Cannon/blue.gif");
+        } else if (playerNum == 2) {
+            return FXManager.getImage("/Gifs/Cannon/red.gif");
+        } else {
+            Config.unknownInputException();
+        }
         return null;
-    }
-
-    @Override
-    public void die() {
-
     }
 
 
@@ -57,11 +61,6 @@ public class Cannon extends Building {
 
     public int getDamage() {
         return damage;
-    }
-
-    @Override
-    public void hit(Damageable damageable) {
-
     }
 
     public void setDamage(int damage) {
