@@ -1,15 +1,11 @@
 package Controllers;
 
-import Database.FileUtils;
 import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
-import java.util.concurrent.CompletableFuture;
 
 public class BackToMainMenuCon implements Controller {
 

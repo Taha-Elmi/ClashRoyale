@@ -241,7 +241,12 @@ public class GameCon implements Controller {
     }
 
     private void setPlayerCardsLevel(Player player, int level) {
-
+        for (Card card: Game.getInstance().getPlayer1().getCards()) {
+            card.setLevel(level);
+        }
+        for (Card card: player.getCards()) {
+            card.setLevel(level);
+        }
     }
 
     private void setCardsImages() {
