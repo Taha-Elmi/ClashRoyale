@@ -57,7 +57,7 @@ public class Wizard extends Troop {
     @Override
     public void damageEmote() {
         Circle circle = new Circle();
-        circle.setRadius(12);
+        circle.setRadius(8);
         circle.setFill(Color.YELLOW);
 
         CardImage cardImage = Game.getInstance().cardToCardImage(this);
@@ -79,9 +79,10 @@ public class Wizard extends Troop {
 
         circle.setCenterX(src.getX());
         circle.setCenterY(src.getY());
+        double duration = src.distance(dst) / 50;
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(duration),
                 new KeyValue(circle.centerXProperty(), dst.getX()),
                 new KeyValue(circle.centerYProperty(), dst.getY())
         ));

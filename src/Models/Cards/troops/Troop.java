@@ -159,12 +159,11 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         if (dst.distance(src) > range) {
             isDamaging = false;
             cardImage.setNormalGif();
-            imageView.setImage(cardImage.getImage());
         } else {
             isDamaging = true;
             cardImage.setDamageGif();
-            imageView.setImage(cardImage.getImage());
         }
+        imageView.setImage(cardImage.getImage());
     }
 
     public void setTargetCategory(Target targetCategory) {
