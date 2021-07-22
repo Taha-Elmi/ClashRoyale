@@ -193,9 +193,6 @@ public class GameCon implements Controller {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         Game.getInstance().update();
-                        if (Game.getInstance().isGameOver()) {
-                            Game.getInstance().finish();
-                        }
                     }
                 });
             }

@@ -14,6 +14,7 @@ import Models.Cards.troops.Giant;
 import Models.Cards.troops.Troop;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
+import Models.Towers.KingTower;
 import Models.Towers.PrincessTower;
 import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
@@ -242,9 +243,6 @@ public class Game {
                     case 2 -> player2_list.add(cardImage);
                     default -> throw new IllegalArgumentException();
                 }
-                Troop troop = (Troop) cardImage.getCard();
-//                troop.readyForMove(imageView, new Point2D(dst.getX(), dst.getY()), timeline);
-//                timeline.play();
             }
         } else if (card instanceof Spell) {
             ImageView imageView = new ImageView(card.born(playerNumber));
@@ -334,7 +332,7 @@ public class Game {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getOwnerImageView().getImage()));
         checkCrowns();
-        if (player1.getCrown() == 3 || player2.getCrown() == 3)
+        if (tower instanceof KingTower)
             finish();
     }
 
