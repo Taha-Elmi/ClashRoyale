@@ -79,7 +79,7 @@ public class ScoreboardCon {
             result = BattleHistory.Result.WIN;
         } else {
             mainLabel.setStyle("-fx-text-fill: red;\n" + "-fx-font-size: 50px;");
-            mainLabel.setText(Game.getInstance().getManager().getName() + " Won!");
+            mainLabel.setText(Game.getInstance().getManager().getName() + "\nWon!");
             happyKing.setImage(FXManager.getImage("/Game/happyRedKing.png"));
             result = BattleHistory.Result.LOOSE;
         }

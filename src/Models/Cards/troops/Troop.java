@@ -114,7 +114,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
                 return;
             }
             hit(target);
-            // damageEmote();
+            damageEmote();
             counter = 0;
             return;
         }

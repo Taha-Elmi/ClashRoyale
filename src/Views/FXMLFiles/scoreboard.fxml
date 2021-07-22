@@ -112,7 +112,7 @@
                   <Button layoutX="146.0" layoutY="608.0" mnemonicParsing="false" onAction="#backOnAction" text="Back to Main Menu" />
                   <Label fx:id="mainLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="14.0" prefHeight="193.0" prefWidth="382.0" text="StupidRobot Won!" textAlignment="CENTER">
                      <font>
-                        <Font size="50.0" />
+                        <Font name="Freestyle Script" size="50.0" />
                      </font>
                   </Label>
                   <ImageView fx:id="happyKing" fitHeight="395.0" fitWidth="337.0" layoutX="38.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true" />
