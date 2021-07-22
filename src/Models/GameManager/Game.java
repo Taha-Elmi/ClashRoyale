@@ -58,6 +58,8 @@ public class Game {
     public void finish() {
         GameCon.getTimer().cancel();
         GameCon.getMainLoop().cancel();
+        if (gameMode == GameMode.MULTI)
+            ((HumanManager)manager).getListener().interrupt();
 
         if (player1.getCrown() > Game.getInstance().getPlayer2().getCrown()
                 || (player1.getCrown() == player2.getCrown() && player1.getHp() > player2.getHp())) {

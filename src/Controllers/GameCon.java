@@ -6,10 +6,7 @@ import Models.Cards.CardImage;
 import Models.Cards.buildings.Building;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
-import Models.GameManager.Game;
-import Models.GameManager.GameMode;
-import Models.GameManager.HumanManager;
-import Models.GameManager.Player;
+import Models.GameManager.*;
 import Models.Graphic.FXManager;
 import Models.Towers.Tower;
 import javafx.application.Platform;
@@ -343,6 +340,8 @@ public class GameCon implements Controller {
                 Point2D src = new Point2D(de.getX() - 13, de.getY() - 13);
                 Game.getInstance().bornCard(chosenCard,src,new Point2D(de.getX()-13,de.getY()-13),boardPane,1);
             }
+            if (Game.getInstance().getGameMode() == GameMode.MULTI)
+                ((HumanManager) Game.getInstance().getManager()).sendData(chosenCard, new Point2D(de.getX(), de.getY()));
         }catch (Exception e) {
             e.printStackTrace();
         }
