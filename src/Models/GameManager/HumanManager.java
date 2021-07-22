@@ -15,6 +15,7 @@ public class HumanManager implements Manager ,Runnable{
     private Player player;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
+    private DataPackage dataPackage;
 
     public HumanManager(Socket socket, NetworkClient networkClient) {
         try {
@@ -28,6 +29,26 @@ public class HumanManager implements Manager ,Runnable{
                 client = ((Client) objectInputStream.readObject());
                 objectOutputStream.writeObject(Config.client);
             }
+
+            name = client.getName();
+            level = client.getLevel();
+            player = new Player(client.getDeckCards());
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            dataPackage = ((DataPackage) objectInputStream.readObject());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
         } catch (IOException | ClassNotFoundException e) {
             Config.unknownInputException();
         }
@@ -40,7 +61,10 @@ public class HumanManager implements Manager ,Runnable{
 
     @Override
     public void action() {
+        if (dataPackage == null)
+            return;
 
+        dataPackage = null;
     }
 
     @Override

@@ -5,7 +5,7 @@ import Database.BattleHistory;
 import Database.SQLManager;
 import Models.Cards.CardImage;
 
-import java.net.Socket;
+
 import java.util.ArrayList;
 
 import Main.Config;
@@ -41,7 +41,6 @@ public class Game {
     private Manager manager;
     private GameMode gameMode;
     private BattleHistory.Result result;
-    private Socket socket;
     public Game(Player player1, Player player2, GameMode gameMode,Manager manager) {
         this.player1 = player1;
         this.player2 = player2;
@@ -49,18 +48,6 @@ public class Game {
         player2_list = new ArrayList<>();
         this.gameMode = gameMode;
         this.manager = manager;
-        this.socket = null;
-        instance = this;
-    }
-
-    public Game(Player player1, Player player2, GameMode gameMode,Manager manager, Socket socket) {
-        this.player1 = player1;
-        this.player2 = player2;
-        player1_list = new ArrayList<>();
-        player2_list = new ArrayList<>();
-        this.gameMode = gameMode;
-        this.manager = manager;
-        this.socket = socket;
         instance = this;
     }
 

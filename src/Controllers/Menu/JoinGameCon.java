@@ -1,9 +1,7 @@
 package Controllers.Menu;
 
 import Main.Config;
-import Models.GameManager.HumanManager;
-import Models.GameManager.NetworkClient;
-import Models.GameManager.Player;
+import Models.GameManager.*;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +47,9 @@ public class JoinGameCon {
             int port = Integer.parseInt(portTextField.getText());
             socket = new Socket(ip, port);
             HumanManager humanManager = new HumanManager(socket, NetworkClient.JOIN);
+            new Game(new Player(Config.client.getDeckCards()), humanManager.getPlayer(), GameMode.MULTI, humanManager);
+            Config.mediaPlayer.stop();
+            FXManager.goTo("game.fxml", Config.primaryStage);
         } catch (NumberFormatException e) {
             warningLabel.setText("Port is a NUMBER ://");
             warningLabel.setVisible(true);

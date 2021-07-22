@@ -1,6 +1,7 @@
 package Controllers.Menu;
 
 import Main.Config;
+import Models.GameManager.*;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -52,6 +53,10 @@ public class CreateGameCon {
             public void run() {
                 try {
                     socket = serverSocket.accept();
+                    HumanManager humanManager = new HumanManager(socket, NetworkClient.CREATE);
+                    new Game(new Player(Config.client.getDeckCards()), humanManager.getPlayer(), GameMode.MULTI, humanManager);
+                    Config.mediaPlayer.stop();
+                    FXManager.goTo("game.fxml",Config.primaryStage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
