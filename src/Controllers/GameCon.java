@@ -11,6 +11,7 @@ import Models.GameManager.GameMode;
 import Models.GameManager.HumanManager;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
+import Models.Towers.Tower;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -447,6 +448,15 @@ public class GameCon implements Controller {
     }
 
     public boolean isValidToDrop(Point2D point2D,int playerNum,Card card) {
+        boolean leftPrincessTowerIsDead;
+        boolean rightPrincessTowerIsDead;
+        if (playerNum == 1) {
+            leftPrincessTowerIsDead = Game.getInstance().getPlayer2().getPrincessTowers().get(0).isDead();
+            rightPrincessTowerIsDead = Game.getInstance().getPlayer2().getPrincessTowers().get(1).isDead();
+        } else {
+            leftPrincessTowerIsDead = Game.getInstance().getPlayer1().getPrincessTowers().get(0).isDead();
+            rightPrincessTowerIsDead = Game.getInstance().getPlayer1().getPrincessTowers().get(1).isDead();
+        }
         if (card instanceof Spell) {
             return true;
         }
@@ -455,10 +465,29 @@ public class GameCon implements Controller {
         if (playerNum == 1) {
             if (y > 345)
                 return true;
-            else
+            else {
+                boolean[] returnValues = new boolean[2];
+                returnValues[0] = false;
+                returnValues[1] = false;
+                if (leftPrincessTowerIsDead) {
+                    if (y > 227 && x < 203) {
+                        returnValues[0] = true;
+                    }
+                }
+                if (rightPrincessTowerIsDead) {
+                    if (y > 227 && x > 253) {
+                        returnValues[1] = true;
+                    }
+                }
+                for (int i = 0; i < 2; i++) {
+                    if (returnValues[i] == true) {
+                        return true;
+                    }
+                }
                 return false;
+            }
         } else if (playerNum == 2) {
-            if (y > 345)
+            if (y < 345)
                 return true;
             else
                 return false;
@@ -546,4 +575,5 @@ public class GameCon implements Controller {
     public static GameCon getInstance() {
         return instance;
     }
+
 }
