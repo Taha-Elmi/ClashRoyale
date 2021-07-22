@@ -12,11 +12,13 @@ import javafx.scene.image.ImageView;
 import java.util.Random;
 
 public class SmartRobotManager implements Manager,Runnable {
-
     private Player player;
+    private String name;
     private Random random = new Random();
     private Point2D[] smartPoints = new Point2D[2];
-    public SmartRobotManager(Player player) {
+
+    public SmartRobotManager(String name, Player player) {
+        this.name = name;
         this.player = player;
         smartPoints[0] = new Point2D(90, 268);
         smartPoints[1] = new Point2D(355, 268);
@@ -34,6 +36,16 @@ public class SmartRobotManager implements Manager,Runnable {
     @Override
     public void run() {
         playCard(getRandomCard());
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 
     private Card getRandomCard() {

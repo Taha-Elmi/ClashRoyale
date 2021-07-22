@@ -7,6 +7,7 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import Models.GameManager.Game;
 import Models.GameManager.GameMode;
+import Models.GameManager.HumanManager;
 import Models.GameManager.Player;
 import Models.Graphic.FXManager;
 import javafx.application.Platform;
@@ -152,19 +153,22 @@ public class GameCon implements Controller {
         rightKingImageView.setImage(FXManager.getImage("/Game/rightKing.png"));
         setCardsImages();
         updateCardsActiveness();
+
         name.setText(Config.client.getName());
         level.setText("lvl: " + Config.client.getLevel());
         hp.setText("HP: MAX");
         setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
+
+        opponentName.setText(Game.getInstance().getManager().getName());
+        opponentHp.setText("HP: MAX");
         if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
-            String robotName = Game.getInstance().getManager().getClass().getSimpleName();
-            opponentName.setText(robotName.substring(0, robotName.length() - 7));
             opponentLevel.setText("lvl: " + Config.client.getLevel());
-            opponentHp.setText("HP: MAX");
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
         } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
-
+            opponentLevel.setText("lvl: " + ((HumanManager)Game.getInstance().getManager()).getLevel());
+            setPlayerCardsLevel(Game.getInstance().getPlayer2(), ((HumanManager)Game.getInstance().getManager()).getLevel());
         }
+
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
         });

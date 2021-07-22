@@ -79,8 +79,7 @@ public class ScoreboardCon {
             result = BattleHistory.Result.WIN;
         } else {
             mainLabel.setStyle("-fx-text-fill: red");
-            String botName = Game.getInstance().getManager().getClass().getSimpleName();
-            mainLabel.setText(botName.substring(0, botName.length() - 7) + " Won!");
+            mainLabel.setText(Game.getInstance().getManager().getName() + " Won!");
             happyKing.setImage(FXManager.getImage("/Game/happyRedKing.png"));
             result = BattleHistory.Result.LOOSE;
         }
@@ -88,7 +87,7 @@ public class ScoreboardCon {
 
     @FXML
     void backOnAction(ActionEvent event) {
-        SQLManager.addHistory(Config.client.getName(), "StupidRobot",
+        SQLManager.addHistory(Config.client.getName(), Game.getInstance().getManager().getName(),
                 Game.getInstance().getPlayer1().getCrown(), Game.getInstance().getPlayer2().getCrown(), result);
         Config.mediaPlayer.stop();
         Config.playMusic("assets/musics/MainTheme.mp3");
