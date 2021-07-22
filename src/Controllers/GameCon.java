@@ -160,20 +160,17 @@ public class GameCon implements Controller {
 
         name.setText(Config.client.getName());
         level.setText("lvl: " + Config.client.getLevel());
-        Game.getInstance().updateHps();
-//        hp.setText("HP: MAX");
         setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
 
         opponentName.setText(Game.getInstance().getManager().getName());
-        opponentHp.setText("HP: MAX");
         if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
             opponentLevel.setText("lvl: " + Config.client.getLevel());
-//            opponentHp.setText("HP: MAX");
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
         } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
             opponentLevel.setText("lvl: " + ((HumanManager)Game.getInstance().getManager()).getLevel());
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), ((HumanManager)Game.getInstance().getManager()).getLevel());
         }
+        Game.getInstance().updateHps();
 
         Platform.runLater(() -> {
             FXManager.setStageReadyForGame(Config.primaryStage);
@@ -248,12 +245,12 @@ public class GameCon implements Controller {
     }
 
     private void setPlayerCardsLevel(Player player, int level) {
-        for (Card card: Game.getInstance().getPlayer1().getCards()) {
-            card.setLevel(level);
-        }
         for (Card card: player.getCards()) {
             card.setLevel(level);
         }
+        player.getKingTower().setLevel(level);
+        player.getPrincessTowers().get(0).setLevel(level);
+        player.getPrincessTowers().get(1).setLevel(level);
     }
 
     private void setCardsImages() {

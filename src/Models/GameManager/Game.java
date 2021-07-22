@@ -67,7 +67,6 @@ public class Game {
             Config.client.setXp(Config.client.getXp() + 70);
         }
 
-        int possibleNewLevel;
         if (Config.client.getXp() < 300)
             Config.client.setLevel(1);
         else if (Config.client.getXp() < 500)
@@ -76,13 +75,12 @@ public class Game {
             Config.client.setLevel(3);
         else if (Config.client.getXp() < 1700)
             Config.client.setLevel(4);
-        else if (Config.client.getXp() < 2500)
-            Config.client.setLevel(5);
         else
-            Config.client.setLevel(6);
+            Config.client.setLevel(5);
+
 
         SQLManager.updateClient(Config.client.getXp(), Config.client.getLevel());
-        SQLManager.addHistory(Config.client.getName(), "StupidRobot",
+        SQLManager.addHistory(Config.client.getName(), manager.getName(),
                 Game.getInstance().getPlayer1().getCrown(), Game.getInstance().getPlayer2().getCrown(), result);
         FXManager.goTo("scoreboard.fxml", Config.primaryStage);
     }

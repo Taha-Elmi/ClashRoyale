@@ -14,7 +14,7 @@ public class PrincessTower extends Tower {
         super.setLevel(level);
         if (level == 1) {
             setDamage(50);
-            setHp(100);
+            setHp(1400);
         } else if (level == 2) {
             setHp(1512);
             setDamage(54);
