@@ -233,7 +233,7 @@ public class Game {
                 boardPane.getChildren().add(imageView);
                 CardImage cardImage = null;
                 try {
-                    cardImage = new CardImage((Card) card.clone(), imageView.getImage());
+                    cardImage = new CardImage((Card) card.clone(), imageView.getImage(), playerNumber);
                 } catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
@@ -248,7 +248,7 @@ public class Game {
             ImageView imageView = new ImageView(card.born(playerNumber));
             CardImage cardImage = null;
             try {
-                cardImage = new CardImage((Card) card.clone(),imageView.getImage());
+                cardImage = new CardImage((Card) card.clone(), imageView.getImage());
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
             }

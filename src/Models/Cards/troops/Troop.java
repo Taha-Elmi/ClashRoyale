@@ -135,28 +135,35 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     }
 
     private void checkIfIsDamaging() {
+        CardImage cardImage = Game.getInstance().cardToCardImage(this);
+        ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
+        int playerNumber = (Game.getInstance().getPlayer1_list().contains(this) ? 1 : 2);
         if (target == null || target.isDead()) {
             target = null;
             isDamaging = false;
+            cardImage.setNormalGif();
+            imageView.setImage(cardImage.getImage());
             return;
         }
-        CardImage cardImage = Game.getInstance().cardToCardImage(this);
-        Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
-                GameCon.getInstance().find(cardImage.getImage()).getY());
+        Point2D src = new Point2D(imageView.getX(), imageView.getY());
         Point2D dst;
         if (target instanceof Troop) {
             CardImage targetCardImage = Game.getInstance().cardToCardImage((Card) target);
             dst = new Point2D(GameCon.getInstance().find(targetCardImage.getImage()).getX(),
                     GameCon.getInstance().find(targetCardImage.getImage()).getY());
         } else {
-            int playerNumber = (Game.getInstance().getPlayer1_list().contains(this) ? 1 : 2);
             dst = new Point2D(GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getX(),
                     GameCon.getInstance().getNearerTowerImageView(src, playerNumber).getY());
         }
-        if (dst.distance(src) > range)
+        if (dst.distance(src) > range) {
             isDamaging = false;
-        else
+            cardImage.setNormalGif();
+            imageView.setImage(cardImage.getImage());
+        } else {
             isDamaging = true;
+            cardImage.setDamageGif();
+            imageView.setImage(cardImage.getImage());
+        }
     }
 
     public void setTargetCategory(Target targetCategory) {
