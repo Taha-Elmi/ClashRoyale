@@ -2,6 +2,7 @@ package Models.GameManager;
 
 import Main.Config;
 import Models.Client;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,40 +19,45 @@ public class HumanManager implements Manager ,Runnable{
     private DataPackage dataPackage;
 
     public HumanManager(Socket socket, NetworkClient networkClient) {
-        try {
-            objectInputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            Client client;
-            if (networkClient == NetworkClient.JOIN) {
-                objectOutputStream.writeObject(Config.client);
-                client = ((Client) objectInputStream.readObject());
-            } else {
-                client = ((Client) objectInputStream.readObject());
-                objectOutputStream.writeObject(Config.client);
-            }
-
-            name = client.getName();
-            level = client.getLevel();
-            player = new Player(client.getDeckCards());
-
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            dataPackage = ((DataPackage) objectInputStream.readObject());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    objectInputStream = new ObjectInputStream(socket.getInputStream());
+                    objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    Client client;
+                    if (networkClient == NetworkClient.JOIN) {
+                        objectOutputStream.writeObject(Config.client);
+                        client = ((Client) objectInputStream.readObject());
+                    } else {
+                        client = ((Client) objectInputStream.readObject());
+                        objectOutputStream.writeObject(Config.client);
                     }
-                }
-            });
 
-        } catch (IOException | ClassNotFoundException e) {
-            Config.unknownInputException();
-        }
+                    name = client.getName();
+                    level = client.getLevel();
+                    player = new Player(client.getDeckCards());
+
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (true) {
+                                try {
+                                    dataPackage = ((DataPackage) objectInputStream.readObject());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+
+                } catch (IOException | ClassNotFoundException e) {
+                    Config.unknownInputException();
+                }
+            }
+        });
     }
 
     @Override
