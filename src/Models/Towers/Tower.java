@@ -1,6 +1,7 @@
 package Models.Towers;
 
 import Models.GameManager.Game;
+import Models.GameManager.Player;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
 import javafx.animation.Timeline;
@@ -44,14 +45,26 @@ abstract public class Tower implements Hitter, Damageable,Runnable {
     }
 
     public void die() {
+        if (this instanceof KingTower)
+            ((KingTower) this).wakeUp();
+        else {
+            if (Game.getInstance().getPlayer1().getPrincessTowers().contains(this))
+                Game.getInstance().getPlayer1().getKingTower().wakeUp();
+            else
+                Game.getInstance().getPlayer2().getKingTower().wakeUp();
+        }
         Game.getInstance().dieTower(this);
     }
 
     public boolean isDead() {
         return hp <= 0;
     }
+
     @Override
     public void gotDamage(int damage) {
+        if (this instanceof KingTower)
+            ((KingTower) this).wakeUp();
+
         hp -= damage;
         Game.getInstance().updateHps();
         if (isDead()) {

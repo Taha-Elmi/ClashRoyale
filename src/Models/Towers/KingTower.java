@@ -1,13 +1,17 @@
 package Models.Towers;
 
 import Models.Cards.Card;
+import Models.GameManager.Game;
+import Models.Graphic.FXManager;
 
 public class KingTower extends Tower {
+    private boolean isAwake;
 
     public KingTower(int level) {
         super(level);
-        setRange(7);
+        setRange(0);
         setHitSpeed(1);
+        isAwake = false;
     }
 
 
@@ -36,6 +40,18 @@ public class KingTower extends Tower {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void wakeUp() {
+        if (isAwake)
+            return;
+
+        if (Game.getInstance().getPlayer1().getKingTower() == this)
+            getOwnerImageView().setImage(FXManager.getImage("/Game/blueKingWakeUp.gif"));
+        else
+            getOwnerImageView().setImage(FXManager.getImage("/Game/redKingWakeUp.gif"));
+        setRange(7);
+        isAwake = true;
     }
 
 
