@@ -36,6 +36,14 @@ public class Client {
         return xp;
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
     public ArrayList<BattleHistory> getBattleHistories() {
         return battleHistories;
     }

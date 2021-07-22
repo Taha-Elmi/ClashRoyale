@@ -1,6 +1,8 @@
 package Models.GameManager;
 
 import Controllers.GameCon;
+import Database.BattleHistory;
+import Database.SQLManager;
 import Models.Cards.CardImage;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class Game {
     private ArrayList<CardImage> player2_list;
     private Manager manager;
     private GameMode gameMode;
+    private BattleHistory.Result result;
     public Game(Player player1, Player player2, GameMode gameMode,Manager manager) {
         this.player1 = player1;
         this.player2 = player2;
@@ -53,6 +56,32 @@ public class Game {
         GameCon.getTimer().cancel();
         GameCon.getMainLoop().cancel();
 
+        if (player1.getCrown() > Game.getInstance().getPlayer2().getCrown()
+                || (player1.getCrown() == player2.getCrown() && player1.getHp() > player2.getHp())) {
+            result = BattleHistory.Result.WIN;
+            Config.client.setXp(Config.client.getXp() + 200);
+        } else {
+            result = BattleHistory.Result.LOOSE;
+            Config.client.setXp(Config.client.getXp() + 70);
+        }
+
+        int possibleNewLevel;
+        if (Config.client.getXp() < 300)
+            Config.client.setLevel(1);
+        else if (Config.client.getXp() < 500)
+            Config.client.setLevel(2);
+        else if (Config.client.getXp() < 900)
+            Config.client.setLevel(3);
+        else if (Config.client.getXp() < 1700)
+            Config.client.setLevel(4);
+        else if (Config.client.getXp() < 2500)
+            Config.client.setLevel(5);
+        else
+            Config.client.setLevel(6);
+
+        SQLManager.updateClient(Config.client.getXp(), Config.client.getLevel());
+        SQLManager.addHistory(Config.client.getName(), "StupidRobot",
+                Game.getInstance().getPlayer1().getCrown(), Game.getInstance().getPlayer2().getCrown(), result);
         FXManager.goTo("scoreboard.fxml", Config.primaryStage);
     }
 
@@ -178,6 +207,10 @@ public class Game {
 
     public GameMode getGameMode() {
         return gameMode;
+    }
+
+    public BattleHistory.Result getResult() {
+        return result;
     }
 
     public static Game getInstance() {

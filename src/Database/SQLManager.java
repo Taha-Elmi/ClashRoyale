@@ -133,4 +133,18 @@ public class SQLManager {
             }
         }
     }
+
+    /**
+     * updates client's xp and level in database
+     * @param xp the new xp
+     * @param level the new level
+     */
+    public static void updateClient(int xp, int level) {
+        try {
+            String query = "update clients set xp = " + xp + ", level = " + level + " where name='" + Config.client.getName() + "';";
+            Config.statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

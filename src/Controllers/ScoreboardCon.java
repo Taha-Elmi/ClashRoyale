@@ -55,8 +55,6 @@ public class ScoreboardCon {
     @FXML
     private Label timerLabel;
 
-    private BattleHistory.Result result;
-
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
         leftKingImageView.setImage(FXManager.getImage("/Game/leftKing.png"));
@@ -70,26 +68,20 @@ public class ScoreboardCon {
         hp.setText(GameCon.getInstance().getHp().getText());
         level.setText(GameCon.getInstance().getLevel().getText());
         name.setText(GameCon.getInstance().getName().getText());
-        if (Game.getInstance().getPlayer1().getCrown() > Game.getInstance().getPlayer2().getCrown()
-                || (Game.getInstance().getPlayer1().getCrown() == Game.getInstance().getPlayer2().getCrown()
-                && Game.getInstance().getPlayer1().getHp() > Game.getInstance().getPlayer2().getHp())) {
+        if (Game.getInstance().getResult() == BattleHistory.Result.WIN) {
             mainLabel.setStyle("-fx-text-fill: blue");
             mainLabel.setText(Config.client.getName() + " Won!");
             happyKing.setImage(FXManager.getImage("/Game/happyBlueKing.png"));
-            result = BattleHistory.Result.WIN;
         } else {
             mainLabel.setStyle("-fx-text-fill: red");
             String botName = Game.getInstance().getManager().getClass().getSimpleName();
             mainLabel.setText(botName.substring(0, botName.length() - 7) + " Won!");
             happyKing.setImage(FXManager.getImage("/Game/happyRedKing.png"));
-            result = BattleHistory.Result.LOOSE;
         }
     }
 
     @FXML
     void backOnAction(ActionEvent event) {
-        SQLManager.addHistory(Config.client.getName(), "StupidRobot",
-                Game.getInstance().getPlayer1().getCrown(), Game.getInstance().getPlayer2().getCrown(), result);
         Config.mediaPlayer.stop();
         Config.playMusic("assets/musics/MainTheme.mp3");
         FXManager.setStageNormal(Config.primaryStage);

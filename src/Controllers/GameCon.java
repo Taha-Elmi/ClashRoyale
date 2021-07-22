@@ -147,6 +147,7 @@ public class GameCon implements Controller {
     }
     @FXML
     public void initialize() {
+        instance = this;
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
         leftKingImageView.setImage(FXManager.getImage("/Game/leftKing.png"));
         rightKingImageView.setImage(FXManager.getImage("/Game/rightKing.png"));
@@ -154,13 +155,14 @@ public class GameCon implements Controller {
         updateCardsActiveness();
         name.setText(Config.client.getName());
         level.setText("lvl: " + Config.client.getLevel());
-        hp.setText("HP: MAX");
+        Game.getInstance().updateHps();
+//        hp.setText("HP: MAX");
         setPlayerCardsLevel(Game.getInstance().getPlayer1(), Config.client.getLevel());
         if (Game.getInstance().getGameMode() == GameMode.SINGLE) {
             String robotName = Game.getInstance().getManager().getClass().getSimpleName();
             opponentName.setText(robotName.substring(0, robotName.length() - 7));
             opponentLevel.setText("lvl: " + Config.client.getLevel());
-            opponentHp.setText("HP: MAX");
+//            opponentHp.setText("HP: MAX");
             setPlayerCardsLevel(Game.getInstance().getPlayer2(), Config.client.getLevel());
         } else if (Game.getInstance().getGameMode() == GameMode.MULTI) {
 
@@ -182,7 +184,6 @@ public class GameCon implements Controller {
         Game.getInstance().getPlayer2().getPrincessTowers().get(1).setOwnerImageView(rightRedPrincessImageView);
         startTimer();
         startMainLoop();
-        instance = this;
         Config.playMusic("assets/musics/BattleTheme.mp3");
     }
 
