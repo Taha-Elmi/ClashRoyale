@@ -1,6 +1,9 @@
 package Controllers.Menu;
 
 import Main.Config;
+import Models.GameManager.HumanManager;
+import Models.GameManager.NetworkClient;
+import Models.GameManager.Player;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -43,6 +48,7 @@ public class JoinGameCon {
             String ip = ipTextField.getText();
             int port = Integer.parseInt(portTextField.getText());
             socket = new Socket(ip, port);
+            HumanManager humanManager = new HumanManager(socket, NetworkClient.JOIN);
         } catch (NumberFormatException e) {
             warningLabel.setText("Port is a NUMBER ://");
             warningLabel.setVisible(true);

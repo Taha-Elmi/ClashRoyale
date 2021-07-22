@@ -1,6 +1,7 @@
 package Models.GameManager;
 
 import Main.Config;
+import Models.Client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,17 +9,24 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class HumanManager implements Manager ,Runnable{
+public class HumanManager implements Manager, Runnable{
     private Player player;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
 
-    public HumanManager(Player player, Socket socket) {
-        this.player = player;
+    public HumanManager(Socket socket, NetworkClient networkClient) {
         try {
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        } catch (IOException e) {
+            Client client;
+            if (networkClient == NetworkClient.JOIN) {
+                objectOutputStream.writeObject(Config.client);
+                client = ((Client) objectInputStream.readObject());
+            } else {
+                client = ((Client) objectInputStream.readObject());
+                objectOutputStream.writeObject(Config.client);
+            }
+        } catch (IOException | ClassNotFoundException e) {
             Config.unknownInputException();
         }
     }
