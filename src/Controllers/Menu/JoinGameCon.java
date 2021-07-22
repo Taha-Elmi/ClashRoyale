@@ -3,6 +3,7 @@ package Controllers.Menu;
 import Main.Config;
 import Models.GameManager.*;
 import Models.Graphic.FXManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -42,24 +43,30 @@ public class JoinGameCon {
 
     @FXML
     void connectButtonOnAction(ActionEvent event) {
-        try {
-            String ip = ipTextField.getText();
-            int port = Integer.parseInt(portTextField.getText());
-            socket = new Socket(ip, port);
-            HumanManager humanManager = new HumanManager(socket, NetworkClient.JOIN);
-            new Game(new Player(Config.client.getDeckCards()), humanManager.getPlayer(), GameMode.MULTI, humanManager);
-            Config.mediaPlayer.stop();
-            FXManager.goTo("game.fxml", Config.primaryStage);
-        } catch (NumberFormatException e) {
-            warningLabel.setText("Port is a NUMBER ://");
-            warningLabel.setVisible(true);
-        } catch (UnknownHostException e) {
-            warningLabel.setText("The Host is Unknown.");
-            warningLabel.setVisible(true);
-        } catch (IOException e) {
-            warningLabel.setText("The IP or Port may be incorrect.");
-            warningLabel.setVisible(true);
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String ip = ipTextField.getText();
+                    int port = Integer.parseInt(portTextField.getText());
+                    socket = new Socket(ip, port);
+                    HumanManager humanManager = new HumanManager(socket, NetworkClient.JOIN);
+                    new Game(new Player(Config.client.getDeckCards()), humanManager.getPlayer(), GameMode.MULTI, humanManager);
+                    Config.mediaPlayer.stop();
+                    FXManager.goTo("game.fxml", Config.primaryStage);
+                } catch (NumberFormatException e) {
+                    warningLabel.setText("Port is a NUMBER ://");
+                    warningLabel.setVisible(true);
+                } catch (UnknownHostException e) {
+                    warningLabel.setText("The Host is Unknown.");
+                    warningLabel.setVisible(true);
+                } catch (IOException e) {
+                    warningLabel.setText("The IP or Port may be incorrect.");
+                    warningLabel.setVisible(true);
+                }
+            }
+        });
+
     }
 
 }
