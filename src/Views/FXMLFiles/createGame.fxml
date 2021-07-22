@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Menu.CreateGameCon">
+   <children>
+      <Label fx:id="portLabel" text="Other Player Can Access the Game Via:" textFill="WHITE">
+         <font>
+            <Font name="Bell MT" size="22.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="25.0" />
+         </VBox.margin></Label>
+      <Label text="Waiting for another player to join..." textFill="WHITE">
+         <font>
+            <Font name="Harrington" size="24.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#backButtonOnAction" prefWidth="230.0" text="Back">
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Haettenschweiler" size="32.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

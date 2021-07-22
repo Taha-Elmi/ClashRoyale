@@ -1,6 +1,7 @@
 package Controllers.Menu;
 
 import Controllers.Controller;
+import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class PlayGameCon implements Controller {
         if (ae.getSource() == singlePlayer) {
             FXManager.openWindow("singlePlayer.fxml");
         } else if (ae.getSource() == oneVsOne) {
-
+            FXManager.goTo("1v1.fxml", Config.primaryStage);
         } else if (ae.getSource() == twoVsTwo) {
 
         } else if (ae.getSource() == back) {
