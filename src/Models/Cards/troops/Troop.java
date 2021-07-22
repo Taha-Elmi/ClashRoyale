@@ -114,6 +114,7 @@ abstract public class Troop extends Card implements Hitter, Damageable {
                 return;
             }
             hit(target);
+            damageEmote();
             counter = 0;
             return;
         }
@@ -239,6 +240,8 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
     }
 
+    public abstract void damageEmote();
+
     public int getDamage() {
         return damage;
     }
@@ -266,5 +269,9 @@ abstract public class Troop extends Card implements Hitter, Damageable {
 
     public void setAreaSplash(boolean areaSplash) {
         this.areaSplash = areaSplash;
+    }
+
+    public Damageable getTarget() {
+        return target;
     }
 }

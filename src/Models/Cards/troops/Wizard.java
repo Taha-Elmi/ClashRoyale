@@ -1,8 +1,23 @@
 package Models.Cards.troops;
 
+import Controllers.GameCon;
 import Main.Config;
+import Models.Cards.Card;
+import Models.Cards.CardImage;
 import Models.Cards.Target;
+import Models.GameManager.Game;
+import Models.Towers.Tower;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class Wizard extends Troop {
 
@@ -37,6 +52,47 @@ public class Wizard extends Troop {
         } else {
             Config.unknownInputException();
         }
+    }
+
+    @Override
+    public void damageEmote() {
+        Circle circle = new Circle();
+        circle.setRadius(12);
+        circle.setFill(Color.YELLOW);
+
+        CardImage cardImage = Game.getInstance().cardToCardImage(this);
+        ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
+        Point2D src = new Point2D(imageView.getX(), imageView.getY());
+
+        Point2D dst = null;
+        if (getTarget() instanceof Card) {
+            cardImage = Game.getInstance().cardToCardImage((Card) getTarget());
+            imageView = GameCon.getInstance().find(cardImage.getImage());
+            dst = new Point2D(imageView.getX(), imageView.getY());
+        } else if (getTarget() instanceof Tower){
+            int playerNumber = (cardImage.isGoingForward() ? 1 : 2);
+            imageView = GameCon.getInstance().getNearerTowerImageView(src, playerNumber);
+            dst = new Point2D(imageView.getX(), imageView.getY());
+        } else {
+            Config.unknownInputException();
+        }
+
+        circle.setCenterX(src.getX());
+        circle.setCenterY(src.getY());
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.seconds(1),
+                new KeyValue(circle.centerXProperty(), dst.getX()),
+                new KeyValue(circle.centerYProperty(), dst.getY())
+        ));
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                GameCon.getInstance().getBoardPane().getChildren().remove(circle);
+            }
+        });
+        GameCon.getInstance().getBoardPane().getChildren().add(circle);
+        timeline.play();
     }
 
     @Override

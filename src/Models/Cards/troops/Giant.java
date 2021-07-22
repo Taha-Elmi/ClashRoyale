@@ -37,6 +37,9 @@ public class Giant extends Troop {
     }
 
     @Override
+    public void damageEmote() {}
+
+    @Override
     public void setSpeedToDefault() {
         setSpeed(speed);
     }

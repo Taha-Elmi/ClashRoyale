@@ -40,6 +40,9 @@ public class BabyDragon extends Troop implements Flyer {
     }
 
     @Override
+    public void damageEmote() {}
+
+    @Override
     public void setSpeedToDefault() {
         setSpeed(speed);
     }
