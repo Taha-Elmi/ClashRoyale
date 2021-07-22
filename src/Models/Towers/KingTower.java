@@ -3,11 +3,13 @@ package Models.Towers;
 import Models.Cards.Card;
 
 public class KingTower extends Tower {
+    private boolean isAwake;
 
     public KingTower(int level) {
         super(level);
-        setRange(7);
+        setRange(0);
         setHitSpeed(1);
+        isAwake = false;
     }
 
 
@@ -36,6 +38,13 @@ public class KingTower extends Tower {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void wakeUp() {
+        if (isAwake)
+            return;
+        setRange(7);
+        isAwake = true;
     }
 
 

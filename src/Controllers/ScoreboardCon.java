@@ -73,7 +73,7 @@ public class ScoreboardCon {
         if (Game.getInstance().getPlayer1().getCrown() > Game.getInstance().getPlayer2().getCrown()
                 || (Game.getInstance().getPlayer1().getCrown() == Game.getInstance().getPlayer2().getCrown()
                 && Game.getInstance().getPlayer1().getHp() > Game.getInstance().getPlayer2().getHp())) {
-            mainLabel.setStyle("-fx-text-fill: blue");
+            mainLabel.setStyle("-fx-text-fill: blue;\n" + "-fx-font-size: 50px;");
             mainLabel.setText(Config.client.getName() + "\nWon!");
             happyKing.setImage(FXManager.getImage("/Game/happyBlueKing.png"));
             result = BattleHistory.Result.WIN;
