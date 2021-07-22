@@ -40,9 +40,9 @@ public class SinglePlayerCon implements Controller {
         Player player1 = new Player(Config.client.getDeckCards());
         Player player2 = new Player(Config.getPlayer2Cards());
         Manager manager = switch (mode) {
-            case "easy" -> new StupidRobotManager(player2);
-            case "medium" -> new SmartRobotManager(player2);
-            case "hard" -> new GeniusRobotManager(player2);
+            case "easy" -> new StupidRobotManager("StupidRobot", player2);
+            case "medium" -> new SmartRobotManager("SmartRobot", player2);
+            case "hard" -> new GeniusRobotManager("GeniusRobot", player2);
             default -> throw new IllegalStateException("Unexpected value: " + mode);
         };
         Game game = new Game(player1,

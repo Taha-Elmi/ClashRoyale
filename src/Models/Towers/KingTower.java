@@ -1,17 +1,23 @@
 package Models.Towers;
 
 import Models.Cards.Card;
+import Models.GameManager.Game;
+import Models.Graphic.FXManager;
 
 public class KingTower extends Tower {
+    private boolean isAwake;
 
-    public void initialize() {
-        setLevel(1); // that will automatically set damage and hp based on level;
-        setRange(7);
+    public KingTower(int level) {
+        super(level);
+        setRange(0);
         setHitSpeed(1);
+        isAwake = false;
     }
+
 
     @Override
     public void setLevel(int level) {
+        super.setLevel(level);
         if (level == 1) {
             setDamage(50);
             setHp(2400);
@@ -36,10 +42,18 @@ public class KingTower extends Tower {
         }
     }
 
-    @Override
-    public void hit(Card card) {
+    public void wakeUp() {
+        if (isAwake)
+            return;
 
+        if (Game.getInstance().getPlayer1().getKingTower() == this)
+            getOwnerImageView().setImage(FXManager.getImage("/Game/blueKingWakeUp.gif"));
+        else
+            getOwnerImageView().setImage(FXManager.getImage("/Game/redKingWakeUp.gif"));
+        setRange(7);
+        isAwake = true;
     }
+
 
     @Override
     public void run() {

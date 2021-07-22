@@ -1,6 +1,7 @@
 package Controllers.Menu;
 
 import Controllers.Controller;
+import Main.Config;
 import Models.Graphic.FXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

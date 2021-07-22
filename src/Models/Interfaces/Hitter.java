@@ -9,7 +9,7 @@ public interface Hitter {
     /**
      * Hit.
      *
-     * @param card the card
+     * @param damageable the card
      */
-    void hit(Card card);
+    void hit(Damageable damageable);
 }

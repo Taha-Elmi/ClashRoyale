@@ -1,5 +1,6 @@
 package Models.Cards;
 
+import Models.GameManager.Game;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,9 @@ abstract public class Card implements Cloneable {
     public Card(int cost,int level,int number) {
         this.cost = cost;
         this.number = number;
+        this.level = level;
         setLevel(level);
+        timeline = new Timeline();
     }
 
     public int getCost() {
@@ -36,8 +39,14 @@ abstract public class Card implements Cloneable {
     }
 
     public abstract Image born(int playerNum);
-    public abstract void die();
-    protected abstract boolean isDead();
+    public void die() {
+        try {
+            Game.getInstance().dieCard(Game.getInstance().cardToCardImage(this));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public abstract void setLevel(int level);
     @Override
     public Object clone() throws CloneNotSupportedException {

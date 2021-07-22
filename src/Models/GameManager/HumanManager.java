@@ -9,7 +9,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class HumanManager implements Manager, Runnable{
+public class HumanManager implements Manager ,Runnable{
+    private String name;
+    private int level;
     private Player player;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
@@ -44,6 +46,20 @@ public class HumanManager implements Manager, Runnable{
     @Override
     public void run() {
 
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 
     public void sendData(DataPackage dataPackage) {

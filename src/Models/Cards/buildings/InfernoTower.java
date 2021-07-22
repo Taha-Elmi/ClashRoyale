@@ -2,6 +2,7 @@ package Models.Cards.buildings;
 
 import Models.Cards.Card;
 import Models.Cards.Target;
+import Models.Interfaces.Damageable;
 import javafx.scene.image.Image;
 
 public class InfernoTower extends Building {
@@ -56,22 +57,12 @@ public class InfernoTower extends Building {
         return null;
     }
 
-    @Override
-    public void die() {
-
-    }
-
 
     @Override
     public void run() {
 
     }
 
-
-    @Override
-    public void hit(Card card) {
-
-    }
 
     public void setMaximumDamage(int maximumDamage) {
         this.maximumDamage = maximumDamage;

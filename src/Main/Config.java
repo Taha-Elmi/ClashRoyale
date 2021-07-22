@@ -48,6 +48,7 @@ public class Config {
         Config.mediaPlayer.setOnEndOfMedia(() ->
                 Config.mediaPlayer.seek(Duration.ZERO));
     }
+
     public static List<Card> getPlayer2Cards() {
         Random r = new Random();
         int randomNumberOrigin = 0;
@@ -71,6 +72,7 @@ public class Config {
         }
         return player2Cards;
     }
+
     static {
         cards.add(new Archer(1));
         cards.add(new BabyDragon(1));
