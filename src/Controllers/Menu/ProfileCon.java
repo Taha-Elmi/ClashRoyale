@@ -12,35 +12,53 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
-
+/**
+ * Profile Menu controller
+ */
 public class ProfileCon implements Controller {
+
     @FXML
     private Pane mainBorder;
+
     @FXML
     private Label username;
+
     @FXML
     private Label xp;
+
     @FXML
     private ImageView levelImage;
+
     @FXML
     private Button back;
+
     @FXML
     private ImageView card1;
+
     @FXML
     private ImageView card2;
+
     @FXML
     private ImageView card3;
+
     @FXML
     private ImageView card4;
+
     @FXML
     private ImageView card5;
+
     @FXML
     private ImageView card6;
+
     @FXML
     private ImageView card7;
+
     @FXML
     private ImageView card8;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         levelImage.setImage(FXManager.getImage("/Levels/" + Config.client.getLevel() + ".png"));
         username.setText(Config.client.getName());
@@ -49,6 +67,11 @@ public class ProfileCon implements Controller {
         FXManager.setBackground(FXManager.getImage("/BackGrounds/Profile.png"),mainBorder);
     }
 
+    /**
+     * back button handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == back) {
@@ -57,6 +80,7 @@ public class ProfileCon implements Controller {
             throw new Exception("unknown event");
         }
     }
+
     private void setDeckCards() {
         ArrayList<ImageView> deck = new ArrayList<>(4);
         deck.add(card1);

@@ -11,6 +11,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.sql.SQLException;
 
+/**
+ * signup controller
+ */
 public class SignupCon extends Controller {
 
     @FXML
@@ -25,6 +28,9 @@ public class SignupCon extends Controller {
     @FXML
     private Label warningLabel;
 
+    /**
+     * Initialize.
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -34,11 +40,18 @@ public class SignupCon extends Controller {
                         .then("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);")
                         .otherwise("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);"));
     }
+
+    /**
+     * what should be done on login button press
+     */
     @Override
     protected void loginButtonPressed() {
         FXManager.goTo("login.fxml",(Stage) loginButton.getScene().getWindow());
     }
 
+    /**
+     * what should be done on signup button press
+     */
     @Override
     protected void signupButtonPressed() {
         try {
@@ -49,6 +62,7 @@ public class SignupCon extends Controller {
         Config.playMusic("assets/musics/MainTheme.mp3");
         FXManager.goTo("MainMenu.fxml",(Stage) signupButton.getScene().getWindow());
     }
+
     private void signupProcess() throws IllegalArgumentException {
         warningLabel.setFont(new Font(labelFontName,labelFontSize));
         String username = usernameTextField.getText();

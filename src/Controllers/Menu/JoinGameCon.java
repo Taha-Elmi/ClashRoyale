@@ -9,13 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * Join Game controller
+ */
 public class JoinGameCon {
 
     @FXML
@@ -32,15 +32,26 @@ public class JoinGameCon {
 
     private Socket socket;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/BackGrounds/PlayGame.jpg"), mainPane);
     }
 
+    /**
+     * back button handler
+     * @param event the event
+     */
     @FXML
     void backButtonOnAction(ActionEvent event) {
         FXManager.goTo("1v1.fxml", Config.primaryStage);
     }
 
+    /**
+     * connect button handler
+     * @param event the event
+     */
     @FXML
     void connectButtonOnAction(ActionEvent event) {
         Platform.runLater(new Runnable() {

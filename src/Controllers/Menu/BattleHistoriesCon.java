@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Battle History Objects that will be saved in database
+ */
 public class BattleHistoriesCon implements Controller {
     private Button backButton;
     @FXML
@@ -25,6 +28,9 @@ public class BattleHistoriesCon implements Controller {
     @FXML
     private VBox mainBox;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         mainBox.getChildren().clear();
         createBackButton();
@@ -63,6 +69,11 @@ public class BattleHistoriesCon implements Controller {
         mainBox.getChildren().add(vBox);
     }
 
+    /**
+     * back action handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
@@ -92,6 +103,7 @@ public class BattleHistoriesCon implements Controller {
         vBox.setStyle(cssLayout);
         mainBox.getChildren().add(vBox);
     }
+
     private boolean addAllBattleHistories() {
         ArrayList<BattleHistory> battleHistories = SQLManager.getHistory(Config.client);
         if (battleHistories.size() <= 0) {

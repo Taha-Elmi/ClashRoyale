@@ -8,7 +8,6 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import Models.GameManager.*;
 import Models.Graphic.FXManager;
-import Models.Towers.Tower;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,28 +22,34 @@ import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The Game controller.
+ */
 public class GameCon implements Controller {
     private static GameCon instance;
     private Card chosenCard;
+
     @FXML
     private GridPane deck;
+
     @FXML
     private ImageView card1;
+
     @FXML
     private ImageView card2;
+
     @FXML
     private ImageView card3;
+
     @FXML
     private ImageView card4;
+
     @FXML
     private Label opponentName;
 
@@ -141,11 +146,18 @@ public class GameCon implements Controller {
 
     private LocalTime localTime;
 
+    /**
+     * Back to main menu button.
+     */
     @FXML
     public void backToMainMenuButton() {
         Config.primaryStage.setFullScreen(false);
         FXManager.openWindow("backToMainMenu.fxml");
     }
+
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         instance = this;
@@ -292,6 +304,11 @@ public class GameCon implements Controller {
         }
     }
 
+    /**
+     * Action Handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
 
@@ -350,6 +367,13 @@ public class GameCon implements Controller {
         chosenCard = null;
     }
 
+    /**
+     * Gets nearer tower image view.
+     *
+     * @param src    the src
+     * @param player the player
+     * @return the nearer tower image view
+     */
     public ImageView getNearerTowerImageView(Point2D src, int player) {
         if (player == 1) {
             double redKingTowerDistance = src.distance(new Point2D(redKingTower.getX(), redKingTower.getY()));
@@ -417,6 +441,10 @@ public class GameCon implements Controller {
         return null;
     }
 
+    /**
+     * gets a random tower's ImageView
+     * @return the ImageView
+     */
     public ImageView getRandomTower() {
         Random random = new Random();
         while (true) {
@@ -431,6 +459,12 @@ public class GameCon implements Controller {
         }
     }
 
+    /**
+     * Gets nearer bridge.
+     *
+     * @param src the src
+     * @return the nearer bridge
+     */
     public ImageView getNearerBridge(Point2D src) {
         double leftBridgeDistance = src.distance(new Point2D(leftBridge.getLayoutX(),leftBridge.getLayoutY()));
         double rightBridgeDistance = src.distance(new Point2D(rightBridge.getLayoutX(),rightBridge.getLayoutY()));
@@ -445,6 +479,14 @@ public class GameCon implements Controller {
             return null;
     }
 
+    /**
+     * Is valid to drop boolean.
+     *
+     * @param point2D   the point 2 d
+     * @param playerNum the player num
+     * @param card      the card
+     * @return the boolean
+     */
     public boolean isValidToDrop(Point2D point2D,int playerNum,Card card) {
         boolean leftPrincessTowerIsDead;
         boolean rightPrincessTowerIsDead;
@@ -495,6 +537,11 @@ public class GameCon implements Controller {
         return false;
     }
 
+    /**
+     * updates the crowns counter
+     * @param n number of the crowns
+     * @param playerNumber player number
+     */
     public void setCrowns(int n, int playerNumber) {
         switch (playerNumber) {
             case 1 -> crowns.setText(" " + n);
@@ -502,6 +549,11 @@ public class GameCon implements Controller {
         }
     }
 
+    /**
+     * setter of the hp field
+     * @param n the amount of the hp
+     * @param playerNumber player number
+     */
     public void setHp(int n, int playerNumber) {
         switch (playerNumber) {
             case 1 -> hp.setText("HP: " + n);
@@ -509,22 +561,43 @@ public class GameCon implements Controller {
         }
     }
 
+    /**
+     * getter of the red king tower ImageView
+     * @return the ImageView
+     */
     public ImageView getRedKingTower() {
         return redKingTower;
     }
 
+    /**
+     * getter of the timer
+     * @return the timer
+     */
     public static Timer getTimer() {
         return timer;
     }
 
+    /**
+     * getter of the main loop timer
+     * @return the timer
+     */
     public static Timer getMainLoop() {
         return mainLoop;
     }
 
+    /**
+     * getter of the pane of the board
+     * @return the pane
+     */
     public Pane getBoardPane() {
         return boardPane;
     }
 
+    /**
+     * gets an image and finds associated ImageView
+     * @param image the image
+     * @return the ImageView
+     */
     public ImageView find(Image image) {
         for (Node node : boardPane.getChildren()) {
             //node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()
@@ -534,44 +607,83 @@ public class GameCon implements Controller {
         return null;
     }
 
+    /**
+     * getter of the timer label
+     * @return the label
+     */
     public Label getTimerLabel() {
         return timerLabel;
     }
 
+    /**
+     * getter of the opponentName label
+     * @return the label
+     */
     public Label getOpponentName() {
         return opponentName;
     }
 
+    /**
+     * getter of the opponentCrowns label
+     * @return the label
+     */
     public Label getOpponentCrowns() {
         return opponentCrowns;
     }
 
+    /**
+     * getter of the opponentHp label
+     * @return the label
+     */
     public Label getOpponentHp() {
         return opponentHp;
     }
 
+    /**
+     * getter of the opponentLevel label
+     * @return the label
+     */
     public Label getOpponentLevel() {
         return opponentLevel;
     }
 
+    /**
+     * getter of the name label
+     * @return the label
+     */
     public Label getName() {
         return name;
     }
 
+    /**
+     * getter of the crowns label
+     * @return the label
+     */
     public Label getCrowns() {
         return crowns;
     }
 
+    /**
+     * getter of the hp label
+     * @return the label
+     */
     public Label getHp() {
         return hp;
     }
 
+    /**
+     * getter of the level label
+     * @return the label
+     */
     public Label getLevel() {
         return level;
     }
 
+    /**
+     * getter of the instance of the class
+     * @return the instance
+     */
     public static GameCon getInstance() {
         return instance;
     }
-
 }

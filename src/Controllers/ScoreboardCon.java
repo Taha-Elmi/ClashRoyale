@@ -1,7 +1,6 @@
 package Controllers;
 
 import Database.BattleHistory;
-import Database.SQLManager;
 import Main.Config;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
@@ -12,6 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.HBox;
 
+/**
+ * The Scoreboard controller.
+ */
 public class ScoreboardCon {
     @FXML
     private HBox mainBorder;
@@ -55,6 +57,9 @@ public class ScoreboardCon {
     @FXML
     private Label timerLabel;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/Game/jungle.jpg"), mainBorder);
         leftKingImageView.setImage(FXManager.getImage("/Game/leftKing.png"));
@@ -79,6 +84,10 @@ public class ScoreboardCon {
         }
     }
 
+    /**
+     * action handler of the back button
+     * @param event the event
+     */
     @FXML
     void backOnAction(ActionEvent event) {
         Config.mediaPlayer.stop();
@@ -87,11 +96,19 @@ public class ScoreboardCon {
         FXManager.goTo("MainMenu.fxml", Config.primaryStage);
     }
 
+    /**
+     * event handler
+     * @param event the event
+     */
     @FXML
     void dragDroppedHandler(DragEvent event) {
 
     }
 
+    /**
+     * event handler
+     * @param event the event
+     */
     @FXML
     void dragOverHandler(DragEvent event) {
 

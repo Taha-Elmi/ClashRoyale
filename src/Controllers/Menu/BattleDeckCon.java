@@ -14,9 +14,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-
 import java.util.ArrayList;
 
+/**
+ * Battle Deck controller
+ */
 public class BattleDeckCon implements Controller {
 
     @FXML
@@ -73,6 +75,11 @@ public class BattleDeckCon implements Controller {
     @FXML
     private Label message;
 
+    /**
+     * back button action handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @FXML
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == backButton) {
@@ -83,6 +90,9 @@ public class BattleDeckCon implements Controller {
         }
     }
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/BackGrounds/BattleDeck.png"), mainBorder);
         updateOnScreenCards();
@@ -129,16 +139,28 @@ public class BattleDeckCon implements Controller {
         }
     }
 
+    /**
+     * card on click handler
+     * @param event the event
+     */
     @FXML
     void cardOnClick(MouseEvent event) {
         upperCard.setImage(((ImageView)event.getSource()).getImage());
     }
 
+    /**
+     * outer card on click handler
+     * @param event the event
+     */
     @FXML
     void outCardOnClick(MouseEvent event) {
         lowerCard.setImage(((ImageView)event.getSource()).getImage());
     }
 
+    /**
+     * change button on click handler
+     * @param event the event
+     */
     @FXML
     void changeButtonOnAction(ActionEvent event) {
         if (!Config.cardImages.contains(new CardImage(null, upperCard.getImage()))

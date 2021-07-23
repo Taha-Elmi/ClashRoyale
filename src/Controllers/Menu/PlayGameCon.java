@@ -10,19 +10,32 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * Play Game Menu controller
+ */
 public class PlayGameCon implements Controller {
     private Stage stage;
+
     @FXML
     private BorderPane mainBorder;
+
     @FXML
     private Button singlePlayer;
+
     @FXML
     private Button oneVsOne;
+
     @FXML
     private Button twoVsTwo;
+
     @FXML
     private Button back;
 
+    /**
+     * button press handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == singlePlayer) {
@@ -38,10 +51,18 @@ public class PlayGameCon implements Controller {
         }
     }
 
+    /**
+     * Initialize
+     */
     public void initialize() {
         Image image = FXManager.getImage("/BackGrounds/PlayGame.jpg");
         FXManager.setBackground(image,mainBorder);
     }
+
+    /**
+     * getter of the stage field
+     * @return the stage
+     */
     private Stage getStage() {
         if (stage == null)
             stage = (Stage) back.getScene().getWindow();

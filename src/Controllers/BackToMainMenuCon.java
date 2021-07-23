@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * The Back to main menu controller
+ */
 public class BackToMainMenuCon implements Controller {
 
     @FXML

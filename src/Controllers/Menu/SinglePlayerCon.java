@@ -11,12 +11,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
+/**
+ * Single Player Menu controller
+ */
 public class SinglePlayerCon implements Controller {
+
     @FXML
     private ChoiceBox<String> choiceBox;
 
     @FXML
     private Button ok;
+
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         choiceBox.getItems().add("easy");
@@ -26,6 +34,11 @@ public class SinglePlayerCon implements Controller {
         Platform.runLater(() -> ok.requestFocus());
     }
 
+    /**
+     * ok button handler
+     * @param ae the ActionEvents.
+     * @throws Exception exception
+     */
     @Override
     public void actionHandler(ActionEvent ae) throws Exception {
         if (ae.getSource() == ok) {
@@ -36,6 +49,7 @@ public class SinglePlayerCon implements Controller {
             throw new Exception("unknown event");
         }
     }
+
     private void startSinglePlayerGame(String mode) {
         Player player1 = new Player(Config.client.getDeckCards());
         Player player2 = new Player(Config.getPlayer2Cards());

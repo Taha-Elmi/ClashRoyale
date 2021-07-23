@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * login controller
+ */
 public class LoginCon extends Controller {
     @FXML
     private CheckBox rememberMeBox;
@@ -23,6 +26,10 @@ public class LoginCon extends Controller {
     private TextField passwordField;
     @FXML
     private Label warningLabel;
+
+    /**
+     * Initialize.
+     */
     public void initialize() {
         super.initialize();
         try {
@@ -38,6 +45,10 @@ public class LoginCon extends Controller {
             e.printStackTrace();
         }
     }
+
+    /**
+     * what should be done on login button press
+     */
     @Override
     protected void loginButtonPressed() {
         try {
@@ -82,6 +93,10 @@ public class LoginCon extends Controller {
         System.out.println("login");
         assignClient(username);
     }
+
+    /**
+     * what should be done on signup button press
+     */
     @Override
     protected void signupButtonPressed() {
         FXManager.goTo("signup.fxml",(Stage) signupButton.getScene().getWindow());

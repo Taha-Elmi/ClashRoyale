@@ -3,18 +3,19 @@ package Controllers.Menu;
 import Main.Config;
 import Models.GameManager.*;
 import Models.Graphic.FXManager;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * Create Game controller
+ */
 public class CreateGameCon {
 
     @FXML
@@ -23,10 +24,13 @@ public class CreateGameCon {
     @FXML
     private Label portLabel;
 
-    Thread thread;
+    private Thread thread;
     private ServerSocket serverSocket;
     private Socket socket;
 
+    /**
+     * Initialize.
+     */
     public void initialize() {
         FXManager.setBackground(FXManager.getImage("/BackGrounds/PlayGame.jpg"), mainPane);
 
@@ -65,6 +69,10 @@ public class CreateGameCon {
         thread.start();
     }
 
+    /**
+     * back button handler
+     * @param event the event
+     */
     @FXML
     void backButtonOnAction(ActionEvent event) {
         try {
