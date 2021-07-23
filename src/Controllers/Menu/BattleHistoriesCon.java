@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Battle History Objects that will be saved in database
+ * Battle History Menu controller
  */
 public class BattleHistoriesCon implements Controller {
     private Button backButton;

@@ -3,7 +3,6 @@ package Database;
 import Main.Config;
 import Models.Cards.Card;
 import Models.Client;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
