@@ -8,41 +8,57 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-
 import java.util.Random;
 
+/**
+ * Stupid Robot Manager
+ */
 public class StupidRobotManager implements Manager,Runnable {
     private Player player;
     private String name;
     private final double validRandomWidth = 300;
     private final double validRandomHeight = 280;
-    Random random = new Random();
+    private Random random = new Random();
 
+    /**
+     * constructor
+     * @param name name
+     * @param player player
+     */
     public StupidRobotManager(String name, Player player) {
         this.name = name;
         this.player = player;
     }
 
-    @Override
-    public void waitForAction() {
-
-    }
-
+    /**
+     * action method
+     */
     @Override
     public void action() {
         run();
     }
 
+    /**
+     * run method
+     */
     @Override
     public void run() {
         playCard(getRandomCard());
     }
 
+    /**
+     * getter of the name
+     * @return the name
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * getter of the player
+     * @return player
+     */
     @Override
     public Player getPlayer() {
         return player;
@@ -51,11 +67,13 @@ public class StupidRobotManager implements Manager,Runnable {
     private Card getRandomCard() {
         return player.getCards().get(random.nextInt(4));
     }
+
     private Point2D getRandomPoint2D() {
         double randomWidth = random.nextDouble() * validRandomWidth;
         double randomHeight = random.nextDouble() * validRandomHeight;
         return new Point2D(randomWidth,randomHeight);
     }
+
     private void playCard(Card card) {
         if (card.getCost() > Game.getInstance().getPlayer2().getElixirs() || card instanceof Rage)
             return;

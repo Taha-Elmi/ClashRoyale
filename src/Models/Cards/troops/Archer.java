@@ -1,13 +1,18 @@
 package Models.Cards.troops;
+
 import Main.Config;
 import Models.Cards.Target;
-import Models.Graphic.FXManager;
-import javafx.scene.image.Image;
 
+/**
+ * Archer
+ */
 public class Archer extends Troop {
-
     private static final Speed speed = Speed.MEDIUM;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Archer(int level) {
         super(3, level,3);
         setSpeed(Speed.MEDIUM);
@@ -17,6 +22,10 @@ public class Archer extends Troop {
         setAreaSplash(false);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -39,11 +48,9 @@ public class Archer extends Troop {
         }
     }
 
-    @Override
-    public void damageEmote() {
-
-    }
-
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);

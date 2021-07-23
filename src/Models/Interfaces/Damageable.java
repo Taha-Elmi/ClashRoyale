@@ -12,5 +12,9 @@ public interface Damageable {
      */
     void gotDamage(int damage);
 
+    /**
+     * checks if dead
+     * @return true if dead, false otherwise
+     */
     boolean isDead();
 }

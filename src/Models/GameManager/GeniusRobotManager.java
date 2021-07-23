@@ -8,15 +8,22 @@ import Models.Cards.spells.Spell;
 import Models.Cards.troops.Troop;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-
 import java.util.Random;
 
+/**
+ * Genius Robot Manager
+ */
 public class GeniusRobotManager implements Manager,Runnable{
     private Player player;
     private String name;
     private Random random = new Random();
     private Point2D[] smartPoints = new Point2D[2];
 
+    /**
+     * constructor
+     * @param name name
+     * @param player player
+     */
     public GeniusRobotManager(String name, Player player) {
         this.name = name;
         this.player = player;
@@ -24,25 +31,35 @@ public class GeniusRobotManager implements Manager,Runnable{
         smartPoints[1] = new Point2D(355, 268);
     }
 
-    @Override
-    public void waitForAction() {
-
-    }
+    /**
+     * the action method
+     */
     @Override
     public void action() {
         run();
     }
 
+    /**
+     * the run method
+     */
     @Override
     public void run() {
         playCard(getRandomCard());
     }
 
+    /**
+     * getter of the name field
+     * @return name
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * getter of the player field
+     * @return player
+     */
     @Override
     public Player getPlayer() {
         return player;
@@ -55,6 +72,7 @@ public class GeniusRobotManager implements Manager,Runnable{
     private Point2D getRandomPoint2D() {
         return smartPoints[random.nextInt(2)];
     }
+
     private void playCard(Card card) {
         if (card.getCost() > Game.getInstance().getPlayer2().getElixirs() || card instanceof Rage)
             return;

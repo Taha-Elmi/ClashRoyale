@@ -4,14 +4,10 @@ import Controllers.GameCon;
 import Database.BattleHistory;
 import Database.SQLManager;
 import Models.Cards.CardImage;
-
-
 import java.util.ArrayList;
-
 import Main.Config;
 import Models.Cards.Card;
 import Models.Cards.buildings.Building;
-import Models.Cards.spells.Rage;
 import Models.Cards.spells.Spell;
 import Models.Cards.troops.Archer;
 import Models.Cards.troops.Giant;
@@ -29,9 +25,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
 import javafx.util.Duration;
 
+/**
+ * The Game class
+ *
+ * This class somehow uses singleton design pattern
+ * but it needs a parameter constructor
+ * so we let the constructor to be public, but puts the object in the static instance field
+ */
 public class Game {
     private static Game instance;
     private Player player1;
@@ -41,6 +43,14 @@ public class Game {
     private Manager manager;
     private GameMode gameMode;
     private BattleHistory.Result result;
+
+    /**
+     * constructor
+     * @param player1 player1
+     * @param player2 player2
+     * @param gameMode game mode
+     * @param manager manager
+     */
     public Game(Player player1, Player player2, GameMode gameMode,Manager manager) {
         this.player1 = player1;
         this.player2 = player2;
@@ -51,10 +61,16 @@ public class Game {
         instance = this;
     }
 
+    /**
+     * Initialize
+     */
     public void initialize() {
 
     }
 
+    /**
+     * finishes the game
+     */
     public void finish() {
         GameCon.getTimer().cancel();
         GameCon.getMainLoop().cancel();
@@ -88,6 +104,9 @@ public class Game {
         FXManager.goTo("scoreboard.fxml", Config.primaryStage);
     }
 
+    /**
+     * the main loop of the game
+     */
     public void update() {
         manager.action();
         checkTowers(player1,player2_list,1);
@@ -99,36 +118,6 @@ public class Game {
         for (CardImage cardImage : player2_list) {
             if (cardImage.getCard() instanceof Troop)
                 ((Troop) cardImage.getCard()).step();
-        }
-    }
-
-    private void checkAllCards(ArrayList<CardImage> playerList, ArrayList<CardImage> enemyList) {
-        for (CardImage cardImage : playerList) {
-            Point2D src = new Point2D(GameCon.getInstance().find(cardImage.getImage()).getX(),
-                    GameCon.getInstance().find(cardImage.getImage()).getY());
-            CardImage target = null;
-            double distance = 0;
-            for (CardImage enemy : enemyList) {
-                Point2D dst = new Point2D(GameCon.getInstance().find(enemy.getImage()).getX(),
-                        GameCon.getInstance().find(enemy.getImage()).getY());
-                if (target == null) {
-                    target = enemy;
-                    distance = src.distance(dst);
-                } else if (src.distance(dst) < distance) {
-                    target = enemy;
-                    distance = src.distance(dst);
-                }
-            }
-
-            if (target == null || distance > 100)
-                continue;
-
-            cardImage.getCard().getTimeline().stop();
-            Timeline timeline = new Timeline();
-            ((Troop) cardImage.getCard()).readyForMove(GameCon.getInstance().find(cardImage.getImage()),
-                    new Point2D(GameCon.getInstance().find(target.getImage()).getX(), GameCon.getInstance().find(target.getImage()).getY()),
-                    timeline);
-            timeline.play();
         }
     }
 
@@ -207,26 +196,54 @@ public class Game {
         }
     }
 
+    /**
+     * getter of player1
+     * @return player1
+     */
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * getter of player2
+     * @return player2
+     */
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * getter of the game mode
+     * @return the game mode
+     */
     public GameMode getGameMode() {
         return gameMode;
     }
 
+    /**
+     * getter of the result field
+     * @return the result
+     */
     public BattleHistory.Result getResult() {
         return result;
     }
 
+    /**
+     * getter of the instance
+     * @return the instance
+     */
     public static Game getInstance() {
         return instance;
     }
 
+    /**
+     * makes a card born
+     * @param card card
+     * @param src src
+     * @param dst dst, in case that the card is a spell
+     * @param boardPane tha game pane
+     * @param playerNumber player number
+     */
     public void bornCard(Card card, Point2D src, Point2D dst, Pane boardPane,int playerNumber) {
         if (card instanceof Troop) {
             final int SPACE = 20;
@@ -324,6 +341,12 @@ public class Game {
         }
     }
 
+    /**
+     * ckecks spells tasks
+     * @param spell the spell
+     * @param src src
+     * @param playerNum player number
+     */
     public void checkSpell(Spell spell,Point2D src,int playerNum) {
         ArrayList<CardImage> enemyList = null;
         ArrayList<Tower> enemyTowers = new ArrayList<>();
@@ -377,6 +400,11 @@ public class Game {
         }
     }
 
+    /**
+     * kills a card
+     * @param cardImage its card image
+     * @throws Exception exception
+     */
     public void dieCard(CardImage cardImage) throws Exception {
         try {
             GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(cardImage.getImage()));
@@ -385,6 +413,10 @@ public class Game {
         }catch (NullPointerException e){}
     }
 
+    /**
+     * kills a tower
+     * @param tower the tower
+     */
     public void dieTower(Tower tower) {
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getImageView().getImage()));
         GameCon.getInstance().getBoardPane().getChildren().removeIf(node -> node instanceof ImageView && ((ImageView) node).getImage().equals(tower.getOwnerImageView().getImage()));
@@ -415,6 +447,9 @@ public class Game {
         player1.setCrown(counter);
     }
 
+    /**
+     * updates the hp
+     */
     public void updateHps() {
         int sum = 0;
         sum += player1.getKingTower().getHp();
@@ -431,6 +466,11 @@ public class Game {
         player2.setHp(sum);
     }
 
+    /**
+     * converter of a card to its card image
+     * @param card card
+     * @return card image
+     */
     public CardImage cardToCardImage(Card card) {
         for (CardImage cardImage: player1_list) {
             if (cardImage.getCard().equals(card)) {
@@ -445,26 +485,42 @@ public class Game {
         return null;
     }
 
+    /**
+     * plays a card as player1
+     * @param card card
+     */
     public void playCardPlayer1(Card card) {
         player1.playCard(card);
     }
 
+    /**
+     * plays a card as player2
+     * @param card card
+     */
     public void playCardPlayer2(Card card) {
         player2.playCard(card);
     }
 
-    public boolean isGameOver() {
-        return false;
-    }
-
+    /**
+     * getter of the manager
+     * @return the manager
+     */
     public Manager getManager() {
         return manager;
     }
 
+    /**
+     * getter of player1 alive cards
+     * @return the cards
+     */
     public ArrayList<CardImage> getPlayer1_list() {
         return player1_list;
     }
 
+    /**
+     * getter of player2 alive cards
+     * @return the cards
+     */
     public ArrayList<CardImage> getPlayer2_list() {
         return player2_list;
     }

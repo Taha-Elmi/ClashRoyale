@@ -13,16 +13,21 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+/**
+ * Wizard
+ */
 public class Wizard extends Troop {
-
     private final static Speed speed = Speed.MEDIUM;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Wizard(int level) {
         super(5, level,1);
         setSpeed(Speed.MEDIUM);
@@ -32,6 +37,10 @@ public class Wizard extends Troop {
         setAreaSplash(true);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -54,6 +63,9 @@ public class Wizard extends Troop {
         }
     }
 
+    /**
+     * throws a yellow circle to the target
+     */
     @Override
     public void damageEmote() {
         Circle circle = new Circle();
@@ -96,6 +108,9 @@ public class Wizard extends Troop {
         timeline.play();
     }
 
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);

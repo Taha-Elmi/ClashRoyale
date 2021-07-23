@@ -1,6 +1,5 @@
 package Models.Cards.spells;
 
-import Controllers.GameCon;
 import Main.Config;
 import Models.Cards.Card;
 import Models.GameManager.Game;
@@ -16,13 +15,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-abstract public class Spell extends Card {
+/**
+ * Parent class of all spells
+ */
+public abstract class Spell extends Card {
     private final double radius;
+
+    /**
+     * constructor
+     * @param cost cost
+     * @param level level
+     * @param radius radius
+     */
     public Spell(int cost,int level,double radius) {
         super(cost,level,1);
         this.radius = radius;
     }
 
+    /**
+     * makes it born
+     * @param playerNum player number
+     * @return the image
+     */
     @Override
     public Image born(int playerNum) {
         String nameOfGif = "";
@@ -36,9 +50,21 @@ abstract public class Spell extends Card {
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
     }
 
+    /**
+     * getter of the radius
+     * @return radius
+     */
     public double getRadius() {
         return radius;
     }
+
+    /**
+     * makes it ready for throw
+     * @param imageView image view
+     * @param dst dst
+     * @param timeline time line
+     * @param playerNum player number
+     */
     public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline,int playerNum) {
         setTimeline(timeline);
         timeline.getKeyFrames().clear();
@@ -57,5 +83,9 @@ abstract public class Spell extends Card {
         });
     }
 
+    /**
+     * the act method
+     * @param damageable target
+     */
     public abstract void act(Damageable damageable);
 }

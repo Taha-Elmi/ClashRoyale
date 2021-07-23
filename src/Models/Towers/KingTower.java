@@ -1,12 +1,18 @@
 package Models.Towers;
 
-import Models.Cards.Card;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 
+/**
+ * King Tower
+ */
 public class KingTower extends Tower {
     private boolean isAwake;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public KingTower(int level) {
         super(level);
         setRange(0);
@@ -14,7 +20,10 @@ public class KingTower extends Tower {
         isAwake = false;
     }
 
-
+    /**
+     * sets the level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         super.setLevel(level);
@@ -42,6 +51,9 @@ public class KingTower extends Tower {
         }
     }
 
+    /**
+     * wakes up the king
+     */
     public void wakeUp() {
         if (isAwake)
             return;
@@ -52,11 +64,5 @@ public class KingTower extends Tower {
             getOwnerImageView().setImage(FXManager.getImage("/Game/redKingWakeUp.gif"));
         setRange(7);
         isAwake = true;
-    }
-
-
-    @Override
-    public void run() {
-
     }
 }

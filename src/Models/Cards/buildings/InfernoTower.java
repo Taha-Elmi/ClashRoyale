@@ -1,32 +1,25 @@
 package Models.Cards.buildings;
 
 import Controllers.GameCon;
-import Main.Config;
-import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.Target;
 import Models.Cards.spells.Spell;
 import Models.GameManager.Game;
 import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.util.Duration;
-
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Inferno Tower
+ */
 public class InfernoTower extends Building {
     private int minimumDamage;
     private int maximumDamage;
@@ -35,10 +28,18 @@ public class InfernoTower extends Building {
     private int lifeCounter = 0;
     private Line line;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public InfernoTower(int level) {
         super(5, level, 0.4, Target.AIRandGROUND, 6, 40);
     }
 
+    /**
+     * setter of the level field
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -70,14 +71,11 @@ public class InfernoTower extends Building {
         }
     }
 
-    public int getMaximumDamage() {
-        return maximumDamage;
-    }
-
-    public int getMinimumDamage() {
-        return minimumDamage;
-    }
-
+    /**
+     * makes it born
+     * @param playerNum player number
+     * @return the image
+     */
     @Override
     public Image born(int playerNum) {
         return switch (playerNum) {
@@ -87,6 +85,12 @@ public class InfernoTower extends Building {
         };
     }
 
+    /**
+     * makes ready to born
+     * @param imageView image view
+     * @param playerNumber player number
+     * @param src src
+     */
     public void readyForBorn(ImageView imageView, int playerNumber, Point2D src) {
         damage = minimumDamage;
         line = new Line();
@@ -121,6 +125,7 @@ public class InfernoTower extends Building {
         long frameTimeInMilliseconds = (long)(100.0);
         timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
+
     private void task(int playerNum,ImageView imageView) {
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
         List<CardImage> cardImages;
@@ -158,18 +163,11 @@ public class InfernoTower extends Building {
         ((Damageable) target).gotDamage(damage);
     }
 
-
-    @Override
-    public void run() {
-
-    }
-
-
-    public void setMaximumDamage(int maximumDamage) {
+    private void setMaximumDamage(int maximumDamage) {
         this.maximumDamage = maximumDamage;
     }
 
-    public void setMinimumDamage(int minimumDamage) {
+    private void setMinimumDamage(int minimumDamage) {
         this.minimumDamage = minimumDamage;
     }
 }

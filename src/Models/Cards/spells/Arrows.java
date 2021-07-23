@@ -1,33 +1,35 @@
 package Models.Cards.spells;
 
 import Main.Config;
-import Models.Cards.Card;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
+/**
+ * Arrows
+ */
 public class Arrows extends Spell implements Hitter {
     private int areaDamage;
+
+    /**
+     * constructor
+     * @param level level
+     */
     public Arrows(int level) {
         super(3, level, 4);
     }
 
+    /**
+     * setter of the area damage
+     * @param areaDamage area damage
+     */
     public void setAreaDamage(int areaDamage) {
         this.areaDamage = areaDamage;
     }
 
-    public int getAreaDamage() {
-        return areaDamage;
-    }
-
+    /**
+     * setter of the level
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -45,15 +47,19 @@ public class Arrows extends Spell implements Hitter {
         }
     }
 
-    protected boolean isDead() {
-        return false;
-    }
-
+    /**
+     * the act method
+     * @param damageable damageable
+     */
     @Override
     public void act(Damageable damageable) {
         hit(damageable);
     }
 
+    /**
+     * hits
+     * @param damageable the card
+     */
     @Override
     public void hit(Damageable damageable) {
         damageable.gotDamage(areaDamage);

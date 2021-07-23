@@ -2,7 +2,6 @@ package Models.Cards.buildings;
 
 import Controllers.GameCon;
 import Main.Config;
-import Models.Cards.Card;
 import Models.Cards.CardImage;
 import Models.Cards.Target;
 import Models.Cards.spells.Spell;
@@ -21,20 +20,31 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Cannon
+ */
 public class Cannon extends Building {
     private int damage;
     private int hitCounter = 0;
     private int lifeCounter = 0;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Cannon(int level) {
         super(6, level, 0.8, Target.GROUND, 5.5, 30);
     }
 
+    /**
+     * makes it born
+     * @param playerNum player number
+     * @return the image
+     */
     @Override
     public Image born(int playerNum) {
         if (playerNum == 1) {
@@ -47,13 +57,10 @@ public class Cannon extends Building {
         return null;
     }
 
-
-    @Override
-    public void run() {
-
-    }
-
-
+    /**
+     * setter of the level
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -80,6 +87,12 @@ public class Cannon extends Building {
         }
     }
 
+    /**
+     * makes ready to born
+     * @param imageView image view
+     * @param playerNumber player number
+     * @param src src
+     */
     public void readyForBorn(ImageView imageView, int playerNumber, Point2D src) {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -107,6 +120,7 @@ public class Cannon extends Building {
         long frameTimeInMilliseconds = (long)(100.0);
         timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }
+
     private void task(int playerNum,ImageView imageView) {
         Point2D src = new Point2D(imageView.getX(), imageView.getY());
         List<CardImage> cardImages;
@@ -159,10 +173,18 @@ public class Cannon extends Building {
         timeline.play();
     }
 
+    /**
+     * getter of the damage
+     * @return damage
+     */
     public int getDamage() {
         return damage;
     }
 
+    /**
+     * setter of the damage
+     * @param damage damage
+     */
     public void setDamage(int damage) {
         this.damage = damage;
     }

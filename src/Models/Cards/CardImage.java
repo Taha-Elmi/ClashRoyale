@@ -5,6 +5,9 @@ import Models.Cards.troops.Troop;
 import Models.Graphic.FXManager;
 import javafx.scene.image.Image;
 
+/**
+ * This class is used to store a card and an image together.
+ */
 public class CardImage {
     private Card card;
     private Image image;
@@ -13,11 +16,22 @@ public class CardImage {
     private Image forwardDamagingGif;
     private Image backwardDamagingGif;
 
+    /**
+     * constructor
+     * @param card the card
+     * @param image the image
+     */
     public CardImage(Card card, Image image) {
         this.card = card;
         this.image = image;
     }
 
+    /**
+     * overloaded constructor with player number
+     * @param card card
+     * @param image image
+     * @param playerNumber player number
+     */
     public CardImage(Card card, Image image, int playerNumber) {
         this.card = card;
         this.image = image;
@@ -25,14 +39,27 @@ public class CardImage {
             assignGifs(playerNumber);
     }
 
+    /**
+     * getter of the card
+     * @return
+     */
     public Card getCard() {
         return card;
     }
 
+    /**
+     * getter of the image
+     * @return
+     */
     public Image getImage() {
         return image;
     }
 
+    /**
+     * overridden equals method
+     * @param obj parameter
+     * @return true if equals, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof CardImage))
@@ -77,6 +104,9 @@ public class CardImage {
         }
     }
 
+    /**
+     * switch to the damaging gif
+     */
     public void setDamageGif() {
         if (forwardDamagingGif != null)
             image = forwardDamagingGif;
@@ -84,6 +114,9 @@ public class CardImage {
             image = backwardDamagingGif;
     }
 
+    /**
+     * switch to the normal gif
+     */
     public void setNormalGif() {
         if (forwardGif != null)
             image = forwardGif;
@@ -91,6 +124,10 @@ public class CardImage {
             image = backwardGif;
     }
 
+    /**
+     * determines if the card is moving forward or not
+     * @return true is forward, false otherwise
+     */
     public boolean isGoingForward() {
         return forwardGif != null;
     }

@@ -7,42 +7,46 @@ import Models.Cards.CardImage;
 import Models.Cards.troops.*;
 import Models.GameManager.Game;
 import Models.Interfaces.Damageable;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
-
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Rage
+ */
 public class Rage extends Spell {
     private double duration;
     private int counter = 0;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Rage(int level) {
         super(3,level,5);
         setLevel(level);
     }
 
+    /**
+     * setter of the duration
+     * @param duration duration
+     */
     public void setDuration(double duration) {
         this.duration = duration;
     }
 
-    public double getDuration() {
-        return duration;
-    }
-
+    /**
+     * setter of the level field
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -60,6 +64,13 @@ public class Rage extends Spell {
         }
     }
 
+    /**
+     * makes it ready for throw
+     * @param imageView image view
+     * @param dst dst
+     * @param timeline time line
+     * @param playerNum player number
+     */
     @Override
     public void readyForThrow(ImageView imageView, Point2D dst, Timeline timeline,int playerNum) {
         imageView.setFitWidth(10);
@@ -122,16 +133,28 @@ public class Rage extends Spell {
         }
     }
 
+    /**
+     * returns card to normal stage
+     * @param cardImage list of cards
+     */
     private void setToNormal(CardImage cardImage) {
         Card card = cardImage.getCard();
         ((Troop) card).setSpeedToDefault();
     }
 
+    /**
+     * act method
+     * @param damageable target
+     */
     @Override
     public void act(Damageable damageable) {
         //Nothing
     }
 
+    /**
+     * overloaded act method
+     * @param troop troop
+     */
     public void act(Troop troop) {
         if (troop.getSpeed() == Speed.SLOW) {
             troop.setSpeed(Speed.RAGE_SLOW);
@@ -143,9 +166,4 @@ public class Rage extends Spell {
             return;
         }
     }
-
-    protected boolean isDead() {
-        return false;
-    }
-
 }

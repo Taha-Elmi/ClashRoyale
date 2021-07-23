@@ -3,10 +3,16 @@ package Models.Cards.troops;
 import Main.Config;
 import Models.Cards.Target;
 
+/**
+ * Valkyrie
+ */
 public class Valkyrie extends Troop {
-
     private final static Speed speed = Speed.MEDIUM;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Valkyrie(int level) {
         super(4, level,1);
         setSpeed(Speed.MEDIUM);
@@ -17,6 +23,10 @@ public class Valkyrie extends Troop {
 
     }
 
+    /**
+     * sets level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -39,9 +49,9 @@ public class Valkyrie extends Troop {
         }
     }
 
-    @Override
-    public void damageEmote() {}
-
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);

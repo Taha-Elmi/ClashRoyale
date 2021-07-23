@@ -1,35 +1,35 @@
 package Models.Cards.spells;
 
 import Main.Config;
-import Models.Cards.Card;
-import Models.Cards.CardImage;
-import Models.GameManager.Game;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Hitter;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
+/**
+ * Fire Ball
+ */
 public class FireBall extends Spell implements Hitter {
     private int areaDamage;
+
+    /**
+     * constructor
+     * @param level level
+     */
     public FireBall(int level) {
         super(4, level,2.5);
     }
 
+    /**
+     * setter of area damage
+     * @param areaDamage area damage
+     */
     public void setAreaDamage(int areaDamage) {
         this.areaDamage = areaDamage;
     }
 
-    public int getAreaDamage() {
-        return areaDamage;
-    }
-
+    /**
+     * setter of the level
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -47,16 +47,19 @@ public class FireBall extends Spell implements Hitter {
         }
     }
 
-    protected boolean isDead() {
-        return false;
-    }
-
-
+    /**
+     * hits
+     * @param damageable the card
+     */
     @Override
     public void hit(Damageable damageable) {
         damageable.gotDamage(areaDamage);
     }
 
+    /**
+     * the act method
+     * @param damageable target
+     */
     @Override
     public void act(Damageable damageable) {
         hit(damageable);

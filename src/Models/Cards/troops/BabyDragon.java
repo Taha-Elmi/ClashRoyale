@@ -3,11 +3,17 @@ package Models.Cards.troops;
 import Main.Config;
 import Models.Cards.Target;
 import Models.Interfaces.Flyer;
-import javafx.scene.image.Image;
 
+/**
+ * Baby Dragon
+ */
 public class BabyDragon extends Troop implements Flyer {
     private final static Speed speed = Speed.FAST;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public BabyDragon(int level) {
         super(4, level,1);
         setSpeed(Speed.FAST);
@@ -17,6 +23,10 @@ public class BabyDragon extends Troop implements Flyer {
         setAreaSplash(true);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -39,9 +49,9 @@ public class BabyDragon extends Troop implements Flyer {
         }
     }
 
-    @Override
-    public void damageEmote() {}
-
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);

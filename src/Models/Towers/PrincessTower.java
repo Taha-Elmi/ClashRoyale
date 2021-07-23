@@ -1,14 +1,24 @@
 package Models.Towers;
 
-import Models.Cards.Card;
+/**
+ * Princess Tower
+ */
 public class PrincessTower extends Tower {
 
+    /**
+     * constructor
+     * @param level level
+     */
     public PrincessTower(int level) {
         super(level);
         setRange(7.5);
         setHitSpeed(0.8);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         super.setLevel(level);
@@ -28,11 +38,5 @@ public class PrincessTower extends Tower {
             setHp(1890);
             setDamage(69);
         } else;
-    }
-
-
-    @Override
-    public void run() {
-
     }
 }

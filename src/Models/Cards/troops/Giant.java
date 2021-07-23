@@ -1,12 +1,17 @@
 package Models.Cards.troops;
 
 import Models.Cards.Target;
-import javafx.scene.image.Image;
 
+/**
+ * Giant
+ */
 public class Giant extends Troop {
-
     private final static Speed speed = Speed.SLOW;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Giant(int level) {
         super(5, level,1);
         setSpeed(Speed.SLOW);
@@ -16,6 +21,10 @@ public class Giant extends Troop {
         setAreaSplash(false);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -36,9 +45,9 @@ public class Giant extends Troop {
         }
     }
 
-    @Override
-    public void damageEmote() {}
-
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);

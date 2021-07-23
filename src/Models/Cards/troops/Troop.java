@@ -11,7 +11,6 @@ import Models.Graphic.FXManager;
 import Models.Interfaces.Damageable;
 import Models.Interfaces.Flyer;
 import Models.Interfaces.Hitter;
-import Models.Towers.Tower;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -19,9 +18,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
 import java.util.ArrayList;
 
+/**
+ * Parent class of all troops
+ */
 abstract public class Troop extends Card implements Hitter, Damageable {
     private int hp;
     private int damage;
@@ -35,11 +36,21 @@ abstract public class Troop extends Card implements Hitter, Damageable {
     private boolean isDamaging;
     private double counter;
 
+    /**
+     * constructor
+     * @param cost cost
+     * @param level level
+     * @param number number
+     */
     public Troop(int cost,int level,int number) {
         super(cost,level,number);
         isDamaging = false;
     }
 
+    /**
+     * finds the target
+     * @return the location to go
+     */
     public Point2D findTarget() {
         CardImage cardImage = Game.getInstance().cardToCardImage(this);
         ArrayList<CardImage> enemyList = (Game.getInstance().getPlayer1_list().contains(cardImage) ?
@@ -99,6 +110,10 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         return new Point2D(nearerTowerImageView.getX(), nearerTowerImageView.getY());
     }
 
+    /**
+     * checks if the troop is under bridge or not
+     * @return true if it's under the bridges and false otherwise
+     */
     public boolean isUnderBridge() {
         CardImage cardImage = Game.getInstance().cardToCardImage(this);
         ImageView imageView = GameCon.getInstance().find(cardImage.getImage());
@@ -107,6 +122,9 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         return false;
     }
 
+    /**
+     * moves the troop for one step, or fight
+     */
     public void step() {
         checkIfIsDamaging();
         if (isDamaging) {
@@ -167,10 +185,18 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         imageView.setImage(cardImage.getImage());
     }
 
+    /**
+     * setter of the target category
+     * @param targetCategory target category
+     */
     public void setTargetCategory(Target targetCategory) {
         this.targetCategory = targetCategory;
     }
 
+    /**
+     * gets damage
+     * @param damage the damage
+     */
     @Override
     public void gotDamage(int damage) {
         hp -= damage;
@@ -178,37 +204,21 @@ abstract public class Troop extends Card implements Hitter, Damageable {
             die();
     }
 
+    /**
+     * hits
+     * @param damageable the card
+     */
     @Override
     public void hit(Damageable damageable) {
         damageable.gotDamage(damage);
     }
 
-    public void readyForMove(ImageView imageView, Point2D dst,Timeline timeline) {
-        setTimeline(timeline);
-        timeline.getKeyFrames().clear();
-        Point2D src = new Point2D(imageView.getX(), imageView.getY());
-        boolean isUnderBridge = true;
-        if (isUnderBridge && !(this instanceof BabyDragon)) {
-            ImageView nearerBridge = GameCon.getInstance().getNearerBridge(src);
-            timeline.getKeyFrames().add(new KeyFrame(
-               Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(new Point2D(nearerBridge.getLayoutX(),nearerBridge.getLayoutY())))),
-               new KeyValue(imageView.xProperty(),nearerBridge.getLayoutX()),
-               new KeyValue(imageView.yProperty(),nearerBridge.getLayoutY())
-            ));
-        }
-        timeline.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(speedToSecond(Speed.toDouble(speed),src.distance(dst))),
-                new KeyValue(imageView.xProperty(),dst.getX()),
-                new KeyValue(imageView.yProperty(),dst.getY())
-        ));
-    }
-
+    /**
+     * setter of the speed
+     * @param speed
+     */
     public void setSpeed(Speed speed) {
         this.speed = speed;
-    }
-    private double speedToSecond(double speed, double length) {
-        //System.out.println(length / speed);
-        return length / speed;
     }
     
     private double speedToLength(Speed speed) {
@@ -222,11 +232,20 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         };
     }
 
+    /**
+     * checks if dead
+     * @return true if dead, false otherwise
+     */
     @Override
     public boolean isDead() {
         return hp <= 0;
     }
 
+    /**
+     * makes it born
+     * @param playerNum player number
+     * @return the image
+     */
     @Override
     public Image born(int playerNum) {
         String nameOfGif = "";
@@ -240,37 +259,79 @@ abstract public class Troop extends Card implements Hitter, Damageable {
         return FXManager.getImage("/Gifs/" + getClass().getSimpleName() + nameOfGif);
     }
 
-    public abstract void damageEmote();
+    /**
+     * creates an emote when damaging.
+     *
+     * some troops implements it and some not.
+     * so we have it here, so that if a troop doesn't implement it, nothing happens.
+     */
+    public void damageEmote(){}
 
+    /**
+     * getter of the damage field
+     * @return damage
+     */
     public int getDamage() {
         return damage;
     }
 
+    /**
+     * setter of the hp
+     * @param hp hp
+     */
     public void setHp(int hp) {
         this.hp = hp;
     }
 
+    /**
+     * setter of the damage
+     * @param damage damage
+     */
     public void setDamage(int damage) {
         this.damage = damage;
     }
+
+    /**
+     * sets speed to default
+     */
     public abstract void setSpeedToDefault();
 
+    /**
+     * getter of speed
+     * @return speed
+     */
     public Speed getSpeed() {
         return speed;
     }
 
+    /**
+     * setter of the hit speed
+     * @param hitSpeed hit speed
+     */
     public void setHitSpeed(double hitSpeed) {
         this.hitSpeed = hitSpeed;
     }
 
+    /**
+     * setter of the range
+     * @param range range
+     */
     public void setRange(int range) {
         this.range = range;
     }
 
+    /**
+     * setter of area splash
+     * @param areaSplash area splash
+     */
     public void setAreaSplash(boolean areaSplash) {
         this.areaSplash = areaSplash;
     }
 
+    /**
+     * getter of the target
+     * @return target
+     */
     public Damageable getTarget() {
         return target;
     }

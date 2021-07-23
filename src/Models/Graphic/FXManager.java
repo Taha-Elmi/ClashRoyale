@@ -1,12 +1,10 @@
 package Models.Graphic;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -83,11 +81,20 @@ public class FXManager {
         return new Image(FXManager.class.getResourceAsStream("/Views/Assets/Pictures" + imageName));
     }
 
+    /**
+     * makes the stage ready for the game
+     * @param stage the stage
+     */
     public static void setStageReadyForGame(Stage stage) {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.setFullScreen(true);
     }
+
+    /**
+     * It will makes the stage normal
+     * @param stage the stage
+     */
     public static void setStageNormal(Stage stage) {
         stage.setMaximized(false);
         stage.setResizable(false);

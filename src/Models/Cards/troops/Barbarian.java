@@ -2,13 +2,17 @@ package Models.Cards.troops;
 
 import Main.Config;
 import Models.Cards.Target;
-import Models.Graphic.FXManager;
-import javafx.scene.image.Image;
 
+/**
+ * Barbarian
+ */
 public class Barbarian extends Troop {
-
     private final static Speed speed = Speed.MEDIUM;
 
+    /**
+     * constructor
+     * @param level level
+     */
     public Barbarian(int level) {
         super(5, level,5);
         setSpeed(Speed.MEDIUM);
@@ -18,6 +22,10 @@ public class Barbarian extends Troop {
         setTargetCategory(Target.GROUND);
     }
 
+    /**
+     * setter of level and other fields
+     * @param level level
+     */
     @Override
     public void setLevel(int level) {
         if (level == 1) {
@@ -40,9 +48,9 @@ public class Barbarian extends Troop {
         }
     }
 
-    @Override
-    public void damageEmote() {}
-
+    /**
+     * sets speed to default
+     */
     @Override
     public void setSpeedToDefault() {
         setSpeed(speed);
