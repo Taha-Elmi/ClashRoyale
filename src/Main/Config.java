@@ -1,4 +1,5 @@
 package Main;
+
 import Database.FileUtils;
 import Models.Cards.Card;
 import Models.Cards.CardImage;
@@ -14,15 +15,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class will store some information that is necessary for running the application
+ */
 public class Config {
     //fields
     public static Stage primaryStage;
@@ -33,6 +33,10 @@ public class Config {
     public static MediaPlayer mediaPlayer;
 
     //methods
+
+    /**
+     * throws unknown inout exception
+     */
     public static void unknownInputException() {
         try {
             throw new Exception("Unknown Input!");
@@ -41,6 +45,10 @@ public class Config {
         }
     }
 
+    /**
+     * plays music
+     * @param path the path
+     */
     public static void playMusic(String path) {
         Media media = FileUtils.loadMedia(path);
         Config.mediaPlayer = new MediaPlayer(media);
@@ -49,6 +57,10 @@ public class Config {
                 Config.mediaPlayer.seek(Duration.ZERO));
     }
 
+    /**
+     * gets player 2 cards
+     * @return the cards
+     */
     public static List<Card> getPlayer2Cards() {
         Random r = new Random();
         int randomNumberOrigin = 0;
@@ -100,6 +112,4 @@ public class Config {
         cardImages.add(new CardImage(cards.get(10), FXManager.getImage("/Cards/Cannon.png")));
         cardImages.add(new CardImage(cards.get(11), FXManager.getImage("/Cards/InfernoTower.png")));
     }
-
-
 }
